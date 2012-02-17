@@ -1,0 +1,439 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<title>Phone</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+    <meta name="author" content="Kundan Singh">
+    <link rel="stylesheet" href="phone.css" type="text/css"></link>
+    
+    <script type="text/javascript">
+        function $(name) {
+            return document.getElementById(name);
+        }
+        function log(msg, type) {
+            var log_text = $("log-text");
+            if (log_text) {
+                log_text.value += "\n" + msg;
+                if (phone && phone.log_scroll)
+                    log_text.scrollTop = log_text.scrollHeight;
+            }
+        };
+    </script>
+    
+    <script type="text/javascript" src="http://theintencity.com/flash-network/swfobject.js"></script>
+    <script type="text/javascript" src="http://theintencity.com/flash-network/json2.js"></script>
+    <script type="text/javascript" src="http://theintencity.com/flash-network/base64.js"></script>
+    <script type="text/javascript" src="http://theintencity.com/flash-network/flash-network.js"></script>
+    <script type="text/javascript" src="sip.js"></script>
+    <script type="text/javascript" src="phone.js"></script>
+    
+    <script type="text/javascript">
+      swfobject.embedSWF("http://theintencity.com/flash-network/NetworkIO.swf", "flash-network", "215", "138", "10.0.0", "expressInstall.swf", {}, 
+        {"allowScriptAccess": "always", "flashVars": "apiVersion=1.0&prefix=network.", "bgcolor" : "#f0f0f0"}, 
+        {"id": "flash-network", "name": "flash-network"});
+      network.movieName = "flash-network";
+      
+      swfobject.embedSWF("http://theintencity.com/flash-network/VideoIO11.swf", "local-video", "240", "168", "11.0.0", "expressInstall.swf", {},
+        {"allowScriptAccess": "always", "allowFullScreen": "true",
+            "flashVars": "videoCodec=H264Avc&codec=pcmu&framesPerPacket=2&prefix=network.", "bgcolor": "#f0f0f0"},
+        {"id": "local-video", "name": "local-video"});
+      
+      swfobject.embedSWF("http://theintencity.com/flash-network/VideoIO11.swf", "remote-video", "240", "168", "11.0.0", "expressInstall.swf", {},
+        {"allowScriptAccess": "always", "allowFullScreen": "true",
+            "flashVars": "videoCodec=H264Avc&codec=pcmu&framesPerPacket=2&prefix=network.", "bgcolor": "#f0f0f0"},
+        {"id": "remote-video", "name": "remote-video"});
+    </script>
+    
+</head> 
+ 
+<body>
+    <div id="config-box" class="content-box">
+        <div class="content-header">Configuration
+            <div class="help-div">
+                <a href="#" title="Save configuration" onclick="return phone.enableBox('config', false);">
+                    <img id="save_config" src="save.png" class="help-img" style="visibility: hidden;"></img></a>
+                <a href="#" title="Edit configuration" onclick="return phone.enableBox('config', true);">
+                    <img id="edit_config" src="edit.png" class="help-img" style="visibility: visible;"></img></a>
+                <a href="#" title="How to configure your phone?" onclick="return phone.help('configuration');">
+                    <img src="help.png" class="help-img"></img></a>
+            </div>
+        </div>
+        <table>
+            <tr><td align="right">Display Name:</td><td>
+            <input type="text" class="text" id="displayname" value="" disabled="disabled"
+                onkeyup="setTimeout(phone.setProperty('displayname', $('displayname').value),100)"/>
+            </td></tr><tr><td align="right">User Name:</td><td>
+            <input type="text" class="text" id="username" value="" disabled="disabled"
+                onkeyup="setTimeout(phone.setProperty('username', $('username').value),100)"/>
+            </td></tr><tr><td align="right">Domain:</td><td>
+            <input type="text" class="text" id="domain" value="" disabled="disabled"
+                onkeyup="setTimeout(phone.setProperty('domain', $('domain').value),100)"/>
+            </td></tr><tr><td align="right">Auth Name:</td><td>
+            <input type="text" class="text" id="authname" value="" disabled="disabled"
+                onkeyup="setTimeout(phone.setProperty('authname', $('authname').value),100)"/>
+            </td></tr><tr><td align="right">Password:</td><td>
+            <input type="password" class="text" id="password" disabled="disabled"
+                onkeyup="setTimeout(phone.setProperty('password', $('password').value),100)"/>
+            </td></tr><tr><td align="right" colspan="2">Transport: 
+            <input type="radio" class="radio" id="transport_udp" name="transport" value="udp" disabled="disabled"
+                onclick="phone.setProperty('transport', 'udp')"></input>UDP,
+            <input type="radio" class="radio" id="transport_tcp" name="transport" value="tcp" disabled="disabled"
+                onclick="phone.setProperty('transport', 'tcp')"></input>TCP,
+            <input type="radio" class="radio" id="transport_ws" name="transport" value="ws" disabled="disabled"
+                onclick="phone.setProperty('transport', 'ws')"></input>WS
+            </td></tr>
+        </table>
+    </div>
+    
+    <div id="register-box" class="content-box">
+        <div class="content-header">Register
+            <div class="help-div">
+                <a href="#" title="Save register parameters" onclick="return phone.enableBox('register', false);">
+                    <img id="save_register" src="save.png" class="help-img" style="visibility: hidden;"></img></a>
+                <a href="#" title="Edit register parameters" onclick="return phone.enableBox('register', true);">
+                    <img id="edit_register" src="edit.png" class="help-img" style="visibility: visible;"></img></a>
+                <a href="#" title="How to register/login?" onclick="return phone.help('register');">
+                    <img src="help.png" class="help-img"></img>
+            </a></div>
+        </div>
+        <div style="padding: 2px;">
+            Send outbound via:<br/>
+            <div style="padding-left: 10px;">
+                <!--
+                <input type="radio" class="radio" id="outbound_domain" name="outbound" value="domain" disabled="disabled"
+                    onclick="phone.setProperty('outbound', 'domain')"/> domain,
+                -->
+                <input type="radio" class="radio" id="outbound_target" name="outbound" value="target" disabled="disabled"
+                    onclick="phone.setProperty('outbound', 'target')"/> target domain, or<br/>
+                <input type="radio" class="radio" id="outbound_proxy" name="outbound" value="proxy" disabled="disabled"
+                    onclick="phone.setProperty('outbound', 'proxy')"/> proxy  address:
+                    <input type="text" class="text" id="outbound_proxy_address" value="" style="width:94px" disabled="disabled"
+                        onkeyup="setTimeout(phone.setProperty('outbound_proxy_address', $('outbound_proxy_address').value),100)"/>
+            </div>
+            Register every
+                <input type="text" class="text" id="register_interval" value="" style="width: 40px;" disabled="disabled"
+                    onclick="phone.setProperty('register_interval', parseInt($('register_interval')).value)"/> seconds<br/>
+            <input type="checkbox" class="radio" id="rport" disabled="disabled"
+                onclick="phone.setProperty('rport', $('rport').checked)" />Use rport,
+            <input type="checkbox" class="radio" id="sipoutbound" disabled="disabled"
+                onclick="phone.setProperty('sipoutbound', $('sipoutbound').checked)" />Use sip-outbound<br/>
+            AoR: <input type="text" class="text" id="local_aor" style="width: 190px;" readonly="readonly" disabled="disabled"/>
+            <div style="position: absolute; bottom: 0px; left: 4px; right: 0px;">
+                <span id="sock_state">idle</span>,
+                <span id="register_state">not registered</span>
+                <div style="float: right;">
+                    <input type="button" class="button" id="register_button" value="Register" disabled="disabled"
+                        title="click to register or unregister"
+                        onclick="return phone.register();" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="call-box" class="content-box">
+        <div class="content-header">Call
+            <div class="help-div">
+                <a href="#" title="Save call capabilities" onclick="return phone.enableBox('call', false);">
+                    <img id="save_call" src="save.png" class="help-img" style="visibility: hidden;"></img></a>
+                <a href="#" title="Edit call capabilities" onclick="return phone.enableBox('call', true);">
+                    <img id="edit_call" src="edit.png" class="help-img" style="visibility: visible;"></img></a>
+                <a href="#" title="How to make/receive call?" onclick="return phone.help('call');">
+                    <img src="help.png" class="help-img"></img>
+            </a></div>
+        </div>
+        <div style="padding: 4px">
+            <select class="uri-scheme" id="target_scheme" disabled="disabled"
+                onchange="phone.setProperty('target_scheme', ['sip', 'tel', 'urn'][$('target_scheme').selectedIndex])">
+                <option id="target_scheme_sip" value="sip">sip</option>
+                <option id="target_scheme_tel" value="tel">tel</option>
+                <option id="target_scheme_urn" value="urn">urn</option>
+            </select>
+            :
+            <input type="text" class="uri-value" id="target_value" value="" disabled="disabled"
+                onkeyup="setTimeout(phone.setProperty('target_value', $('target_value').value), 100)"/>
+            
+            <div style="position: absolute; left: 81px; right: 2px; overflow: hidden;">
+                <table cellpadding="0px" cellspacing="0px">
+                    <tr><td>
+                        <div class="dialdiv" onclick="phone.sendDigit('1')">
+                            <span class="dialnumber">1</span>
+                        </div>
+                    </td><td>
+                        <div class="dialdiv" onclick="phone.sendDigit('2')">
+                            <span class="dialnumber">2</span>
+                            <span class="dialletter">abc</span>
+                        </div>
+                    </td><td>
+                        <div class="dialdiv" onclick="phone.sendDigit('3')">
+                            <span class="dialnumber">3</span>
+                            <span class="dialletter">def</span>
+                        </div>
+                    </td></tr><tr><td>
+                        <div class="dialdiv" onclick="phone.sendDigit('4')">
+                            <span class="dialnumber">4</span>
+                            <span class="dialletter">ghi</span>
+                        </div>
+                    </td><td>
+                        <div class="dialdiv" onclick="phone.sendDigit('5')">
+                            <span class="dialnumber">5</span>
+                            <span class="dialletter">jkl</span>
+                        </div>
+                    </td><td>
+                        <div class="dialdiv" onclick="phone.sendDigit('6')">
+                            <span class="dialnumber">6</span>
+                            <span class="dialletter">mno</span>
+                        </div>
+                    </td></tr><tr><td>
+                        <div class="dialdiv" onclick="phone.sendDigit('7')">
+                            <span class="dialnumber">7</span>
+                            <span class="dialletter">pqrs</span>
+                        </div>
+                    </td><td>
+                        <div class="dialdiv" onclick="phone.sendDigit('8')">
+                            <span class="dialnumber">8</span>
+                            <span class="dialletter">tuv</span>
+                        </div>
+                    </td><td>
+                        <div class="dialdiv" onclick="phone.sendDigit('9')">
+                            <span class="dialnumber">9</span>
+                            <span class="dialletter">wxyz</span>
+                        </div>
+                    </td></tr><tr><td>
+                        <div class="dialdiv" onclick="phone.sendDigit('*')">
+                            <span class="dialnumber" style="font-size: xx-large;">*</span>
+                        </div>
+                    </td><td>
+                        <div class="dialdiv" onclick="phone.sendDigit('0')">
+                            <span class="dialnumber">0</span>
+                        </div>
+                    </td><td>
+                        <div class="dialdiv" onclick="phone.sendDigit('#')">
+                            <span class="dialnumber">#</span>
+                            <span class="dialletter">abc</span>
+                        </div>
+                    </td></tr>
+                </table>
+            </div>
+            <div style="position: absolute; bottom: 2px; left: 81px; right: 2px; overflow: hidden;">
+                <input type="button" class="callbutton" id="call_button" value="Call" disabled="disabled" 
+                       onclick="return phone.call();" title="click to call or answer"></input>
+                <input type="button" class="endbutton" id="end_button" value="End" disabled="disabled"
+                       onclick="return phone.end();" title="click to cancel, decline or hang up"></input>
+            </div>
+            <div style="position: absolute; left: 2px; top: 50px; width: 77px; bottom: 2px;">
+                <input type="checkbox" class="checkbox" id="has_audio" disabled="disabled"
+                    title="Audio codec using pcmu, pcma and speex"
+                    onclick="phone.setProperty('has_audio', $('has_audio').checked)"></input>Audio<br/>
+                <input type="checkbox" class="checkbox" id="has_tones" disabled="disabled"
+                    title="DTMF tones using RFC 4733"
+                    onclick="phone.setProperty('has_tones', $('has_tones').checked)"></input>Tones<br/>
+                <input type="checkbox" class="checkbox" id="has_video" disabled="disabled"
+                    title="Video codec using h264"
+                    onclick="phone.setProperty('has_video', $('has_video').checked)"></input>Video<br/>
+                <input type="checkbox" class="checkbox" id="has_text" disabled="disabled"
+                    title="Real-time text using t140 and RFC 4351"
+                    onclick="phone.setProperty('has_text', $('has_text').checked)"></input>Text<br/>
+                <input type="checkbox" class="checkbox" id="has_location" disabled="disabled"
+                    title="Caller location for emergency calls"
+                    onclick="phone.setProperty('has_location', $('has_location').checked)"></input>Location<br/>
+            </div>
+            <div style="position: absolute; left: 6px; bottom: 6px;">
+                <span id="call_state">idle</span>
+            </div>
+        </div>
+    </div>
+    
+    <div id="im-box" class="content-box">
+        <div class="content-header">Text Chat
+            <div class="help-div">
+                <a href="#" title="Print text chat" onclick="return phone.print($('im-history').value)">
+                    <img src="print.png" class="print-img"></img></a>
+                <a href="#" title="How to send/receive text chat?" onclick="return phone.help('im');">
+                    <img src="help.png" class="help-img"></img></a>
+            </div>
+        </div>
+    
+        <div style="width: 100%; height: 170px; bottom: 0px;">
+            <div id="im-history-box">
+                <textarea id="im-history" readonly="readonly">This area displays the text messages.</textarea>
+            </div>
+            <input type="text" id="im-input" onkeyup="return phone.sendChar(event);"
+                onchange="phone.sendText($('im-input').value); $('im-input').value=''; return false;"></input>
+            <input type="button" id="im-button" value="send"
+                onclick="phone.sendText($('im-input').value); $('im-input').value=''; return false;"></input>
+        </div>
+    </div>
+    
+    <div id="local-video-box" class="content-box">
+        <div class="content-header">Local Video
+            <input id="local-video-on" type="checkbox" style="height: 12px; padding: 0px; margin: 0px;"
+                onclick="getFlashMovie('local-video').setProperty('live', $('local-video-on').checked)"/>
+            <div class="help-div">
+                <a href="#" title="Toggle control panel" onclick="return phone.toggleControls('local-video')">
+                    <img src="edit.png" class="help-img" style="visibility: visible;"></img></a>
+                <a href="#" title="What is local video?" onclick="return phone.help('local-video');">
+                    <img src="help.png" class="help-img"></img></a>
+            </div>
+        </div>
+        <div id="local-video">
+            <h2>Alternative content</h2>
+            <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+        </div>
+    </div>
+    
+    <div id="remote-video-box" class="content-box">
+        <div class="content-header">Remote Video
+            <div class="help-div">
+                <a href="#" title="Toggle control panel" onclick="getFlashMovie('remote-video').setProperty('controls', !getFlashMovie('remote-video').getProperty('controls')); return false;">
+                    <img src="edit.png" class="help-img" style="visibility: visible;"></img></a>
+                <a href="#" title="What is remote video?" onclick="return phone.help('remote-video');">
+                    <img src="help.png" class="help-img"></img></a>
+            </div>
+        </div>
+        <div id="remote-video">
+            <h2>Alternative content</h2>
+            <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+        </div>
+    </div>
+    
+    <div id="flash-network-box" class="content-box">
+        <div class="content-header">Flash Network
+            <div class="help-div">
+                <a href="#" title="Save network properties" onclick="return phone.enableBox('network', false);">
+                    <img id="save_network" src="save.png" class="help-img" style="visibility: hidden;"></img></a>
+                <a href="#" title="Edit network properties" onclick="return phone.enableBox('network', true);">
+                    <img id="edit_network" src="edit.png" class="help-img" style="visibility: visible;"></img></a>
+                <a href="#" title="What is Flash Network?" onclick="return phone.help('flash-network');">
+                    <img src="help.png" class="help-img"></img>
+            </a></div>
+        </div>
+        <div style="position: absolute; left: 4px;">
+            <input type="text" class="text" id="listen_ip" style="width: 100px;" disabled="disabled"
+                onkeyup="setTimeout(phone.setProperty('listen_ip', $('listen_ip').value),100)"/>
+        </div>
+        
+        <div id="network_status" style="position: absolute; right: 4px;"></div>
+        <div style="position: absolute; top: 46px; left: 12px;">
+            <div id="flash-network">
+                <h2>Alternative content</h2>
+                <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="help-box" class="content-box">
+        <div class="content-header">Getting Started
+            <div class="help-div">
+                <a href="#" title="Getting started guide" onclick="return phone.help('default');">
+                    <img src="help.png" class="help-img"></img></a>
+            </div>
+        </div>
+        <div id="help" style="padding: 4px; overflow: auto; width: 232px; height: 160px; text-align: justify;"></div>
+    </div>
+    
+    <div id="log-box" class="content-box">
+        <div class="content-header">Program Log
+            (auto-scroll?<input id="log_scroll" type="checkbox" style="font-size: small;"
+                onclick="phone.setProperty('log_scroll', $('log_scroll').checked)"></input>)
+            <div class="help-div">
+                <a href="#" title="Print text chat" onclick="return phone.print($('log-text').value)">
+                    <img src="print.png" class="print-img"></img></a>
+                <a href="#" title="What is Program Log?" onclick="return phone.help('program-log');">
+                    <img src="help.png" class="help-img"></img></a>
+            </div>
+        </div>
+        <div id="log-text-div">
+            <textarea id="log-text" readonly="readonly">This box display the program trace</textarea>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        var phone = new Phone();
+
+        //network._debug = true;
+        network.onstatus = function(value) { phone.statusChanged(value); };
+        network.onnetworkchange = function() { phone.networkChanged(); };
+        
+        phone.addEventListener("propertyChange", function(event) {
+            var value = event.newValue;
+            var property = event.property;
+            var subprop = "";
+            if (property.indexOf(".") >= 0) {
+                var parts = property.split(".");
+                property = parts[0];
+                if (parts.length > 0)
+                    subprop = parts[1];
+            }
+            
+            var input = $(property);
+            if (!input) {
+                var inputs = document.getElementsByName(property);
+                // this may be radio buttons.
+                for (var j=0; j<inputs.length; ++j) {
+                    var input1 = inputs[j];
+                    if (subprop) {
+                        input1[subprop] = value;
+                    }
+                    else if (input1.value == value) {
+                        input = input1;
+                        input.checked = true;
+                        break;
+                    }
+                }
+            }
+            else {
+                if (input.localName == "input") {
+                    if (input.type == "text" || input.type == "password" || input.type == "button") {
+                        if (subprop)
+                            input[subprop] = value;
+                        else
+                            input.value = value;
+                    }
+                    else if (input.type == "checkbox") {
+                        if (subprop)
+                            input[subprop] = value;
+                        else
+                            input.checked = (value && value != "false" ? true : false);
+                    }
+                    else if (input.type == "radio") {
+                        if (subprop) {
+                            input[subprop] = value;
+                        }
+                    }
+                }
+                else if (input.localName == "span" || input.localName == "div") {
+                    if (!subprop)
+                        input.innerHTML = cleanHTML(value);
+                }
+                else if (input.localName == "select") {
+                    if (subprop)
+                        input[subprop] = value;
+                    else
+                        input.value = value;
+                }
+                else {
+                    log("ignoring propertyChange for " + event.property);
+                }
+            }
+        });
+        
+        phone.addEventListener("message", function(event) {
+            var msg = "";
+            if (event.sender) {
+                msg += event.sender + ": ";
+            }
+            if (event.text) {
+                msg += event.text;
+            }
+            if (msg) {
+                var history = $('im-history');
+                history.value += "\n" + msg;
+                history.scrollTop = history.scrollHeight;
+            }
+        });
+        
+        phone.populate();
+        phone.help("default");
+    </script>
+</body>
+</html>

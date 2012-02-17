@@ -1,0 +1,294 @@
+body {
+  margin: 0;
+  padding: 10px;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: #404040;
+  overflow: hidden;
+}
+td, li {
+  font-family: sans-serif;
+  font-size: 14px;
+  color: #404040;
+}
+a {
+  color: #000080;
+  text-decoration: none;
+}
+input {
+  outline: none;
+}
+input.text[disabled] {
+  background-color: #f0f0f0;
+}
+input.button {
+  border: 1px outset #a0a0a0;
+  cursor: pointer;
+}
+input.radio {
+  
+}
+input.checkbox {
+  
+}
+.has-shadow {
+  border: 1px solid #a0a0a0;
+  -moz-box-shadow: 3px 3px 10px #808080;
+  -webkit-box-shadow: 3px 3px 10px #808080;
+  box-shadow: 3px 3px 10px #808080;
+  /*
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#808080')";
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#808080');
+  */
+}
+.has-gradient {
+  background: -moz-linear-gradient(100% 100% 90deg, #e0e0e0, #f0f0f0);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f0f0f0), to(#e0e0e0));
+  background: -webkit-linear-gradient(#f0f0f0, #e0e0e0);
+  background: -o-linear-gradient(#f0f0f0, #e0e0e0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#e0e0e0');
+}
+.heading {
+  font-weight: bold;
+  font-size: 14px;
+}
+div.content {
+  position: absolute;
+  border: 1px solid #a0a0a0;
+  top: 32px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  clear: left;
+  padding: 10px;
+  background-color: #a8a8a8;
+}
+div.content-box {
+  background-color: #f0f0f0;
+  border: 1px solid #a0a0a0;
+}
+div.content-header {
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border: 1px solid #c0c0c0;
+  background-color: #f0f0f0;
+  background: -moz-linear-gradient(100% 100% 90deg, #b0b0b0, #d0d0d0);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d0d0d0), to(#b0b0b0));
+  background: -webkit-linear-gradient(#d0d0d0, #b0b0b0);
+  background: -o-linear-gradient(#d0d0d0, #b0b0b0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0d0d0', endColorstr='#b0b0b0');
+}
+
+div.help-div {
+  float: right;
+  right: 4px;
+  top: 4px;
+}
+
+img.help-img {
+  border: none;
+  width: 16px;
+  height: 16px;
+}
+
+img.print-img {
+  border: none;
+  width: 16px;
+  height: 16px;
+}
+
+select {
+  border: 0;
+  -webkit-appearance: none;
+  font-size: 14px;
+  background-color: #f0f0f0;
+  outline: none;
+}
+select.uri-scheme {
+  /* width: 28px; */
+  width: 66px;
+  text-align: right;
+  direction: rtl;
+}
+input.uri-value {
+  width: 154px;
+}
+input.uri-value[disabled] {
+  background-color: #f0f0f0;
+}
+
+div.dialpad {
+  
+}
+div.dialdiv {
+  width: 40px;
+  height: 24px;
+  margin: 1px;
+  padding: 0px;
+  padding-left: 8px;
+  border: 1px outset #a0a0a0;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+span.dialnumber {
+  font-size: large;
+}
+span.dialletter {
+  font-size: x-small;
+}
+input.dialbutton {
+  border: 1px outset #a0a0a0;
+  cursor: pointer;
+  width: 50px;
+  height: 26px;
+  margin: 1px;
+  background-color: #f0f0f0;
+}
+input.callbutton {
+  border: 1px outset #a0a0a0;
+  cursor: pointer;
+  width: 74px;
+  height: 20px;
+  margin: 1px;
+  background-color: #80ff80;
+}
+input.callbutton[disabled] {
+  background-color: #f0f0f0;
+}
+
+input.endbutton {
+  border: 1px outset #a0a0a0;
+  cursor: pointer;
+  width: 74px;
+  height: 20px;
+  margin: 1px;
+  background-color: #ff8080;
+}
+input.endbutton[disabled] {
+  background-color: #f0f0f0;
+}
+
+div#config-box {
+  position: absolute;
+  top: 10px;
+  height: 190px;
+  left: 10px;
+  width: 240px;
+}
+
+div#register-box {
+  position: absolute;
+  top: 212px;
+  height: 190px;
+  left: 10px;
+  width: 240px;
+}
+
+div#call-box {
+  position: absolute;
+  top: 10px;
+  height: 190px;
+  left: 262px;
+  width: 240px;
+}
+
+div#im-box {
+  position: absolute;
+  top: 212px;
+  height: 190px;
+  left: 262px;
+  width: 240px;
+}
+
+div#local-video-box {
+  position: absolute;
+  top: 10px;
+  height: 190px;
+  left: 514px;
+  width: 240px;
+}
+
+div#remote-video-box {
+  position: absolute;
+  top: 212px;
+  height: 190px;
+  left: 514px;
+  width: 240px;
+}
+
+div#flash-network-box {
+  position: absolute;
+  top: 10px;
+  height: 190px;
+  left: 766px;
+  width: 240px;
+}
+
+div#help-box {
+  position: absolute;
+  top: 212px;
+  height: 190px;
+  left: 766px;
+  width: 240px;
+}
+
+div#log-box {
+  position: absolute;
+  top: 414px;
+  bottom: 10px;
+  left: 10px;
+  width: 996px;
+}
+
+div#log-text-div {
+  position: absolute;
+  top: 24px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+textarea#log-text {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #f0f0f0;
+  border: none;
+  outline: none;
+}
+
+input#im-input {
+  position: absolute;
+  left: 2px;
+  right: 44px;
+  height: 20px;
+  bottom: 2px;
+  margin: 0px;
+}
+input#im-button {
+  border: 1px outset #a0a0a0;
+  cursor: pointer;
+  position: absolute;
+  bottom: 2px;
+  height: 20px;
+  right: 0px;
+}
+div#im-history-box {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  top: 24px;
+  bottom: 24px;
+  padding: 0px;
+  border: 1px solid #c0c0c0;
+}
+textarea#im-history {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #f0f0f0;
+  border: none;
+  outline: none;
+}
