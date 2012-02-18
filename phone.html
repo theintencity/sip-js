@@ -34,26 +34,27 @@
     <script type="text/javascript" src="phone.js"></script>
     
     <script type="text/javascript">
-      swfobject.embedSWF("http://theintencity.com/flash-network/NetworkIO.swf", "flash-network", "215", "138", "10.0.0", "expressInstall.swf", {}, 
-        {"allowScriptAccess": "always", "flashVars": "apiVersion=1.0&prefix=network.", "bgcolor" : "#f0f0f0"}, 
+      swfobject.embedSWF("http://theintencity.com/flash-network/NetworkIO.swf", "flash-network", "215", "138", "10.0.0", "http://theintencity.com/flash-network/expressInstall.swf", 
+        {"apiVersion": "1.0", "prefix": "network."}, 
+        {"allowScriptAccess": "always", "bgcolor" : "#f0f0f0"}, 
         {"id": "flash-network", "name": "flash-network"});
       network.movieName = "flash-network";
       
-      swfobject.embedSWF("http://theintencity.com/flash-network/VideoIO11.swf", "local-video", "240", "168", "11.0.0", "expressInstall.swf", {},
-        {"allowScriptAccess": "always", "allowFullScreen": "true",
-            "flashVars": "videoCodec=H264Avc&codec=pcmu&framesPerPacket=2&prefix=network.", "bgcolor": "#f0f0f0"},
+      swfobject.embedSWF("http://theintencity.com/flash-network/VideoIO11.swf", "local-video", "240", "168", "11.0.0", "http://theintencity.com/flash-network/expressInstall.swf", 
+        {"videoCodec": "H264Avc", "codec": "pcmu", "framesPerPacket": "2", "prefix": "network."},
+        {"allowScriptAccess": "always", "allowFullScreen": "true", "bgcolor": "#f0f0f0"},
         {"id": "local-video", "name": "local-video"});
       
-      swfobject.embedSWF("http://theintencity.com/flash-network/VideoIO11.swf", "remote-video", "240", "168", "11.0.0", "expressInstall.swf", {},
-        {"allowScriptAccess": "always", "allowFullScreen": "true",
-            "flashVars": "videoCodec=H264Avc&codec=pcmu&framesPerPacket=2&prefix=network.", "bgcolor": "#f0f0f0"},
+      swfobject.embedSWF("http://theintencity.com/flash-network/VideoIO11.swf", "remote-video", "240", "168", "11.0.0", "http://theintencity.com/flash-network/expressInstall.swf",
+        {"videoCodec": "H264Avc", "codec": "pcmu", "framesPerPacket": "2", "prefix": "network."},
+        {"allowScriptAccess": "always", "allowFullScreen": "true", "bgcolor": "#f0f0f0"},
         {"id": "remote-video", "name": "remote-video"});
     </script>
     
 </head> 
  
 <body>
-    <div id="config-box" class="content-box">
+    <div id="config-box" class="content-box has-shadow">
         <div class="content-header">Configuration
             <div class="help-div">
                 <a href="#" title="Save configuration" onclick="return phone.enableBox('config', false);">
@@ -67,18 +68,23 @@
         <table>
             <tr><td align="right">Display Name:</td><td>
             <input type="text" class="text" id="displayname" value="" disabled="disabled"
+                style="width: 130px;"
                 onkeyup="setTimeout(phone.setProperty('displayname', $('displayname').value),100)"/>
             </td></tr><tr><td align="right">User Name:</td><td>
             <input type="text" class="text" id="username" value="" disabled="disabled"
+                style="width: 130px;"
                 onkeyup="setTimeout(phone.setProperty('username', $('username').value),100)"/>
             </td></tr><tr><td align="right">Domain:</td><td>
             <input type="text" class="text" id="domain" value="" disabled="disabled"
+                style="width: 130px;"
                 onkeyup="setTimeout(phone.setProperty('domain', $('domain').value),100)"/>
             </td></tr><tr><td align="right">Auth Name:</td><td>
             <input type="text" class="text" id="authname" value="" disabled="disabled"
+                style="width: 130px;"
                 onkeyup="setTimeout(phone.setProperty('authname', $('authname').value),100)"/>
             </td></tr><tr><td align="right">Password:</td><td>
             <input type="password" class="text" id="password" disabled="disabled"
+                style="width: 130px;"
                 onkeyup="setTimeout(phone.setProperty('password', $('password').value),100)"/>
             </td></tr><tr><td align="right" colspan="2">Transport: 
             <input type="radio" class="radio" id="transport_udp" name="transport" value="udp" disabled="disabled"
@@ -91,7 +97,7 @@
         </table>
     </div>
     
-    <div id="register-box" class="content-box">
+    <div id="register-box" class="content-box has-shadow">
         <div class="content-header">Register
             <div class="help-div">
                 <a href="#" title="Save register parameters" onclick="return phone.enableBox('register', false);">
@@ -136,7 +142,7 @@
         </div>
     </div>
     
-    <div id="call-box" class="content-box">
+    <div id="call-box" class="content-box has-shadow">
         <div class="content-header">Call
             <div class="help-div">
                 <a href="#" title="Save call capabilities" onclick="return phone.enableBox('call', false);">
@@ -158,8 +164,8 @@
             <input type="text" class="uri-value" id="target_value" value="" disabled="disabled"
                 onkeyup="setTimeout(phone.setProperty('target_value', $('target_value').value), 100)"/>
             
-            <div style="position: absolute; left: 81px; right: 2px; overflow: hidden;">
-                <table cellpadding="0px" cellspacing="0px">
+            <div style="position: absolute; left: 81px; top: 50px; right: 2px; overflow: hidden;">
+                <table cellpadding="0" cellspacing="0" width="100%">
                     <tr><td>
                         <div class="dialdiv" onclick="phone.sendDigit('1')">
                             <span class="dialnumber">1</span>
@@ -205,8 +211,8 @@
                             <span class="dialletter">wxyz</span>
                         </div>
                     </td></tr><tr><td>
-                        <div class="dialdiv" onclick="phone.sendDigit('*')">
-                            <span class="dialnumber" style="font-size: xx-large;">*</span>
+                        <div class="dialdiv" onclick="phone.sendDigit('*')" style="overflow: hidden;">
+                            <span class="dialnumber" style="font-size: 20pt; display: block;">*</span>
                         </div>
                     </td><td>
                         <div class="dialdiv" onclick="phone.sendDigit('0')">
@@ -220,7 +226,7 @@
                     </td></tr>
                 </table>
             </div>
-            <div style="position: absolute; bottom: 2px; left: 81px; right: 2px; overflow: hidden;">
+            <div style="position: absolute; bottom: 2px; left: 80px; right: 2px; overflow: hidden;">
                 <input type="button" class="callbutton" id="call_button" value="Call" disabled="disabled" 
                        onclick="return phone.call();" title="click to call or answer"></input>
                 <input type="button" class="endbutton" id="end_button" value="End" disabled="disabled"
@@ -249,7 +255,7 @@
         </div>
     </div>
     
-    <div id="im-box" class="content-box">
+    <div id="im-box" class="content-box has-shadow">
         <div class="content-header">Text Chat
             <div class="help-div">
                 <a href="#" title="Print text chat" onclick="return phone.print($('im-history').value)">
@@ -270,7 +276,7 @@
         </div>
     </div>
     
-    <div id="local-video-box" class="content-box">
+    <div id="local-video-box" class="content-box has-shadow">
         <div class="content-header">Local Video
             <input id="local-video-on" type="checkbox" style="height: 12px; padding: 0px; margin: 0px;"
                 onclick="getFlashMovie('local-video').setProperty('live', $('local-video-on').checked)"/>
@@ -287,7 +293,7 @@
         </div>
     </div>
     
-    <div id="remote-video-box" class="content-box">
+    <div id="remote-video-box" class="content-box has-shadow">
         <div class="content-header">Remote Video
             <div class="help-div">
                 <a href="#" title="Toggle control panel" onclick="getFlashMovie('remote-video').setProperty('controls', !getFlashMovie('remote-video').getProperty('controls')); return false;">
@@ -302,7 +308,7 @@
         </div>
     </div>
     
-    <div id="flash-network-box" class="content-box">
+    <div id="flash-network-box" class="content-box has-shadow">
         <div class="content-header">Flash Network
             <div class="help-div">
                 <a href="#" title="Save network properties" onclick="return phone.enableBox('network', false);">
@@ -327,7 +333,7 @@
         </div>
     </div>
     
-    <div id="help-box" class="content-box">
+    <div id="help-box" class="content-box has-shadow">
         <div class="content-header">Getting Started
             <div class="help-div">
                 <a href="#" title="Getting started guide" onclick="return phone.help('default');">
@@ -337,7 +343,7 @@
         <div id="help" style="padding: 4px; overflow: auto; width: 232px; height: 160px; text-align: justify;"></div>
     </div>
     
-    <div id="log-box" class="content-box">
+    <div id="log-box" class="content-box has-shadow">
         <div class="content-header">Program Log
             (auto-scroll?<input id="log_scroll" type="checkbox" style="font-size: small;"
                 onclick="phone.setProperty('log_scroll', $('log_scroll').checked)"></input>)

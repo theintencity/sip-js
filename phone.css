@@ -12,6 +12,11 @@ body {
   font-size: 14px;
   color: #404040;
   overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+html {
+  height: 100%;
 }
 td, li {
   font-family: sans-serif;
@@ -43,10 +48,8 @@ input.checkbox {
   -moz-box-shadow: 3px 3px 10px #808080;
   -webkit-box-shadow: 3px 3px 10px #808080;
   box-shadow: 3px 3px 10px #808080;
-  /*
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#808080')";
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#808080');
-  */
 }
 .has-gradient {
   background: -moz-linear-gradient(100% 100% 90deg, #e0e0e0, #f0f0f0);
@@ -80,7 +83,7 @@ div.content-header {
   padding-top: 2px;
   padding-bottom: 2px;
   border: 1px solid #c0c0c0;
-  background-color: #f0f0f0;
+  background-color: #b0b0b0;
   background: -moz-linear-gradient(100% 100% 90deg, #b0b0b0, #d0d0d0);
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d0d0d0), to(#b0b0b0));
   background: -webkit-linear-gradient(#d0d0d0, #b0b0b0);
@@ -90,8 +93,13 @@ div.content-header {
 
 div.help-div {
   float: right;
+  position: absolute;
   right: 4px;
   top: 4px;
+}
+
+img {
+  border: none;
 }
 
 img.help-img {
@@ -115,12 +123,14 @@ select {
 }
 select.uri-scheme {
   /* width: 28px; */
-  width: 66px;
+  width: 62px;
   text-align: right;
   direction: rtl;
 }
 input.uri-value {
   width: 154px;
+  position: absolute;
+  right: 4px;
 }
 input.uri-value[disabled] {
   background-color: #f0f0f0;
@@ -130,7 +140,6 @@ div.dialpad {
   
 }
 div.dialdiv {
-  width: 40px;
   height: 24px;
   margin: 1px;
   padding: 0px;
@@ -140,10 +149,12 @@ div.dialdiv {
   cursor: pointer;
 }
 span.dialnumber {
-  font-size: large;
+  font-size: 14pt;
+  display: inline;
 }
 span.dialletter {
-  font-size: x-small;
+  font-size: 7pt;
+  display: inline;
 }
 input.dialbutton {
   border: 1px outset #a0a0a0;
@@ -269,7 +280,7 @@ textarea#log-text {
 input#im-input {
   position: absolute;
   left: 2px;
-  right: 44px;
+  width: 194px;
   height: 20px;
   bottom: 2px;
   margin: 0px;
@@ -293,7 +304,7 @@ div#im-history-box {
 }
 textarea#im-history {
   width: 100%;
-  height: 100%;
+  height: 140px;
   overflow: auto;
   background-color: #f0f0f0;
   border: none;
