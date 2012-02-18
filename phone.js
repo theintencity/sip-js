@@ -1,4 +1,7 @@
-// Phone Script
+// Copyright (c) 2011-2012, Intencity Cloud Technologies
+// Copyright (c) 2011-2012, Kundan Singh
+// This software is licensed under LGPL.
+// See README and http://code.google.com/p/sip-js for details.
 
 function getFlashMovie(name) {
     var isIE = navigator.appName.indexOf("Microsoft") != -1;
