@@ -1,0 +1,2042 @@
+15:00:08.209 sipapi DEBUG - ('127.0.0.1', 53947)=>('127.0.0.1', 5080) on type='ws' length 0
+15:00:08.255 sipapi DEBUG - ('127.0.0.1', 53972)=>('127.0.0.1', 5080) on type='ws' length 0
+15:01:16.821 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) connection type 'ws'
+15:01:16.822 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) on type='ws' length 266
+15:01:16.822 sipapi DEBUG - handshake
+GET /sip HTTP/1.1
+Upgrade: websocket
+Connection: Upgrade
+Host: localhost:5080
+Origin: http://localhost:8080
+Sec-WebSocket-Protocol: sip
+Sec-WebSocket-Key: x8Y+O0NmyFr/lwXZVn0ngQ==
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Extensions: x-webkit-deflate-frame
+
+
+15:01:16.822 sipapi DEBUG - ('127.0.0.1', 5080)=>('127.0.0.1', 54040)
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: mtwUSI610d2GCdyI/k34MJG7mMk=
+Sec-WebSocket-Protocol: sip
+
+
+15:01:16.838 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) on type='ws' length 546
+15:01:16.839 sipapi DEBUG - offset=8 length=538
+15:01:16.840 sipapi DEBUG - websocket received
+REGISTER sip:localhost SIP/2.0
+Via: SIP/2.0/WS r107941806.invalid;rport;branch=z9hG4bKYmZmNTExMzEwMDQ0N2U3NDIxMmVkYjkwNzkyY2Q2MmI.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713221421118315
+To: "Kundan" <sip:kundan@localhost>
+Call-ID: 2581484819@r107941806.invalid
+CSeq: 1 REGISTER
+Max-Forwards: 70
+Contact: <sip:kundan@r107941806.invalid>;reg-id=1;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>"
+Route: <sip:localhost:5080;lr;transport=ws>
+Content-Length: 0
+Supported: path, outbound, gruu
+Expires: 180
+
+
+15:01:16.842 sipapi DEBUG - received request from stack 'REGISTER'
+15:01:16.843 sipapi DEBUG - save {'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:53972;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=129;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333144918.2269, sip:alan@127.0.0.1:53972;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@r107941806.invalid>;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";reg-id=1;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+15:01:16.843 sipapi DEBUG - locate 'sip:kundan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:53972;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=129;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333144918.2269, sip:alan@127.0.0.1:53972;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@r107941806.invalid>;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";reg-id=1;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+closing transaction 'z9hG4bKYmZmNTExMzEwMDQ0N2U3NDIxMmVkYjkwNzkyY2Q2MmI.'
+15:01:16.845 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54040) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;branch=z9hG4bKYmZmNTExMzEwMDQ0N2U3NDIxMmVkYjkwNzkyY2Q2MmI.;rport=54040
+From: "Kundan" <sip:kundan@localhost>;tag=56065713221421118315
+Expires: 180
+To: "Kundan" <sip:kundan@localhost>;tag=168358768738
+Contact: <sip:kundan@127.0.0.1:54040;transport=ws>;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>";reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179
+CSeq: 1 REGISTER
+Call-ID: 2581484819@r107941806.invalid
+
+
+15:01:24.406 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) connection type 'ws'
+15:01:24.407 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 266
+15:01:24.407 sipapi DEBUG - handshake
+GET /sip HTTP/1.1
+Upgrade: websocket
+Connection: Upgrade
+Host: localhost:5080
+Origin: http://localhost:8080
+Sec-WebSocket-Protocol: sip
+Sec-WebSocket-Key: jolasH+S5XMEJpPYLsEJMA==
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Extensions: x-webkit-deflate-frame
+
+
+15:01:24.407 sipapi DEBUG - ('127.0.0.1', 5080)=>('127.0.0.1', 54076)
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: UPQIkSAYJo373YFQQDH4WJepTsQ=
+Sec-WebSocket-Protocol: sip
+
+
+15:01:24.423 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 539
+15:01:24.423 sipapi DEBUG - offset=8 length=531
+15:01:24.424 sipapi DEBUG - websocket received
+REGISTER sip:localhost SIP/2.0
+Via: SIP/2.0/WS r8909973457.invalid;rport;branch=z9hG4bKNDc4YTY0NDc2YWU5YTEzYjIzN2Q2MzVlNDk0ZGU3YTI.
+From: "Alan" <sip:alan@localhost>;tag=29105385422215425041
+To: "Alan" <sip:alan@localhost>
+Call-ID: 6572913498@r8909973457.invalid
+CSeq: 1 REGISTER
+Max-Forwards: 70
+Contact: <sip:alan@r8909973457.invalid>;reg-id=1;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>"
+Route: <sip:localhost:5080;lr;transport=ws>
+Content-Length: 0
+Supported: path, outbound, gruu
+Expires: 180
+
+
+15:01:24.426 sipapi DEBUG - received request from stack 'REGISTER'
+15:01:24.427 sipapi DEBUG - save {'sip:alan@localhost': [(Contact: <sip:alan@r8909973457.invalid>;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";reg-id=1;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54040;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+15:01:24.427 sipapi DEBUG - locate 'sip:alan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@r8909973457.invalid>;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";reg-id=1;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54040;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+closing transaction 'z9hG4bKNDc4YTY0NDc2YWU5YTEzYjIzN2Q2MzVlNDk0ZGU3YTI.'
+15:01:24.429 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54076) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;branch=z9hG4bKNDc4YTY0NDc2YWU5YTEzYjIzN2Q2MzVlNDk0ZGU3YTI.;rport=54076
+From: "Alan" <sip:alan@localhost>;tag=29105385422215425041
+Expires: 180
+To: "Alan" <sip:alan@localhost>;tag=168358768785
+Contact: <sip:alan@127.0.0.1:54076;transport=ws>;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>";reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179
+CSeq: 1 REGISTER
+Call-ID: 6572913498@r8909973457.invalid
+
+
+15:01:29.116 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) on type='ws' length 2940
+15:01:29.117 sipapi DEBUG - offset=8 length=2932
+15:01:29.121 sipapi DEBUG - websocket received
+INVITE sip:alan@localhost SIP/2.0
+Via: SIP/2.0/WS r107941806.invalid;rport;branch=z9hG4bKNTQyYjZjZWIwNDUyNWJkM2NjN2I2YmI3OTc5NzEzOWY.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 1 INVITE
+Max-Forwards: 70
+Contact: <sip:kundan@localhost>
+Route: <sip:alan@localhost:5080;lr>
+Content-Length: 2327
+User-Agent: sip-js/1.0
+X-Webrtc: eyJtZXNzYWdlVHlwZSI6Ik9GRkVSIiwib2ZmZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwic2VxIjoxLCJ0aWVCcmVha2VyIjo2Mzc1NTExMjV9
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62135 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp:62134 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62130 typ host name rtcp network_name en1 username dcWyymdwEPK3CXo5 password sTLJSez0eM0VUfUkZ+1Pyi generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62131 typ host name rtp network_name en1 username 0MPTQtITP1mZdqlA password 3r4BHEOfQAUhN+7FVH7zCf generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62134 typ srflx name rtcp network_name en1 username IhAUx7qlRoBMWpLH password XMvxVdaVBbhA+poanGC1U/ generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62135 typ srflx name rtp network_name en1 username hmeOhwc+ZxfiliMb password 0Hl4qGJpC5624Cjxmfapt+ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:keNcG3HezSNID7LmfDa9J4lfdUL8W1F7TNJKcbuy 
+a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:gaQuA429SJy2e9JctPUyEAmQrEw3y7hi2iRdhLfa 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=ssrc:2570980487 cname:hsWuSQJxx7przmb8
+a=ssrc:2570980487 mslabel:7555a050-6ffa-4bd6-a528-e7e77194c439
+a=ssrc:2570980487 label:Default
+m=video 62137 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp:62136 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62132 typ host name video_rtcp network_name en1 username YwSakUOxF+pV4GqE password WzOZWvnoU3KKQXo26W7Rtu generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62133 typ host name video_rtp network_name en1 username kI5+SblDl80FTYoO password L1FgZ9XnKZ2tQCJNoUJq5l generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62137 typ srflx name video_rtp network_name en1 username zNQ+C+bCGBrM6w/w password wnUGyVqboTLm81K+9fJKBb generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62136 typ srflx name video_rtcp network_name en1 username tOjsohegdLCD/BHE password PUFlbohJFnsOG2IczoN++y generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:5ydJsA+FZVpAyqJMT/nW/UW+tcOmDvXJh/pPhNRe 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+a=ssrc:43633328 cname:hsWuSQJxx7przmb8
+a=ssrc:43633328 mslabel:7555a050-6ffa-4bd6-a528-e7e77194c439
+a=ssrc:43633328 label:Built-in iSight
+
+15:01:29.123 sipapi DEBUG - received request from stack 'INVITE'
+15:01:29.124 sipapi DEBUG - locate 'sip:alan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54076;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54040;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+15:01:29.124 sipd DEBUG - locate returned [sip:alan@127.0.0.1:54076;transport=ws]
+15:01:29.127 sipapi DEBUG - sending request on stack 'INVITE'
+15:01:29.129 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54076) on type='ws'
+INVITE sip:alan@127.0.0.1:54076;transport=ws SIP/2.0
+Call-ID: 2705619908@r107941806.invalid
+Content-Length: 2327
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bK0Mdq3wXerDk6wtNjoqo9dw..
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKNTQyYjZjZWIwNDUyNWJkM2NjN2I2YmI3OTc5NzEzOWY.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+User-Agent: sip-js/1.0
+To: <sip:alan@localhost>
+Contact: <sip:kundan@localhost>
+CSeq: 1 INVITE
+Max-Forwards: 69
+Record-Route: <sip:192.168.1.8:5080;lr>
+X-Webrtc: eyJtZXNzYWdlVHlwZSI6Ik9GRkVSIiwib2ZmZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwic2VxIjoxLCJ0aWVCcmVha2VyIjo2Mzc1NTExMjV9
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62135 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp:62134 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62130 typ host name rtcp network_name en1 username dcWyymdwEPK3CXo5 password sTLJSez0eM0VUfUkZ+1Pyi generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62131 typ host name rtp network_name en1 username 0MPTQtITP1mZdqlA password 3r4BHEOfQAUhN+7FVH7zCf generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62134 typ srflx name rtcp network_name en1 username IhAUx7qlRoBMWpLH password XMvxVdaVBbhA+poanGC1U/ generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62135 typ srflx name rtp network_name en1 username hmeOhwc+ZxfiliMb password 0Hl4qGJpC5624Cjxmfapt+ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:keNcG3HezSNID7LmfDa9J4lfdUL8W1F7TNJKcbuy 
+a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:gaQuA429SJy2e9JctPUyEAmQrEw3y7hi2iRdhLfa 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=ssrc:2570980487 cname:hsWuSQJxx7przmb8
+a=ssrc:2570980487 mslabel:7555a050-6ffa-4bd6-a528-e7e77194c439
+a=ssrc:2570980487 label:Default
+m=video 62137 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp:62136 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62132 typ host name video_rtcp network_name en1 username YwSakUOxF+pV4GqE password WzOZWvnoU3KKQXo26W7Rtu generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62133 typ host name video_rtp network_name en1 username kI5+SblDl80FTYoO password L1FgZ9XnKZ2tQCJNoUJq5l generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62137 typ srflx name video_rtp network_name en1 username zNQ+C+bCGBrM6w/w password wnUGyVqboTLm81K+9fJKBb generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62136 typ srflx name video_rtcp network_name en1 username tOjsohegdLCD/BHE password PUFlbohJFnsOG2IczoN++y generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:5ydJsA+FZVpAyqJMT/nW/UW+tcOmDvXJh/pPhNRe 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+a=ssrc:43633328 cname:hsWuSQJxx7przmb8
+a=ssrc:43633328 mslabel:7555a050-6ffa-4bd6-a528-e7e77194c439
+a=ssrc:43633328 label:Built-in iSight
+
+15:01:29.147 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 419
+15:01:29.148 sipapi DEBUG - offset=8 length=411
+15:01:29.149 sipapi DEBUG - websocket received
+SIP/2.0 100 Trying
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bK0Mdq3wXerDk6wtNjoqo9dw..;received=127.0.0.1
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKNTQyYjZjZWIwNDUyNWJkM2NjN2I2YmI3OTc5NzEzOWY.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+15:01:29.150 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54040) on type='ws'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKNTQyYjZjZWIwNDUyNWJkM2NjN2I2YmI3OTc5NzEzOWY.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>
+CSeq: 1 INVITE
+Call-ID: 2705619908@r107941806.invalid
+
+
+15:01:29.163 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 444
+15:01:29.163 sipapi DEBUG - offset=8 length=436
+15:01:29.166 sipapi DEBUG - websocket received
+SIP/2.0 180 Ringing
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bK0Mdq3wXerDk6wtNjoqo9dw..;received=127.0.0.1
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKNTQyYjZjZWIwNDUyNWJkM2NjN2I2YmI3OTc5NzEzOWY.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+15:01:29.168 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54040) on type='ws'
+SIP/2.0 180 Ringing
+Content-Length: 0
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKNTQyYjZjZWIwNDUyNWJkM2NjN2I2YmI3OTc5NzEzOWY.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+CSeq: 1 INVITE
+Call-ID: 2705619908@r107941806.invalid
+
+
+15:01:32.466 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 2077
+15:01:32.467 sipapi DEBUG - offset=8 length=2069
+15:01:32.470 sipapi DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bK0Mdq3wXerDk6wtNjoqo9dw..;received=127.0.0.1
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKNTQyYjZjZWIwNDUyNWJkM2NjN2I2YmI3OTc5NzEzOWY.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 1 INVITE
+Content-Length: 1312
+Contact: <sip:alan@localhost>
+Server: sip-js/1.0
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6IjNkcnVUSW5FeitDNEVIMndpZGtXZGg3dTlNY25Fbjh2IiwibWVzc2FnZVR5cGUiOiJBTlNXRVIiLCJvZmZlcmVyU2Vzc2lvbklkIjoiams0bUhWTXdhTk90Wm45eGdleEF0SUJwbkJsVmZrWWYiLCJzZXEiOjF9
+Content-Type: application/sdp
+Record-Route: <sip:192.168.1.8:5080;lr>
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62140 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62138 typ host name rtp network_name en1 username EAmQrEw3y7hi2iRd password hLfawKZC5ydJsA+FZVpAyq generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62140 typ srflx name rtp network_name en1 username CXo5sTLJSez0eM0V password UfUkZ+1Pyi0MPTQtITP1mZ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:hsWuSQJxx7przmb8HM+ZkeNcG3HezSNID7LmfDa9 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+m=video 62141 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62139 typ host name video_rtp network_name en1 username JMT/nW/UW+tcOmDv password XJh/pPhNRedcWyymdwEPK3 generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62141 typ srflx name video_rtp network_name en1 username QAUhN+7FVH7zCfYw password SakUOxF+pV4GqEWzOZWvno generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:J4lfdUL8W1F7TNJKcbuygaQuA429SJy2e9JctPUy 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+
+closing transaction 'z9hG4bK0Mdq3wXerDk6wtNjoqo9dw..'
+received 1 responses out of 1
+closing transaction 'z9hG4bKNTQyYjZjZWIwNDUyNWJkM2NjN2I2YmI3OTc5NzEzOWY.'
+15:01:32.473 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54040) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 1312
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKNTQyYjZjZWIwNDUyNWJkM2NjN2I2YmI3OTc5NzEzOWY.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Contact: <sip:alan@localhost>
+CSeq: 1 INVITE
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6IjNkcnVUSW5FeitDNEVIMndpZGtXZGg3dTlNY25Fbjh2IiwibWVzc2FnZVR5cGUiOiJBTlNXRVIiLCJvZmZlcmVyU2Vzc2lvbklkIjoiams0bUhWTXdhTk90Wm45eGdleEF0SUJwbkJsVmZrWWYiLCJzZXEiOjF9
+Call-ID: 2705619908@r107941806.invalid
+Record-Route: <sip:192.168.1.8:5080;lr>
+Server: sip-js/1.0
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62140 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62138 typ host name rtp network_name en1 username EAmQrEw3y7hi2iRd password hLfawKZC5ydJsA+FZVpAyq generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62140 typ srflx name rtp network_name en1 username CXo5sTLJSez0eM0V password UfUkZ+1Pyi0MPTQtITP1mZ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:hsWuSQJxx7przmb8HM+ZkeNcG3HezSNID7LmfDa9 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+m=video 62141 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62139 typ host name video_rtp network_name en1 username JMT/nW/UW+tcOmDv password XJh/pPhNRedcWyymdwEPK3 generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62141 typ srflx name video_rtp network_name en1 username QAUhN+7FVH7zCfYw password SakUOxF+pV4GqEWzOZWvno generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:J4lfdUL8W1F7TNJKcbuygaQuA429SJy2e9JctPUy 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+
+15:01:32.603 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) on type='ws' length 619
+15:01:32.603 sipapi DEBUG - offset=8 length=611
+15:01:32.606 sipapi DEBUG - websocket received
+ACK sip:alan@localhost SIP/2.0
+Via: SIP/2.0/WS r107941806.invalid;rport;branch=z9hG4bKNTQyYjZjZWIwNDUyNWJkM2NjN2I2YmI3OTc5NzEzOWY.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 1 ACK
+Max-Forwards: 70
+Contact: <sip:kundan@r107941806.invalid>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 0
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwibWVzc2FnZVR5cGUiOiJPSyIsIm9mZmVyZXJTZXNzaW9uSWQiOiIzZHJ1VEluRXorQzRFSDJ3aWRrV2RoN3U5TWNuRW44diIsInNlcSI6MX0=
+
+
+no dialog for ACK, finding transaction
+No existing transaction for ACK
+15:01:32.610 sipapi DEBUG - received request from stack 'ACK'
+15:01:32.611 sipapi DEBUG - locate 'sip:alan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54076;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=175;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54040;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+15:01:32.612 sipd DEBUG - locate returned [sip:alan@127.0.0.1:54076;transport=ws]
+15:01:32.614 sipapi DEBUG - sending request on stack 'ACK'
+15:01:32.615 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54076) on type='ws'
+ACK sip:alan@127.0.0.1:54076;transport=ws SIP/2.0
+Call-ID: 2705619908@r107941806.invalid
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bK0Mdq3wXerDk6wtNjoqo9dw..
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKNTQyYjZjZWIwNDUyNWJkM2NjN2I2YmI3OTc5NzEzOWY.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Contact: <sip:kundan@r107941806.invalid>
+CSeq: 1 ACK
+Max-Forwards: 69
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwibWVzc2FnZVR5cGUiOiJPSyIsIm9mZmVyZXJTZXNzaW9uSWQiOiIzZHJ1VEluRXorQzRFSDJ3aWRrV2RoN3U5TWNuRW44diIsInNlcSI6MX0=
+
+
+15:01:32.722 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 2610
+15:01:32.723 sipapi DEBUG - offset=8 length=2602
+15:01:32.731 sipapi DEBUG - websocket received
+INVITE sip:kundan@localhost SIP/2.0
+Via: SIP/2.0/WS r8909973457.invalid;rport;branch=z9hG4bKM2U4MTFmMGZkNmFiNWVkNWIyZTE0YjUwNDVkOWZmZTI.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 2 INVITE
+Max-Forwards: 70
+Contact: <sip:alan@localhost>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 1899
+User-Agent: sip-js/1.0
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwibWVzc2FnZVR5cGUiOiJPRkZFUiIsIm9mZmVyZXJTZXNzaW9uSWQiOiIzZHJ1VEluRXorQzRFSDJ3aWRrV2RoN3U5TWNuRW44diIsInNlcSI6MiwidGllQnJlYWtlciI6NzMzNjk4NjA4fQ==
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62140 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62138 typ host name rtp network_name en1 username EAmQrEw3y7hi2iRd password hLfawKZC5ydJsA+FZVpAyq generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62140 typ srflx name rtp network_name en1 username CXo5sTLJSez0eM0V password UfUkZ+1Pyi0MPTQtITP1mZ generation 0
+a=candidate:1 1 tcp 0.8 192.168.1.8 54077 typ host name rtp network_name en1 username JrxRKAsuFa51q+cl password O39XzTJXKOWy2PGQTStE3m generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:hsWuSQJxx7przmb8HM+ZkeNcG3HezSNID7LmfDa9 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=ssrc:712269578 cname:O2KXC5f58wMA/gNH
+a=ssrc:712269578 mslabel:5469ce36-34d2-4273-a889-c1965a3b619e
+a=ssrc:712269578 label:Default
+m=video 62141 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62139 typ host name video_rtp network_name en1 username JMT/nW/UW+tcOmDv password XJh/pPhNRedcWyymdwEPK3 generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62141 typ srflx name video_rtp network_name en1 username QAUhN+7FVH7zCfYw password SakUOxF+pV4GqEWzOZWvno generation 0
+a=candidate:1 1 tcp 0.8 192.168.1.8 54078 typ host name video_rtp network_name en1 username 2i4YCRuvTh6ZpeGm password qlP0H2hrdLiqZoSAg0RguH generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:J4lfdUL8W1F7TNJKcbuygaQuA429SJy2e9JctPUy 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+a=ssrc:1498104730 cname:O2KXC5f58wMA/gNH
+a=ssrc:1498104730 mslabel:5469ce36-34d2-4273-a889-c1965a3b619e
+a=ssrc:1498104730 label:Built-in iSight
+
+15:01:32.739 sipapi DEBUG - received request from stack 'INVITE'
+15:01:32.743 sipapi DEBUG - locate 'sip:kundan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54076;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=171;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54040;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+15:01:32.744 sipd DEBUG - locate returned [sip:kundan@127.0.0.1:54040;transport=ws]
+15:01:32.746 sipapi DEBUG - sending request on stack 'INVITE'
+15:01:32.748 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54040) on type='ws'
+INVITE sip:kundan@127.0.0.1:54040;transport=ws SIP/2.0
+Call-ID: 2705619908@r107941806.invalid
+Content-Length: 1899
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKZfGaWCq1nvWE60uQFrcbeQ..
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;rport=54076;branch=z9hG4bKM2U4MTFmMGZkNmFiNWVkNWIyZTE0YjUwNDVkOWZmZTI.
+From: <sip:alan@localhost>;tag=2910538542782380322
+User-Agent: sip-js/1.0
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Contact: <sip:alan@localhost>
+CSeq: 2 INVITE
+Max-Forwards: 69
+Record-Route: <sip:192.168.1.8:5080;lr>
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwibWVzc2FnZVR5cGUiOiJPRkZFUiIsIm9mZmVyZXJTZXNzaW9uSWQiOiIzZHJ1VEluRXorQzRFSDJ3aWRrV2RoN3U5TWNuRW44diIsInNlcSI6MiwidGllQnJlYWtlciI6NzMzNjk4NjA4fQ==
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62140 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62138 typ host name rtp network_name en1 username EAmQrEw3y7hi2iRd password hLfawKZC5ydJsA+FZVpAyq generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62140 typ srflx name rtp network_name en1 username CXo5sTLJSez0eM0V password UfUkZ+1Pyi0MPTQtITP1mZ generation 0
+a=candidate:1 1 tcp 0.8 192.168.1.8 54077 typ host name rtp network_name en1 username JrxRKAsuFa51q+cl password O39XzTJXKOWy2PGQTStE3m generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:hsWuSQJxx7przmb8HM+ZkeNcG3HezSNID7LmfDa9 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=ssrc:712269578 cname:O2KXC5f58wMA/gNH
+a=ssrc:712269578 mslabel:5469ce36-34d2-4273-a889-c1965a3b619e
+a=ssrc:712269578 label:Default
+m=video 62141 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62139 typ host name video_rtp network_name en1 username JMT/nW/UW+tcOmDv password XJh/pPhNRedcWyymdwEPK3 generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62141 typ srflx name video_rtp network_name en1 username QAUhN+7FVH7zCfYw password SakUOxF+pV4GqEWzOZWvno generation 0
+a=candidate:1 1 tcp 0.8 192.168.1.8 54078 typ host name video_rtp network_name en1 username 2i4YCRuvTh6ZpeGm password qlP0H2hrdLiqZoSAg0RguH generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:J4lfdUL8W1F7TNJKcbuygaQuA429SJy2e9JctPUy 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+a=ssrc:1498104730 cname:O2KXC5f58wMA/gNH
+a=ssrc:1498104730 mslabel:5469ce36-34d2-4273-a889-c1965a3b619e
+a=ssrc:1498104730 label:Built-in iSight
+
+15:01:32.835 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) on type='ws' length 444
+15:01:32.836 sipapi DEBUG - offset=8 length=436
+15:01:32.837 sipapi DEBUG - websocket received
+SIP/2.0 100 Trying
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKZfGaWCq1nvWE60uQFrcbeQ..;received=127.0.0.1
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;rport=54076;branch=z9hG4bKM2U4MTFmMGZkNmFiNWVkNWIyZTE0YjUwNDVkOWZmZTI.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 2 INVITE
+Content-Length: 0
+
+
+15:01:32.838 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54076) on type='ws'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;rport=54076;branch=z9hG4bKM2U4MTFmMGZkNmFiNWVkNWIyZTE0YjUwNDVkOWZmZTI.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+CSeq: 2 INVITE
+Call-ID: 2705619908@r107941806.invalid
+
+
+15:01:32.860 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) on type='ws' length 493
+15:01:32.861 sipapi DEBUG - offset=8 length=485
+15:01:32.864 sipapi DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKZfGaWCq1nvWE60uQFrcbeQ..;received=127.0.0.1
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;rport=54076;branch=z9hG4bKM2U4MTFmMGZkNmFiNWVkNWIyZTE0YjUwNDVkOWZmZTI.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 2 INVITE
+Content-Length: 0
+Contact: <sip:kundan@localhost>
+Server: sip-js/1.0
+
+
+closing transaction 'z9hG4bKZfGaWCq1nvWE60uQFrcbeQ..'
+received 1 responses out of 1
+closing transaction 'z9hG4bKM2U4MTFmMGZkNmFiNWVkNWIyZTE0YjUwNDVkOWZmZTI.'
+15:01:32.866 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54076) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;rport=54076;branch=z9hG4bKM2U4MTFmMGZkNmFiNWVkNWIyZTE0YjUwNDVkOWZmZTI.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Contact: <sip:kundan@localhost>
+CSeq: 2 INVITE
+Call-ID: 2705619908@r107941806.invalid
+Server: sip-js/1.0
+
+
+15:01:32.938 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 425
+15:01:32.939 sipapi DEBUG - offset=8 length=417
+15:01:32.940 sipapi DEBUG - websocket received
+ACK sip:kundan@localhost SIP/2.0
+Via: SIP/2.0/WS r8909973457.invalid;rport;branch=z9hG4bKM2U4MTFmMGZkNmFiNWVkNWIyZTE0YjUwNDVkOWZmZTI.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 2 ACK
+Max-Forwards: 70
+Contact: <sip:alan@r8909973457.invalid>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 0
+
+
+no dialog for ACK, finding transaction
+No existing transaction for ACK
+15:01:32.943 sipapi DEBUG - received request from stack 'ACK'
+15:01:32.944 sipapi DEBUG - locate 'sip:kundan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54076;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=171;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54040;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=164;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+15:01:32.944 sipd DEBUG - locate returned [sip:kundan@127.0.0.1:54040;transport=ws]
+15:01:32.946 sipapi DEBUG - sending request on stack 'ACK'
+15:01:32.947 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54040) on type='ws'
+ACK sip:kundan@127.0.0.1:54040;transport=ws SIP/2.0
+Call-ID: 2705619908@r107941806.invalid
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKZfGaWCq1nvWE60uQFrcbeQ..
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;rport=54076;branch=z9hG4bKM2U4MTFmMGZkNmFiNWVkNWIyZTE0YjUwNDVkOWZmZTI.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Contact: <sip:alan@r8909973457.invalid>
+CSeq: 2 ACK
+Max-Forwards: 69
+
+
+15:01:32.998 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) on type='ws' length 2920
+15:01:32.999 sipapi DEBUG - offset=8 length=2912
+15:01:33.9 sipapi DEBUG - websocket received
+INVITE sip:alan@localhost SIP/2.0
+Via: SIP/2.0/WS r107941806.invalid;rport;branch=z9hG4bKOTI5Nzk3MmNjMzFhZWQxMzFmOWM0YzkwMjVmMGRlZTc.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 2 INVITE
+Max-Forwards: 70
+Contact: <sip:kundan@localhost>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 2242
+User-Agent: sip-js/1.0
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwibWVzc2FnZVR5cGUiOiJBTlNXRVIiLCJvZmZlcmVyU2Vzc2lvbklkIjoiM2RydVRJbkV6K0M0RUgyd2lka1dkaDd1OU1jbkVuOHYiLCJzZXEiOjJ9
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62135 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp:62134 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62130 typ host name rtcp network_name en1 username dcWyymdwEPK3CXo5 password sTLJSez0eM0VUfUkZ+1Pyi generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62131 typ host name rtp network_name en1 username 0MPTQtITP1mZdqlA password 3r4BHEOfQAUhN+7FVH7zCf generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62134 typ srflx name rtcp network_name en1 username IhAUx7qlRoBMWpLH password XMvxVdaVBbhA+poanGC1U/ generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62135 typ srflx name rtp network_name en1 username hmeOhwc+ZxfiliMb password 0Hl4qGJpC5624Cjxmfapt+ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:keNcG3HezSNID7LmfDa9J4lfdUL8W1F7TNJKcbuy 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=ssrc:2570980487 cname:hsWuSQJxx7przmb8
+a=ssrc:2570980487 mslabel:7555a050-6ffa-4bd6-a528-e7e77194c439
+a=ssrc:2570980487 label:Default
+m=video 62137 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp:62136 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62132 typ host name video_rtcp network_name en1 username YwSakUOxF+pV4GqE password WzOZWvnoU3KKQXo26W7Rtu generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62133 typ host name video_rtp network_name en1 username kI5+SblDl80FTYoO password L1FgZ9XnKZ2tQCJNoUJq5l generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62137 typ srflx name video_rtp network_name en1 username zNQ+C+bCGBrM6w/w password wnUGyVqboTLm81K+9fJKBb generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62136 typ srflx name video_rtcp network_name en1 username tOjsohegdLCD/BHE password PUFlbohJFnsOG2IczoN++y generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:5ydJsA+FZVpAyqJMT/nW/UW+tcOmDvXJh/pPhNRe 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+a=ssrc:43633328 cname:hsWuSQJxx7przmb8
+a=ssrc:43633328 mslabel:7555a050-6ffa-4bd6-a528-e7e77194c439
+a=ssrc:43633328 label:Built-in iSight
+
+15:01:33.15 sipapi DEBUG - received request from stack 'INVITE'
+15:01:33.16 sipapi DEBUG - locate 'sip:alan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54076;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=171;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54040;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=163;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+15:01:33.16 sipd DEBUG - locate returned [sip:alan@127.0.0.1:54076;transport=ws]
+15:01:33.25 sipapi DEBUG - sending request on stack 'INVITE'
+15:01:33.31 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54076) on type='ws'
+INVITE sip:alan@127.0.0.1:54076;transport=ws SIP/2.0
+Call-ID: 2705619908@r107941806.invalid
+Content-Length: 2242
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKL_OoEU47tYgxSP4XoiV28w..
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKOTI5Nzk3MmNjMzFhZWQxMzFmOWM0YzkwMjVmMGRlZTc.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+User-Agent: sip-js/1.0
+To: <sip:alan@localhost>;tag=2910538542782380322
+Contact: <sip:kundan@localhost>
+CSeq: 2 INVITE
+Max-Forwards: 69
+Record-Route: <sip:192.168.1.8:5080;lr>
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwibWVzc2FnZVR5cGUiOiJBTlNXRVIiLCJvZmZlcmVyU2Vzc2lvbklkIjoiM2RydVRJbkV6K0M0RUgyd2lka1dkaDd1OU1jbkVuOHYiLCJzZXEiOjJ9
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62135 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp:62134 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62130 typ host name rtcp network_name en1 username dcWyymdwEPK3CXo5 password sTLJSez0eM0VUfUkZ+1Pyi generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62131 typ host name rtp network_name en1 username 0MPTQtITP1mZdqlA password 3r4BHEOfQAUhN+7FVH7zCf generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62134 typ srflx name rtcp network_name en1 username IhAUx7qlRoBMWpLH password XMvxVdaVBbhA+poanGC1U/ generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62135 typ srflx name rtp network_name en1 username hmeOhwc+ZxfiliMb password 0Hl4qGJpC5624Cjxmfapt+ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:keNcG3HezSNID7LmfDa9J4lfdUL8W1F7TNJKcbuy 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=ssrc:2570980487 cname:hsWuSQJxx7przmb8
+a=ssrc:2570980487 mslabel:7555a050-6ffa-4bd6-a528-e7e77194c439
+a=ssrc:2570980487 label:Default
+m=video 62137 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp:62136 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62132 typ host name video_rtcp network_name en1 username YwSakUOxF+pV4GqE password WzOZWvnoU3KKQXo26W7Rtu generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62133 typ host name video_rtp network_name en1 username kI5+SblDl80FTYoO password L1FgZ9XnKZ2tQCJNoUJq5l generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62137 typ srflx name video_rtp network_name en1 username zNQ+C+bCGBrM6w/w password wnUGyVqboTLm81K+9fJKBb generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62136 typ srflx name video_rtcp network_name en1 username tOjsohegdLCD/BHE password PUFlbohJFnsOG2IczoN++y generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:5ydJsA+FZVpAyqJMT/nW/UW+tcOmDvXJh/pPhNRe 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+a=ssrc:43633328 cname:hsWuSQJxx7przmb8
+a=ssrc:43633328 mslabel:7555a050-6ffa-4bd6-a528-e7e77194c439
+a=ssrc:43633328 label:Built-in iSight
+
+15:01:33.129 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 443
+15:01:33.131 sipapi DEBUG - offset=8 length=435
+15:01:33.141 sipapi DEBUG - websocket received
+SIP/2.0 100 Trying
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKL_OoEU47tYgxSP4XoiV28w..;received=127.0.0.1
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKOTI5Nzk3MmNjMzFhZWQxMzFmOWM0YzkwMjVmMGRlZTc.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 2 INVITE
+Content-Length: 0
+
+
+15:01:33.147 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54040) on type='ws'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKOTI5Nzk3MmNjMzFhZWQxMzFmOWM0YzkwMjVmMGRlZTc.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+CSeq: 2 INVITE
+Call-ID: 2705619908@r107941806.invalid
+
+
+15:01:33.206 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 490
+15:01:33.206 sipapi DEBUG - offset=8 length=482
+15:01:33.208 sipapi DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKL_OoEU47tYgxSP4XoiV28w..;received=127.0.0.1
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKOTI5Nzk3MmNjMzFhZWQxMzFmOWM0YzkwMjVmMGRlZTc.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 2 INVITE
+Content-Length: 0
+Contact: <sip:alan@localhost>
+Server: sip-js/1.0
+
+
+closing transaction 'z9hG4bKL_OoEU47tYgxSP4XoiV28w..'
+received 1 responses out of 1
+closing transaction 'z9hG4bKOTI5Nzk3MmNjMzFhZWQxMzFmOWM0YzkwMjVmMGRlZTc.'
+15:01:33.220 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54040) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKOTI5Nzk3MmNjMzFhZWQxMzFmOWM0YzkwMjVmMGRlZTc.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Contact: <sip:alan@localhost>
+CSeq: 2 INVITE
+Call-ID: 2705619908@r107941806.invalid
+Server: sip-js/1.0
+
+
+15:01:33.286 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) on type='ws' length 423
+15:01:33.290 sipapi DEBUG - offset=8 length=415
+15:01:33.298 sipapi DEBUG - websocket received
+ACK sip:alan@localhost SIP/2.0
+Via: SIP/2.0/WS r107941806.invalid;rport;branch=z9hG4bKOTI5Nzk3MmNjMzFhZWQxMzFmOWM0YzkwMjVmMGRlZTc.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 2 ACK
+Max-Forwards: 70
+Contact: <sip:kundan@r107941806.invalid>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 0
+
+
+no dialog for ACK, finding transaction
+No existing transaction for ACK
+15:01:33.306 sipapi DEBUG - received request from stack 'ACK'
+15:01:33.307 sipapi DEBUG - locate 'sip:alan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54076;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=171;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54040;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=163;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+15:01:33.308 sipd DEBUG - locate returned [sip:alan@127.0.0.1:54076;transport=ws]
+15:01:33.310 sipapi DEBUG - sending request on stack 'ACK'
+15:01:33.311 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54076) on type='ws'
+ACK sip:alan@127.0.0.1:54076;transport=ws SIP/2.0
+Call-ID: 2705619908@r107941806.invalid
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKL_OoEU47tYgxSP4XoiV28w..
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKOTI5Nzk3MmNjMzFhZWQxMzFmOWM0YzkwMjVmMGRlZTc.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Contact: <sip:kundan@r107941806.invalid>
+CSeq: 2 ACK
+Max-Forwards: 69
+
+
+15:01:33.393 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 641
+15:01:33.395 sipapi DEBUG - offset=8 length=633
+15:01:33.396 sipapi DEBUG - websocket received
+INVITE sip:kundan@localhost SIP/2.0
+Via: SIP/2.0/WS r8909973457.invalid;rport;branch=z9hG4bKYTJmYTYxZmI0YjIwODhiN2M1OTk0OGQyNWRkYjVmZjY.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 3 INVITE
+Max-Forwards: 70
+Contact: <sip:alan@localhost>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 0
+User-Agent: sip-js/1.0
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6IjNkcnVUSW5FeitDNEVIMndpZGtXZGg3dTlNY25Fbjh2IiwibWVzc2FnZVR5cGUiOiJPSyIsIm9mZmVyZXJTZXNzaW9uSWQiOiJqazRtSFZNd2FOT3Rabjl4Z2V4QXRJQnBuQmxWZmtZZiIsInNlcSI6Mn0=
+
+
+15:01:33.398 sipapi DEBUG - received request from stack 'INVITE'
+15:01:33.399 sipapi DEBUG - locate 'sip:kundan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54076;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=171;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54040;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=163;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+15:01:33.413 sipd DEBUG - locate returned [sip:kundan@127.0.0.1:54040;transport=ws]
+15:01:33.415 sipapi DEBUG - sending request on stack 'INVITE'
+15:01:33.416 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54040) on type='ws'
+INVITE sip:kundan@127.0.0.1:54040;transport=ws SIP/2.0
+Call-ID: 2705619908@r107941806.invalid
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKUhYDwKsC_sAg8r04XH7p9g..
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;rport=54076;branch=z9hG4bKYTJmYTYxZmI0YjIwODhiN2M1OTk0OGQyNWRkYjVmZjY.
+From: <sip:alan@localhost>;tag=2910538542782380322
+User-Agent: sip-js/1.0
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Contact: <sip:alan@localhost>
+CSeq: 3 INVITE
+Max-Forwards: 69
+Record-Route: <sip:192.168.1.8:5080;lr>
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6IjNkcnVUSW5FeitDNEVIMndpZGtXZGg3dTlNY25Fbjh2IiwibWVzc2FnZVR5cGUiOiJPSyIsIm9mZmVyZXJTZXNzaW9uSWQiOiJqazRtSFZNd2FOT3Rabjl4Z2V4QXRJQnBuQmxWZmtZZiIsInNlcSI6Mn0=
+
+
+15:01:33.579 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) on type='ws' length 444
+15:01:33.579 sipapi DEBUG - offset=8 length=436
+15:01:33.580 sipapi DEBUG - websocket received
+SIP/2.0 100 Trying
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKUhYDwKsC_sAg8r04XH7p9g..;received=127.0.0.1
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;rport=54076;branch=z9hG4bKYTJmYTYxZmI0YjIwODhiN2M1OTk0OGQyNWRkYjVmZjY.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 3 INVITE
+Content-Length: 0
+
+
+15:01:33.581 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54076) on type='ws'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;rport=54076;branch=z9hG4bKYTJmYTYxZmI0YjIwODhiN2M1OTk0OGQyNWRkYjVmZjY.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+CSeq: 3 INVITE
+Call-ID: 2705619908@r107941806.invalid
+
+
+15:01:33.637 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) on type='ws' length 493
+15:01:33.639 sipapi DEBUG - offset=8 length=485
+15:01:33.641 sipapi DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKUhYDwKsC_sAg8r04XH7p9g..;received=127.0.0.1
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;rport=54076;branch=z9hG4bKYTJmYTYxZmI0YjIwODhiN2M1OTk0OGQyNWRkYjVmZjY.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 3 INVITE
+Content-Length: 0
+Contact: <sip:kundan@localhost>
+Server: sip-js/1.0
+
+
+closing transaction 'z9hG4bKUhYDwKsC_sAg8r04XH7p9g..'
+received 1 responses out of 1
+closing transaction 'z9hG4bKYTJmYTYxZmI0YjIwODhiN2M1OTk0OGQyNWRkYjVmZjY.'
+15:01:33.643 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54076) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;rport=54076;branch=z9hG4bKYTJmYTYxZmI0YjIwODhiN2M1OTk0OGQyNWRkYjVmZjY.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Contact: <sip:kundan@localhost>
+CSeq: 3 INVITE
+Call-ID: 2705619908@r107941806.invalid
+Server: sip-js/1.0
+
+
+15:01:33.940 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 425
+15:01:33.942 sipapi DEBUG - offset=8 length=417
+15:01:33.944 sipapi DEBUG - websocket received
+ACK sip:kundan@localhost SIP/2.0
+Via: SIP/2.0/WS r8909973457.invalid;rport;branch=z9hG4bKYTJmYTYxZmI0YjIwODhiN2M1OTk0OGQyNWRkYjVmZjY.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 3 ACK
+Max-Forwards: 70
+Contact: <sip:alan@r8909973457.invalid>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 0
+
+
+no dialog for ACK, finding transaction
+No existing transaction for ACK
+15:01:33.946 sipapi DEBUG - received request from stack 'ACK'
+15:01:33.947 sipapi DEBUG - locate 'sip:kundan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54076;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=171;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54040;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=163;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+15:01:33.948 sipd DEBUG - locate returned [sip:kundan@127.0.0.1:54040;transport=ws]
+15:01:33.949 sipapi DEBUG - sending request on stack 'ACK'
+15:01:33.950 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54040) on type='ws'
+ACK sip:kundan@127.0.0.1:54040;transport=ws SIP/2.0
+Call-ID: 2705619908@r107941806.invalid
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKUhYDwKsC_sAg8r04XH7p9g..
+Via: SIP/2.0/WS r8909973457.invalid;received=127.0.0.1;rport=54076;branch=z9hG4bKYTJmYTYxZmI0YjIwODhiN2M1OTk0OGQyNWRkYjVmZjY.
+From: <sip:alan@localhost>;tag=2910538542782380322
+To: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+Contact: <sip:alan@r8909973457.invalid>
+CSeq: 3 ACK
+Max-Forwards: 69
+
+
+15:01:57.349 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) on type='ws' length 423
+15:01:57.351 sipapi DEBUG - offset=8 length=415
+15:01:57.352 sipapi DEBUG - websocket received
+BYE sip:alan@localhost SIP/2.0
+Via: SIP/2.0/WS r107941806.invalid;rport;branch=z9hG4bKNjgxYjNkNzMxY2ZjY2EzODcyNDYzZDRiYzg2MzQ1ZjA.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 3 BYE
+Max-Forwards: 70
+Contact: <sip:kundan@r107941806.invalid>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 0
+
+
+15:01:57.354 sipapi DEBUG - received request from stack 'BYE'
+15:01:57.354 sipapi DEBUG - locate 'sip:alan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54076;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=171;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54040;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=162;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145056.843241, sip:kundan@127.0.0.1:54040;transport=ws)]}
+15:01:57.355 sipd DEBUG - locate returned [sip:alan@127.0.0.1:54076;transport=ws]
+15:01:57.357 sipapi DEBUG - sending request on stack 'BYE'
+15:01:57.358 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54076) on type='ws'
+BYE sip:alan@127.0.0.1:54076;transport=ws SIP/2.0
+Call-ID: 2705619908@r107941806.invalid
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKv7Zm9VaCrJAYJ_oDGItdbg..
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKNjgxYjNkNzMxY2ZjY2EzODcyNDYzZDRiYzg2MzQ1ZjA.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Contact: <sip:kundan@r107941806.invalid>
+CSeq: 3 BYE
+Max-Forwards: 69
+
+
+15:01:57.487 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 436
+15:01:57.487 sipapi DEBUG - offset=8 length=428
+15:01:57.488 sipapi DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKv7Zm9VaCrJAYJ_oDGItdbg..;received=127.0.0.1
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKNjgxYjNkNzMxY2ZjY2EzODcyNDYzZDRiYzg2MzQ1ZjA.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+Call-ID: 2705619908@r107941806.invalid
+CSeq: 3 BYE
+Content-Length: 0
+
+
+received 1 responses out of 1
+closing transaction 'z9hG4bKNjgxYjNkNzMxY2ZjY2EzODcyNDYzZDRiYzg2MzQ1ZjA.'
+closing transaction 'z9hG4bKv7Zm9VaCrJAYJ_oDGItdbg..'
+15:01:57.492 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54040) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r107941806.invalid;received=127.0.0.1;rport=54040;branch=z9hG4bKNjgxYjNkNzMxY2ZjY2EzODcyNDYzZDRiYzg2MzQ1ZjA.
+From: "Kundan" <sip:kundan@localhost>;tag=56065713227547603123
+To: <sip:alan@localhost>;tag=2910538542782380322
+CSeq: 3 BYE
+Call-ID: 2705619908@r107941806.invalid
+
+
+15:02:32.375 sipapi DEBUG - ('127.0.0.1', 54040)=>('127.0.0.1', 5080) on type='ws' length 0
+15:02:32.387 sipapi DEBUG - ('127.0.0.1', 54076)=>('127.0.0.1', 5080) on type='ws' length 0
+15:04:30.429 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) connection type 'ws'
+15:04:30.431 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) on type='ws' length 266
+15:04:30.431 sipapi DEBUG - handshake
+GET /sip HTTP/1.1
+Upgrade: websocket
+Connection: Upgrade
+Host: localhost:5080
+Origin: http://localhost:8080
+Sec-WebSocket-Protocol: sip
+Sec-WebSocket-Key: TONtsnUNZ8XUWuU+zrqmCg==
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Extensions: x-webkit-deflate-frame
+
+
+15:04:30.432 sipapi DEBUG - ('127.0.0.1', 5080)=>('127.0.0.1', 54138)
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: b+2OVyFCC45gvz83hS+QCcGI+ro=
+Sec-WebSocket-Protocol: sip
+
+
+15:04:30.449 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) on type='ws' length 547
+15:04:30.449 sipapi DEBUG - offset=8 length=539
+15:04:30.450 sipapi DEBUG - websocket received
+REGISTER sip:localhost SIP/2.0
+Via: SIP/2.0/WS r2214209241.invalid;rport;branch=z9hG4bKYWYyYzc3NTI0OTMzMDExMDZjNDlhNjVlN2E1ZTdlNjE.
+From: "Kundan" <sip:kundan@localhost>;tag=621066252981683912
+To: "Kundan" <sip:kundan@localhost>
+Call-ID: 5960136599@r2214209241.invalid
+CSeq: 1 REGISTER
+Max-Forwards: 70
+Contact: <sip:kundan@r2214209241.invalid>;reg-id=1;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>"
+Route: <sip:localhost:5080;lr;transport=ws>
+Content-Length: 0
+Supported: path, outbound, gruu
+Expires: 180
+
+
+15:04:30.452 sipapi DEBUG - received request from stack 'REGISTER'
+15:04:30.453 sipapi DEBUG - save {'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54076;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=147;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@r2214209241.invalid>;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";reg-id=1;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+15:04:30.453 sipapi DEBUG - locate 'sip:kundan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54076;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=147;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145064.427244, sip:alan@127.0.0.1:54076;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@r2214209241.invalid>;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";reg-id=1;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+closing transaction 'z9hG4bKYWYyYzc3NTI0OTMzMDExMDZjNDlhNjVlN2E1ZTdlNjE.'
+15:04:30.455 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54138) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;branch=z9hG4bKYWYyYzc3NTI0OTMzMDExMDZjNDlhNjVlN2E1ZTdlNjE.;rport=54138
+From: "Kundan" <sip:kundan@localhost>;tag=621066252981683912
+Expires: 180
+To: "Kundan" <sip:kundan@localhost>;tag=168358768736
+Contact: <sip:kundan@127.0.0.1:54138;transport=ws>;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>";reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179
+CSeq: 1 REGISTER
+Call-ID: 5960136599@r2214209241.invalid
+
+
+15:04:36.534 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) connection type 'ws'
+15:04:36.534 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 266
+15:04:36.535 sipapi DEBUG - handshake
+GET /sip HTTP/1.1
+Upgrade: websocket
+Connection: Upgrade
+Host: localhost:5080
+Origin: http://localhost:8080
+Sec-WebSocket-Protocol: sip
+Sec-WebSocket-Key: gtFEwLH6QQ2P/o5S+iGG8A==
+Sec-WebSocket-Version: 13
+Sec-WebSocket-Extensions: x-webkit-deflate-frame
+
+
+15:04:36.535 sipapi DEBUG - ('127.0.0.1', 5080)=>('127.0.0.1', 54175)
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: kmTiZVdCyLlbpKcOrvhX7MRfA4I=
+Sec-WebSocket-Protocol: sip
+
+
+15:04:36.550 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 539
+15:04:36.551 sipapi DEBUG - offset=8 length=531
+15:04:36.552 sipapi DEBUG - websocket received
+REGISTER sip:localhost SIP/2.0
+Via: SIP/2.0/WS r3457191870.invalid;rport;branch=z9hG4bKYjgyZjhkYjA1YjI2Y2I1Y2JiY2VlZGIxMzAwMTJlNmQ.
+From: "Alan" <sip:alan@localhost>;tag=20263546558512229269
+To: "Alan" <sip:alan@localhost>
+Call-ID: 5286195179@r3457191870.invalid
+CSeq: 1 REGISTER
+Max-Forwards: 70
+Contact: <sip:alan@r3457191870.invalid>;reg-id=1;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>"
+Route: <sip:localhost:5080;lr;transport=ws>
+Content-Length: 0
+Supported: path, outbound, gruu
+Expires: 180
+
+
+15:04:36.553 sipapi DEBUG - received request from stack 'REGISTER'
+15:04:36.554 sipapi DEBUG - save {'sip:alan@localhost': [(Contact: <sip:alan@r3457191870.invalid>;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";reg-id=1;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145256.554489, sip:alan@127.0.0.1:54175;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54138;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+15:04:36.554 sipapi DEBUG - locate 'sip:alan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@r3457191870.invalid>;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";reg-id=1;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145256.554489, sip:alan@127.0.0.1:54175;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54138;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+closing transaction 'z9hG4bKYjgyZjhkYjA1YjI2Y2I1Y2JiY2VlZGIxMzAwMTJlNmQ.'
+15:04:36.556 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54175) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;branch=z9hG4bKYjgyZjhkYjA1YjI2Y2I1Y2JiY2VlZGIxMzAwMTJlNmQ.;rport=54175
+From: "Alan" <sip:alan@localhost>;tag=20263546558512229269
+Expires: 180
+To: "Alan" <sip:alan@localhost>;tag=168358768725
+Contact: <sip:alan@127.0.0.1:54175;transport=ws>;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>";reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179
+CSeq: 1 REGISTER
+Call-ID: 5286195179@r3457191870.invalid
+
+
+15:04:48.748 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) on type='ws' length 2941
+15:04:48.749 sipapi DEBUG - offset=8 length=2933
+15:04:48.753 sipapi DEBUG - websocket received
+INVITE sip:alan@localhost SIP/2.0
+Via: SIP/2.0/WS r2214209241.invalid;rport;branch=z9hG4bKNzVlNTEyNzZiOTkwYjA2MDUzYmE3OTU4YjY3Y2RkOWQ.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 1 INVITE
+Max-Forwards: 70
+Contact: <sip:kundan@localhost>
+Route: <sip:alan@localhost:5080;lr>
+Content-Length: 2327
+User-Agent: sip-js/1.0
+X-Webrtc: eyJtZXNzYWdlVHlwZSI6Ik9GRkVSIiwib2ZmZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwic2VxIjoxLCJ0aWVCcmVha2VyIjo2Mzc1NTExMjV9
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62152 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp:62151 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62147 typ host name rtcp network_name en1 username dcWyymdwEPK3CXo5 password sTLJSez0eM0VUfUkZ+1Pyi generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62148 typ host name rtp network_name en1 username 0MPTQtITP1mZdqlA password 3r4BHEOfQAUhN+7FVH7zCf generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62152 typ srflx name rtp network_name en1 username hmeOhwc+ZxfiliMb password 0Hl4qGJpC5624Cjxmfapt+ generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62151 typ srflx name rtcp network_name en1 username IhAUx7qlRoBMWpLH password XMvxVdaVBbhA+poanGC1U/ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:keNcG3HezSNID7LmfDa9J4lfdUL8W1F7TNJKcbuy 
+a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:gaQuA429SJy2e9JctPUyEAmQrEw3y7hi2iRdhLfa 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=ssrc:2570980487 cname:hsWuSQJxx7przmb8
+a=ssrc:2570980487 mslabel:5eb1a64b-231f-41d4-80b1-79cada11f275
+a=ssrc:2570980487 label:Default
+m=video 62154 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp:62153 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62149 typ host name video_rtcp network_name en1 username YwSakUOxF+pV4GqE password WzOZWvnoU3KKQXo26W7Rtu generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62150 typ host name video_rtp network_name en1 username kI5+SblDl80FTYoO password L1FgZ9XnKZ2tQCJNoUJq5l generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62153 typ srflx name video_rtcp network_name en1 username tOjsohegdLCD/BHE password PUFlbohJFnsOG2IczoN++y generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62154 typ srflx name video_rtp network_name en1 username zNQ+C+bCGBrM6w/w password wnUGyVqboTLm81K+9fJKBb generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:5ydJsA+FZVpAyqJMT/nW/UW+tcOmDvXJh/pPhNRe 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+a=ssrc:43633328 cname:hsWuSQJxx7przmb8
+a=ssrc:43633328 mslabel:5eb1a64b-231f-41d4-80b1-79cada11f275
+a=ssrc:43633328 label:Built-in iSight
+
+15:04:48.756 sipapi DEBUG - received request from stack 'INVITE'
+15:04:48.756 sipapi DEBUG - locate 'sip:alan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54175;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145256.554489, sip:alan@127.0.0.1:54175;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54138;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+15:04:48.757 sipd DEBUG - locate returned [sip:alan@127.0.0.1:54175;transport=ws]
+15:04:48.760 sipapi DEBUG - sending request on stack 'INVITE'
+15:04:48.761 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54175) on type='ws'
+INVITE sip:alan@127.0.0.1:54175;transport=ws SIP/2.0
+Call-ID: 8400613494@r2214209241.invalid
+Content-Length: 2327
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKEZeQhHcU342y-RdMHnlq1Q..
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKNzVlNTEyNzZiOTkwYjA2MDUzYmE3OTU4YjY3Y2RkOWQ.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+User-Agent: sip-js/1.0
+To: <sip:alan@localhost>
+Contact: <sip:kundan@localhost>
+CSeq: 1 INVITE
+Max-Forwards: 69
+Record-Route: <sip:192.168.1.8:5080;lr>
+X-Webrtc: eyJtZXNzYWdlVHlwZSI6Ik9GRkVSIiwib2ZmZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwic2VxIjoxLCJ0aWVCcmVha2VyIjo2Mzc1NTExMjV9
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62152 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp:62151 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62147 typ host name rtcp network_name en1 username dcWyymdwEPK3CXo5 password sTLJSez0eM0VUfUkZ+1Pyi generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62148 typ host name rtp network_name en1 username 0MPTQtITP1mZdqlA password 3r4BHEOfQAUhN+7FVH7zCf generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62152 typ srflx name rtp network_name en1 username hmeOhwc+ZxfiliMb password 0Hl4qGJpC5624Cjxmfapt+ generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62151 typ srflx name rtcp network_name en1 username IhAUx7qlRoBMWpLH password XMvxVdaVBbhA+poanGC1U/ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:keNcG3HezSNID7LmfDa9J4lfdUL8W1F7TNJKcbuy 
+a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:gaQuA429SJy2e9JctPUyEAmQrEw3y7hi2iRdhLfa 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=ssrc:2570980487 cname:hsWuSQJxx7przmb8
+a=ssrc:2570980487 mslabel:5eb1a64b-231f-41d4-80b1-79cada11f275
+a=ssrc:2570980487 label:Default
+m=video 62154 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp:62153 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62149 typ host name video_rtcp network_name en1 username YwSakUOxF+pV4GqE password WzOZWvnoU3KKQXo26W7Rtu generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62150 typ host name video_rtp network_name en1 username kI5+SblDl80FTYoO password L1FgZ9XnKZ2tQCJNoUJq5l generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62153 typ srflx name video_rtcp network_name en1 username tOjsohegdLCD/BHE password PUFlbohJFnsOG2IczoN++y generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62154 typ srflx name video_rtp network_name en1 username zNQ+C+bCGBrM6w/w password wnUGyVqboTLm81K+9fJKBb generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:5ydJsA+FZVpAyqJMT/nW/UW+tcOmDvXJh/pPhNRe 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+a=ssrc:43633328 cname:hsWuSQJxx7przmb8
+a=ssrc:43633328 mslabel:5eb1a64b-231f-41d4-80b1-79cada11f275
+a=ssrc:43633328 label:Built-in iSight
+
+15:04:48.805 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 420
+15:04:48.806 sipapi DEBUG - offset=8 length=412
+15:04:48.807 sipapi DEBUG - websocket received
+SIP/2.0 100 Trying
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKEZeQhHcU342y-RdMHnlq1Q..;received=127.0.0.1
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKNzVlNTEyNzZiOTkwYjA2MDUzYmE3OTU4YjY3Y2RkOWQ.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+15:04:48.809 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54138) on type='ws'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKNzVlNTEyNzZiOTkwYjA2MDUzYmE3OTU4YjY3Y2RkOWQ.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>
+CSeq: 1 INVITE
+Call-ID: 8400613494@r2214209241.invalid
+
+
+15:04:48.810 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 446
+15:04:48.810 sipapi DEBUG - offset=8 length=438
+15:04:48.811 sipapi DEBUG - websocket received
+SIP/2.0 180 Ringing
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKEZeQhHcU342y-RdMHnlq1Q..;received=127.0.0.1
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKNzVlNTEyNzZiOTkwYjA2MDUzYmE3OTU4YjY3Y2RkOWQ.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+15:04:48.813 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54138) on type='ws'
+SIP/2.0 180 Ringing
+Content-Length: 0
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKNzVlNTEyNzZiOTkwYjA2MDUzYmE3OTU4YjY3Y2RkOWQ.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+CSeq: 1 INVITE
+Call-ID: 8400613494@r2214209241.invalid
+
+
+15:04:53.599 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 2079
+15:04:53.605 sipapi DEBUG - offset=8 length=2071
+15:04:53.608 sipapi DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKEZeQhHcU342y-RdMHnlq1Q..;received=127.0.0.1
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKNzVlNTEyNzZiOTkwYjA2MDUzYmE3OTU4YjY3Y2RkOWQ.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 1 INVITE
+Content-Length: 1312
+Contact: <sip:alan@localhost>
+Server: sip-js/1.0
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6IjBZaVBZLzBIdkNVdWYrNTJtTW5jYjBjKzNkcnVUSW5FIiwibWVzc2FnZVR5cGUiOiJBTlNXRVIiLCJvZmZlcmVyU2Vzc2lvbklkIjoiams0bUhWTXdhTk90Wm45eGdleEF0SUJwbkJsVmZrWWYiLCJzZXEiOjF9
+Content-Type: application/sdp
+Record-Route: <sip:192.168.1.8:5080;lr>
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62157 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62155 typ host name rtp network_name en1 username EAmQrEw3y7hi2iRd password hLfawKZC5ydJsA+FZVpAyq generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62157 typ srflx name rtp network_name en1 username CXo5sTLJSez0eM0V password UfUkZ+1Pyi0MPTQtITP1mZ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:hsWuSQJxx7przmb8HM+ZkeNcG3HezSNID7LmfDa9 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+m=video 62158 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62156 typ host name video_rtp network_name en1 username JMT/nW/UW+tcOmDv password XJh/pPhNRedcWyymdwEPK3 generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62158 typ srflx name video_rtp network_name en1 username QAUhN+7FVH7zCfYw password SakUOxF+pV4GqEWzOZWvno generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:J4lfdUL8W1F7TNJKcbuygaQuA429SJy2e9JctPUy 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+
+closing transaction 'z9hG4bKEZeQhHcU342y-RdMHnlq1Q..'
+received 1 responses out of 1
+closing transaction 'z9hG4bKNzVlNTEyNzZiOTkwYjA2MDUzYmE3OTU4YjY3Y2RkOWQ.'
+15:04:53.613 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54138) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 1312
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKNzVlNTEyNzZiOTkwYjA2MDUzYmE3OTU4YjY3Y2RkOWQ.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Contact: <sip:alan@localhost>
+CSeq: 1 INVITE
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6IjBZaVBZLzBIdkNVdWYrNTJtTW5jYjBjKzNkcnVUSW5FIiwibWVzc2FnZVR5cGUiOiJBTlNXRVIiLCJvZmZlcmVyU2Vzc2lvbklkIjoiams0bUhWTXdhTk90Wm45eGdleEF0SUJwbkJsVmZrWWYiLCJzZXEiOjF9
+Call-ID: 8400613494@r2214209241.invalid
+Record-Route: <sip:192.168.1.8:5080;lr>
+Server: sip-js/1.0
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62157 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62155 typ host name rtp network_name en1 username EAmQrEw3y7hi2iRd password hLfawKZC5ydJsA+FZVpAyq generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62157 typ srflx name rtp network_name en1 username CXo5sTLJSez0eM0V password UfUkZ+1Pyi0MPTQtITP1mZ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:hsWuSQJxx7przmb8HM+ZkeNcG3HezSNID7LmfDa9 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+m=video 62158 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62156 typ host name video_rtp network_name en1 username JMT/nW/UW+tcOmDv password XJh/pPhNRedcWyymdwEPK3 generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62158 typ srflx name video_rtp network_name en1 username QAUhN+7FVH7zCfYw password SakUOxF+pV4GqEWzOZWvno generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:J4lfdUL8W1F7TNJKcbuygaQuA429SJy2e9JctPUy 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+
+15:04:53.717 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) on type='ws' length 622
+15:04:53.717 sipapi DEBUG - offset=8 length=614
+15:04:53.718 sipapi DEBUG - websocket received
+ACK sip:alan@localhost SIP/2.0
+Via: SIP/2.0/WS r2214209241.invalid;rport;branch=z9hG4bKNzVlNTEyNzZiOTkwYjA2MDUzYmE3OTU4YjY3Y2RkOWQ.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 1 ACK
+Max-Forwards: 70
+Contact: <sip:kundan@r2214209241.invalid>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 0
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwibWVzc2FnZVR5cGUiOiJPSyIsIm9mZmVyZXJTZXNzaW9uSWQiOiIwWWlQWS8wSHZDVXVmKzUybU1uY2IwYyszZHJ1VEluRSIsInNlcSI6MX0=
+
+
+no dialog for ACK, finding transaction
+No existing transaction for ACK
+15:04:53.720 sipapi DEBUG - received request from stack 'ACK'
+15:04:53.721 sipapi DEBUG - locate 'sip:alan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54175;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=167;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145256.554489, sip:alan@127.0.0.1:54175;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54138;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+15:04:53.722 sipd DEBUG - locate returned [sip:alan@127.0.0.1:54175;transport=ws]
+15:04:53.723 sipapi DEBUG - sending request on stack 'ACK'
+15:04:53.724 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54175) on type='ws'
+ACK sip:alan@127.0.0.1:54175;transport=ws SIP/2.0
+Call-ID: 8400613494@r2214209241.invalid
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKEZeQhHcU342y-RdMHnlq1Q..
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKNzVlNTEyNzZiOTkwYjA2MDUzYmE3OTU4YjY3Y2RkOWQ.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Contact: <sip:kundan@r2214209241.invalid>
+CSeq: 1 ACK
+Max-Forwards: 69
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwibWVzc2FnZVR5cGUiOiJPSyIsIm9mZmVyZXJTZXNzaW9uSWQiOiIwWWlQWS8wSHZDVXVmKzUybU1uY2IwYyszZHJ1VEluRSIsInNlcSI6MX0=
+
+
+15:04:53.804 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 2611
+15:04:53.804 sipapi DEBUG - offset=8 length=2603
+15:04:53.810 sipapi DEBUG - websocket received
+INVITE sip:kundan@localhost SIP/2.0
+Via: SIP/2.0/WS r3457191870.invalid;rport;branch=z9hG4bKNDBmOTk4Zjk5M2I1NDk2ZmU4OWVmZGY0YTY5MjkwMzk.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 2 INVITE
+Max-Forwards: 70
+Contact: <sip:alan@localhost>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 1899
+User-Agent: sip-js/1.0
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwibWVzc2FnZVR5cGUiOiJPRkZFUiIsIm9mZmVyZXJTZXNzaW9uSWQiOiIwWWlQWS8wSHZDVXVmKzUybU1uY2IwYyszZHJ1VEluRSIsInNlcSI6MiwidGllQnJlYWtlciI6MjUzNDA2MTY0Nn0=
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62157 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62155 typ host name rtp network_name en1 username EAmQrEw3y7hi2iRd password hLfawKZC5ydJsA+FZVpAyq generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62157 typ srflx name rtp network_name en1 username CXo5sTLJSez0eM0V password UfUkZ+1Pyi0MPTQtITP1mZ generation 0
+a=candidate:1 1 tcp 0.8 192.168.1.8 54176 typ host name rtp network_name en1 username y/JMPTQpkRetLBlS password o/i14u9pJrxRKAsuFa51q+ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:hsWuSQJxx7przmb8HM+ZkeNcG3HezSNID7LmfDa9 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=ssrc:3779673595 cname:czYawJhh013QatKj
+a=ssrc:3779673595 mslabel:088a7749-72de-461a-b15b-5a28057af0bf
+a=ssrc:3779673595 label:Default
+m=video 62158 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62156 typ host name video_rtp network_name en1 username JMT/nW/UW+tcOmDv password XJh/pPhNRedcWyymdwEPK3 generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62158 typ srflx name video_rtp network_name en1 username QAUhN+7FVH7zCfYw password SakUOxF+pV4GqEWzOZWvno generation 0
+a=candidate:1 1 tcp 0.8 192.168.1.8 54177 typ host name video_rtp network_name en1 username clO39XzTJXKOWy2P password GQTStE3m2i4YCRuvTh6Zpe generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:J4lfdUL8W1F7TNJKcbuygaQuA429SJy2e9JctPUy 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+a=ssrc:738392404 cname:czYawJhh013QatKj
+a=ssrc:738392404 mslabel:088a7749-72de-461a-b15b-5a28057af0bf
+a=ssrc:738392404 label:Built-in iSight
+
+15:04:53.815 sipapi DEBUG - received request from stack 'INVITE'
+15:04:53.816 sipapi DEBUG - locate 'sip:kundan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54175;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=162;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145256.554489, sip:alan@127.0.0.1:54175;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54138;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=179;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+15:04:53.817 sipd DEBUG - locate returned [sip:kundan@127.0.0.1:54138;transport=ws]
+15:04:53.829 sipapi DEBUG - sending request on stack 'INVITE'
+15:04:53.833 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54138) on type='ws'
+INVITE sip:kundan@127.0.0.1:54138;transport=ws SIP/2.0
+Call-ID: 8400613494@r2214209241.invalid
+Content-Length: 1899
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKsSCcT8IfCSGgDC7YSm3prQ..
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;rport=54175;branch=z9hG4bKNDBmOTk4Zjk5M2I1NDk2ZmU4OWVmZGY0YTY5MjkwMzk.
+From: <sip:alan@localhost>;tag=20263546555860207958
+User-Agent: sip-js/1.0
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Contact: <sip:alan@localhost>
+CSeq: 2 INVITE
+Max-Forwards: 69
+Record-Route: <sip:192.168.1.8:5080;lr>
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwibWVzc2FnZVR5cGUiOiJPRkZFUiIsIm9mZmVyZXJTZXNzaW9uSWQiOiIwWWlQWS8wSHZDVXVmKzUybU1uY2IwYyszZHJ1VEluRSIsInNlcSI6MiwidGllQnJlYWtlciI6MjUzNDA2MTY0Nn0=
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62157 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62155 typ host name rtp network_name en1 username EAmQrEw3y7hi2iRd password hLfawKZC5ydJsA+FZVpAyq generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62157 typ srflx name rtp network_name en1 username CXo5sTLJSez0eM0V password UfUkZ+1Pyi0MPTQtITP1mZ generation 0
+a=candidate:1 1 tcp 0.8 192.168.1.8 54176 typ host name rtp network_name en1 username y/JMPTQpkRetLBlS password o/i14u9pJrxRKAsuFa51q+ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:hsWuSQJxx7przmb8HM+ZkeNcG3HezSNID7LmfDa9 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=ssrc:3779673595 cname:czYawJhh013QatKj
+a=ssrc:3779673595 mslabel:088a7749-72de-461a-b15b-5a28057af0bf
+a=ssrc:3779673595 label:Default
+m=video 62158 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp: IN IP4 
+a=candidate:1 1 udp 1 192.168.1.8 62156 typ host name video_rtp network_name en1 username JMT/nW/UW+tcOmDv password XJh/pPhNRedcWyymdwEPK3 generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62158 typ srflx name video_rtp network_name en1 username QAUhN+7FVH7zCfYw password SakUOxF+pV4GqEWzOZWvno generation 0
+a=candidate:1 1 tcp 0.8 192.168.1.8 54177 typ host name video_rtp network_name en1 username clO39XzTJXKOWy2P password GQTStE3m2i4YCRuvTh6Zpe generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:J4lfdUL8W1F7TNJKcbuygaQuA429SJy2e9JctPUy 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+a=ssrc:738392404 cname:czYawJhh013QatKj
+a=ssrc:738392404 mslabel:088a7749-72de-461a-b15b-5a28057af0bf
+a=ssrc:738392404 label:Built-in iSight
+
+15:04:53.929 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) on type='ws' length 445
+15:04:53.929 sipapi DEBUG - offset=8 length=437
+15:04:53.930 sipapi DEBUG - websocket received
+SIP/2.0 100 Trying
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKsSCcT8IfCSGgDC7YSm3prQ..;received=127.0.0.1
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;rport=54175;branch=z9hG4bKNDBmOTk4Zjk5M2I1NDk2ZmU4OWVmZGY0YTY5MjkwMzk.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 2 INVITE
+Content-Length: 0
+
+
+15:04:53.932 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54175) on type='ws'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;rport=54175;branch=z9hG4bKNDBmOTk4Zjk5M2I1NDk2ZmU4OWVmZGY0YTY5MjkwMzk.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+CSeq: 2 INVITE
+Call-ID: 8400613494@r2214209241.invalid
+
+
+15:04:53.996 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) on type='ws' length 494
+15:04:53.997 sipapi DEBUG - offset=8 length=486
+15:04:54.5 sipapi DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKsSCcT8IfCSGgDC7YSm3prQ..;received=127.0.0.1
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;rport=54175;branch=z9hG4bKNDBmOTk4Zjk5M2I1NDk2ZmU4OWVmZGY0YTY5MjkwMzk.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 2 INVITE
+Content-Length: 0
+Contact: <sip:kundan@localhost>
+Server: sip-js/1.0
+
+
+closing transaction 'z9hG4bKsSCcT8IfCSGgDC7YSm3prQ..'
+received 1 responses out of 1
+closing transaction 'z9hG4bKNDBmOTk4Zjk5M2I1NDk2ZmU4OWVmZGY0YTY5MjkwMzk.'
+15:04:54.10 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54175) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;rport=54175;branch=z9hG4bKNDBmOTk4Zjk5M2I1NDk2ZmU4OWVmZGY0YTY5MjkwMzk.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Contact: <sip:kundan@localhost>
+CSeq: 2 INVITE
+Call-ID: 8400613494@r2214209241.invalid
+Server: sip-js/1.0
+
+
+15:04:54.78 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 426
+15:04:54.79 sipapi DEBUG - offset=8 length=418
+15:04:54.80 sipapi DEBUG - websocket received
+ACK sip:kundan@localhost SIP/2.0
+Via: SIP/2.0/WS r3457191870.invalid;rport;branch=z9hG4bKNDBmOTk4Zjk5M2I1NDk2ZmU4OWVmZGY0YTY5MjkwMzk.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 2 ACK
+Max-Forwards: 70
+Contact: <sip:alan@r3457191870.invalid>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 0
+
+
+no dialog for ACK, finding transaction
+No existing transaction for ACK
+15:04:54.81 sipapi DEBUG - received request from stack 'ACK'
+15:04:54.82 sipapi DEBUG - locate 'sip:kundan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54175;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=162;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145256.554489, sip:alan@127.0.0.1:54175;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54138;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=156;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+15:04:54.82 sipd DEBUG - locate returned [sip:kundan@127.0.0.1:54138;transport=ws]
+15:04:54.84 sipapi DEBUG - sending request on stack 'ACK'
+15:04:54.86 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54138) on type='ws'
+ACK sip:kundan@127.0.0.1:54138;transport=ws SIP/2.0
+Call-ID: 8400613494@r2214209241.invalid
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKsSCcT8IfCSGgDC7YSm3prQ..
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;rport=54175;branch=z9hG4bKNDBmOTk4Zjk5M2I1NDk2ZmU4OWVmZGY0YTY5MjkwMzk.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Contact: <sip:alan@r3457191870.invalid>
+CSeq: 2 ACK
+Max-Forwards: 69
+
+
+15:04:54.180 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) on type='ws' length 2922
+15:04:54.181 sipapi DEBUG - offset=8 length=2914
+15:04:54.186 sipapi DEBUG - websocket received
+INVITE sip:alan@localhost SIP/2.0
+Via: SIP/2.0/WS r2214209241.invalid;rport;branch=z9hG4bKODA3YTY4YmI5MDM4MGRiOWYzMzI4NDE4YzliYjMwMDI.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 2 INVITE
+Max-Forwards: 70
+Contact: <sip:kundan@localhost>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 2242
+User-Agent: sip-js/1.0
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwibWVzc2FnZVR5cGUiOiJBTlNXRVIiLCJvZmZlcmVyU2Vzc2lvbklkIjoiMFlpUFkvMEh2Q1V1Zis1Mm1NbmNiMGMrM2RydVRJbkUiLCJzZXEiOjJ9
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62152 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp:62151 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62147 typ host name rtcp network_name en1 username dcWyymdwEPK3CXo5 password sTLJSez0eM0VUfUkZ+1Pyi generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62148 typ host name rtp network_name en1 username 0MPTQtITP1mZdqlA password 3r4BHEOfQAUhN+7FVH7zCf generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62152 typ srflx name rtp network_name en1 username hmeOhwc+ZxfiliMb password 0Hl4qGJpC5624Cjxmfapt+ generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62151 typ srflx name rtcp network_name en1 username IhAUx7qlRoBMWpLH password XMvxVdaVBbhA+poanGC1U/ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:keNcG3HezSNID7LmfDa9J4lfdUL8W1F7TNJKcbuy 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=ssrc:2570980487 cname:hsWuSQJxx7przmb8
+a=ssrc:2570980487 mslabel:5eb1a64b-231f-41d4-80b1-79cada11f275
+a=ssrc:2570980487 label:Default
+m=video 62154 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp:62153 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62149 typ host name video_rtcp network_name en1 username YwSakUOxF+pV4GqE password WzOZWvnoU3KKQXo26W7Rtu generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62150 typ host name video_rtp network_name en1 username kI5+SblDl80FTYoO password L1FgZ9XnKZ2tQCJNoUJq5l generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62153 typ srflx name video_rtcp network_name en1 username tOjsohegdLCD/BHE password PUFlbohJFnsOG2IczoN++y generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62154 typ srflx name video_rtp network_name en1 username zNQ+C+bCGBrM6w/w password wnUGyVqboTLm81K+9fJKBb generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:5ydJsA+FZVpAyqJMT/nW/UW+tcOmDvXJh/pPhNRe 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+a=ssrc:43633328 cname:hsWuSQJxx7przmb8
+a=ssrc:43633328 mslabel:5eb1a64b-231f-41d4-80b1-79cada11f275
+a=ssrc:43633328 label:Built-in iSight
+
+15:04:54.189 sipapi DEBUG - received request from stack 'INVITE'
+15:04:54.190 sipapi DEBUG - locate 'sip:alan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54175;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=162;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145256.554489, sip:alan@127.0.0.1:54175;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54138;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=156;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+15:04:54.190 sipd DEBUG - locate returned [sip:alan@127.0.0.1:54175;transport=ws]
+15:04:54.192 sipapi DEBUG - sending request on stack 'INVITE'
+15:04:54.193 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54175) on type='ws'
+INVITE sip:alan@127.0.0.1:54175;transport=ws SIP/2.0
+Call-ID: 8400613494@r2214209241.invalid
+Content-Length: 2242
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKOEwElmJe-cQ2ZAj_Eb69mQ..
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKODA3YTY4YmI5MDM4MGRiOWYzMzI4NDE4YzliYjMwMDI.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+User-Agent: sip-js/1.0
+To: <sip:alan@localhost>;tag=20263546555860207958
+Contact: <sip:kundan@localhost>
+CSeq: 2 INVITE
+Max-Forwards: 69
+Record-Route: <sip:192.168.1.8:5080;lr>
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6ImprNG1IVk13YU5PdFpuOXhnZXhBdElCcG5CbFZma1lmIiwibWVzc2FnZVR5cGUiOiJBTlNXRVIiLCJvZmZlcmVyU2Vzc2lvbklkIjoiMFlpUFkvMEh2Q1V1Zis1Mm1NbmNiMGMrM2RydVRJbkUiLCJzZXEiOjJ9
+Content-Type: application/sdp
+
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=
+t=0 0
+m=audio 62152 RTP/AVPF 103 104 0 8 106 105 13 126
+c=IN IP4 98.207.78.212
+a=rtcp:62151 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62147 typ host name rtcp network_name en1 username dcWyymdwEPK3CXo5 password sTLJSez0eM0VUfUkZ+1Pyi generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62148 typ host name rtp network_name en1 username 0MPTQtITP1mZdqlA password 3r4BHEOfQAUhN+7FVH7zCf generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62152 typ srflx name rtp network_name en1 username hmeOhwc+ZxfiliMb password 0Hl4qGJpC5624Cjxmfapt+ generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62151 typ srflx name rtcp network_name en1 username IhAUx7qlRoBMWpLH password XMvxVdaVBbhA+poanGC1U/ generation 0
+a=mid:audio
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_32 inline:keNcG3HezSNID7LmfDa9J4lfdUL8W1F7TNJKcbuy 
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=ssrc:2570980487 cname:hsWuSQJxx7przmb8
+a=ssrc:2570980487 mslabel:5eb1a64b-231f-41d4-80b1-79cada11f275
+a=ssrc:2570980487 label:Default
+m=video 62154 RTP/AVPF 100 101 102
+c=IN IP4 98.207.78.212
+a=rtcp:62153 IN IP4 98.207.78.212
+a=candidate:1 2 udp 1 192.168.1.8 62149 typ host name video_rtcp network_name en1 username YwSakUOxF+pV4GqE password WzOZWvnoU3KKQXo26W7Rtu generation 0
+a=candidate:1 1 udp 1 192.168.1.8 62150 typ host name video_rtp network_name en1 username kI5+SblDl80FTYoO password L1FgZ9XnKZ2tQCJNoUJq5l generation 0
+a=candidate:1 2 udp 0.9 98.207.78.212 62153 typ srflx name video_rtcp network_name en1 username tOjsohegdLCD/BHE password PUFlbohJFnsOG2IczoN++y generation 0
+a=candidate:1 1 udp 0.9 98.207.78.212 62154 typ srflx name video_rtp network_name en1 username zNQ+C+bCGBrM6w/w password wnUGyVqboTLm81K+9fJKBb generation 0
+a=mid:video
+a=rtcp-mux
+a=crypto:0 AES_CM_128_HMAC_SHA1_80 inline:5ydJsA+FZVpAyqJMT/nW/UW+tcOmDvXJh/pPhNRe 
+a=rtpmap:100 VP8/90000
+a=rtpmap:101 red/90000
+a=rtpmap:102 ulpfec/90000
+a=ssrc:43633328 cname:hsWuSQJxx7przmb8
+a=ssrc:43633328 mslabel:5eb1a64b-231f-41d4-80b1-79cada11f275
+a=ssrc:43633328 label:Built-in iSight
+
+15:04:54.331 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 445
+15:04:54.332 sipapi DEBUG - offset=8 length=437
+15:04:54.333 sipapi DEBUG - websocket received
+SIP/2.0 100 Trying
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKOEwElmJe-cQ2ZAj_Eb69mQ..;received=127.0.0.1
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKODA3YTY4YmI5MDM4MGRiOWYzMzI4NDE4YzliYjMwMDI.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 2 INVITE
+Content-Length: 0
+
+
+15:04:54.359 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54138) on type='ws'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKODA3YTY4YmI5MDM4MGRiOWYzMzI4NDE4YzliYjMwMDI.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+CSeq: 2 INVITE
+Call-ID: 8400613494@r2214209241.invalid
+
+
+15:04:54.395 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 492
+15:04:54.395 sipapi DEBUG - offset=8 length=484
+15:04:54.396 sipapi DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKOEwElmJe-cQ2ZAj_Eb69mQ..;received=127.0.0.1
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKODA3YTY4YmI5MDM4MGRiOWYzMzI4NDE4YzliYjMwMDI.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 2 INVITE
+Content-Length: 0
+Contact: <sip:alan@localhost>
+Server: sip-js/1.0
+
+
+closing transaction 'z9hG4bKOEwElmJe-cQ2ZAj_Eb69mQ..'
+received 1 responses out of 1
+closing transaction 'z9hG4bKODA3YTY4YmI5MDM4MGRiOWYzMzI4NDE4YzliYjMwMDI.'
+15:04:54.398 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54138) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKODA3YTY4YmI5MDM4MGRiOWYzMzI4NDE4YzliYjMwMDI.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Contact: <sip:alan@localhost>
+CSeq: 2 INVITE
+Call-ID: 8400613494@r2214209241.invalid
+Server: sip-js/1.0
+
+
+15:04:54.600 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 642
+15:04:54.600 sipapi DEBUG - offset=8 length=634
+15:04:54.602 sipapi DEBUG - websocket received
+INVITE sip:kundan@localhost SIP/2.0
+Via: SIP/2.0/WS r3457191870.invalid;rport;branch=z9hG4bKZTJlYTQ0OWEwOWU0NzZmMDIzZTM5Y2UzNWUxNjkxNWE.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 3 INVITE
+Max-Forwards: 70
+Contact: <sip:alan@localhost>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 0
+User-Agent: sip-js/1.0
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6IjBZaVBZLzBIdkNVdWYrNTJtTW5jYjBjKzNkcnVUSW5FIiwibWVzc2FnZVR5cGUiOiJPSyIsIm9mZmVyZXJTZXNzaW9uSWQiOiJqazRtSFZNd2FOT3Rabjl4Z2V4QXRJQnBuQmxWZmtZZiIsInNlcSI6Mn0=
+
+
+15:04:54.605 sipapi DEBUG - received request from stack 'INVITE'
+15:04:54.607 sipapi DEBUG - locate 'sip:kundan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54175;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=162;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145256.554489, sip:alan@127.0.0.1:54175;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54138;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=156;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+15:04:54.608 sipd DEBUG - locate returned [sip:kundan@127.0.0.1:54138;transport=ws]
+15:04:54.610 sipapi DEBUG - sending request on stack 'INVITE'
+15:04:54.612 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54138) on type='ws'
+INVITE sip:kundan@127.0.0.1:54138;transport=ws SIP/2.0
+Call-ID: 8400613494@r2214209241.invalid
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bK0EErV7fGeEGBL7hQO5LIPA..
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;rport=54175;branch=z9hG4bKZTJlYTQ0OWEwOWU0NzZmMDIzZTM5Y2UzNWUxNjkxNWE.
+From: <sip:alan@localhost>;tag=20263546555860207958
+User-Agent: sip-js/1.0
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Contact: <sip:alan@localhost>
+CSeq: 3 INVITE
+Max-Forwards: 69
+Record-Route: <sip:192.168.1.8:5080;lr>
+X-Webrtc: eyJhbnN3ZXJlclNlc3Npb25JZCI6IjBZaVBZLzBIdkNVdWYrNTJtTW5jYjBjKzNkcnVUSW5FIiwibWVzc2FnZVR5cGUiOiJPSyIsIm9mZmVyZXJTZXNzaW9uSWQiOiJqazRtSFZNd2FOT3Rabjl4Z2V4QXRJQnBuQmxWZmtZZiIsInNlcSI6Mn0=
+
+
+15:04:54.761 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) on type='ws' length 426
+15:04:54.761 sipapi DEBUG - offset=8 length=418
+15:04:54.762 sipapi DEBUG - websocket received
+ACK sip:alan@localhost SIP/2.0
+Via: SIP/2.0/WS r2214209241.invalid;rport;branch=z9hG4bKODA3YTY4YmI5MDM4MGRiOWYzMzI4NDE4YzliYjMwMDI.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 2 ACK
+Max-Forwards: 70
+Contact: <sip:kundan@r2214209241.invalid>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 0
+
+
+no dialog for ACK, finding transaction
+No existing transaction for ACK
+15:04:54.775 sipapi DEBUG - received request from stack 'ACK'
+15:04:54.776 sipapi DEBUG - locate 'sip:alan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54175;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=162;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145256.554489, sip:alan@127.0.0.1:54175;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54138;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=155;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+15:04:54.779 sipd DEBUG - locate returned [sip:alan@127.0.0.1:54175;transport=ws]
+15:04:54.781 sipapi DEBUG - sending request on stack 'ACK'
+15:04:54.782 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54175) on type='ws'
+ACK sip:alan@127.0.0.1:54175;transport=ws SIP/2.0
+Call-ID: 8400613494@r2214209241.invalid
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKOEwElmJe-cQ2ZAj_Eb69mQ..
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKODA3YTY4YmI5MDM4MGRiOWYzMzI4NDE4YzliYjMwMDI.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Contact: <sip:kundan@r2214209241.invalid>
+CSeq: 2 ACK
+Max-Forwards: 69
+
+
+15:04:55.38 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) on type='ws' length 445
+15:04:55.38 sipapi DEBUG - offset=8 length=437
+15:04:55.46 sipapi DEBUG - websocket received
+SIP/2.0 100 Trying
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bK0EErV7fGeEGBL7hQO5LIPA..;received=127.0.0.1
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;rport=54175;branch=z9hG4bKZTJlYTQ0OWEwOWU0NzZmMDIzZTM5Y2UzNWUxNjkxNWE.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 3 INVITE
+Content-Length: 0
+
+
+15:04:55.49 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54175) on type='ws'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;rport=54175;branch=z9hG4bKZTJlYTQ0OWEwOWU0NzZmMDIzZTM5Y2UzNWUxNjkxNWE.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+CSeq: 3 INVITE
+Call-ID: 8400613494@r2214209241.invalid
+
+
+15:04:55.164 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) on type='ws' length 494
+15:04:55.164 sipapi DEBUG - offset=8 length=486
+15:04:55.171 sipapi DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bK0EErV7fGeEGBL7hQO5LIPA..;received=127.0.0.1
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;rport=54175;branch=z9hG4bKZTJlYTQ0OWEwOWU0NzZmMDIzZTM5Y2UzNWUxNjkxNWE.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 3 INVITE
+Content-Length: 0
+Contact: <sip:kundan@localhost>
+Server: sip-js/1.0
+
+
+closing transaction 'z9hG4bK0EErV7fGeEGBL7hQO5LIPA..'
+received 1 responses out of 1
+closing transaction 'z9hG4bKZTJlYTQ0OWEwOWU0NzZmMDIzZTM5Y2UzNWUxNjkxNWE.'
+15:04:55.179 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54175) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;rport=54175;branch=z9hG4bKZTJlYTQ0OWEwOWU0NzZmMDIzZTM5Y2UzNWUxNjkxNWE.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Contact: <sip:kundan@localhost>
+CSeq: 3 INVITE
+Call-ID: 8400613494@r2214209241.invalid
+Server: sip-js/1.0
+
+
+15:04:55.331 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 426
+15:04:55.332 sipapi DEBUG - offset=8 length=418
+15:04:55.334 sipapi DEBUG - websocket received
+ACK sip:kundan@localhost SIP/2.0
+Via: SIP/2.0/WS r3457191870.invalid;rport;branch=z9hG4bKZTJlYTQ0OWEwOWU0NzZmMDIzZTM5Y2UzNWUxNjkxNWE.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 3 ACK
+Max-Forwards: 70
+Contact: <sip:alan@r3457191870.invalid>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 0
+
+
+no dialog for ACK, finding transaction
+No existing transaction for ACK
+15:04:55.344 sipapi DEBUG - received request from stack 'ACK'
+15:04:55.344 sipapi DEBUG - locate 'sip:kundan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54175;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=161;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145256.554489, sip:alan@127.0.0.1:54175;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54138;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=155;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+15:04:55.345 sipd DEBUG - locate returned [sip:kundan@127.0.0.1:54138;transport=ws]
+15:04:55.354 sipapi DEBUG - sending request on stack 'ACK'
+15:04:55.356 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54138) on type='ws'
+ACK sip:kundan@127.0.0.1:54138;transport=ws SIP/2.0
+Call-ID: 8400613494@r2214209241.invalid
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bK0EErV7fGeEGBL7hQO5LIPA..
+Via: SIP/2.0/WS r3457191870.invalid;received=127.0.0.1;rport=54175;branch=z9hG4bKZTJlYTQ0OWEwOWU0NzZmMDIzZTM5Y2UzNWUxNjkxNWE.
+From: <sip:alan@localhost>;tag=20263546555860207958
+To: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+Contact: <sip:alan@r3457191870.invalid>
+CSeq: 3 ACK
+Max-Forwards: 69
+
+
+15:05:00.228 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) on type='ws' length 426
+15:05:00.229 sipapi DEBUG - offset=8 length=418
+15:05:00.230 sipapi DEBUG - websocket received
+BYE sip:alan@localhost SIP/2.0
+Via: SIP/2.0/WS r2214209241.invalid;rport;branch=z9hG4bKMDZkYWY4ZjYyM2IxYzVhNjg5ODRmOTE5ZGNmYTBiNmU.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 3 BYE
+Max-Forwards: 70
+Contact: <sip:kundan@r2214209241.invalid>
+Route: <sip:192.168.1.8:5080;lr>
+Content-Length: 0
+
+
+15:05:00.232 sipapi DEBUG - received request from stack 'BYE'
+15:05:00.233 sipapi DEBUG - locate 'sip:alan@localhost' in
+{'sip:alan@localhost': [(Contact: <sip:alan@127.0.0.1:54175;transport=ws>;reg-id=1;pub-gruu="sip:alan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=161;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145256.554489, sip:alan@127.0.0.1:54175;transport=ws)], 'sip:kundan@localhost': [(Contact: <sip:kundan@127.0.0.1:54138;transport=ws>;reg-id=1;pub-gruu="sip:kundan@localhost;gr=urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631";expires=155;+sip.instance="<urn:uuid:d354a75c-19e9-4d5a-a2d4-d778f6904631>", 1333145250.453299, sip:kundan@127.0.0.1:54138;transport=ws)]}
+15:05:00.233 sipd DEBUG - locate returned [sip:alan@127.0.0.1:54175;transport=ws]
+15:05:00.235 sipapi DEBUG - sending request on stack 'BYE'
+15:05:00.236 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54175) on type='ws'
+BYE sip:alan@127.0.0.1:54175;transport=ws SIP/2.0
+Call-ID: 8400613494@r2214209241.invalid
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKpc4jWqYCWTDwv35dk0wyTQ..
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKMDZkYWY4ZjYyM2IxYzVhNjg5ODRmOTE5ZGNmYTBiNmU.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Contact: <sip:kundan@r2214209241.invalid>
+CSeq: 3 BYE
+Max-Forwards: 69
+
+
+15:05:00.350 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 438
+15:05:00.350 sipapi DEBUG - offset=8 length=430
+15:05:00.351 sipapi DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.8:5080;rport;branch=z9hG4bKpc4jWqYCWTDwv35dk0wyTQ..;received=127.0.0.1
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKMDZkYWY4ZjYyM2IxYzVhNjg5ODRmOTE5ZGNmYTBiNmU.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+Call-ID: 8400613494@r2214209241.invalid
+CSeq: 3 BYE
+Content-Length: 0
+
+
+received 1 responses out of 1
+closing transaction 'z9hG4bKMDZkYWY4ZjYyM2IxYzVhNjg5ODRmOTE5ZGNmYTBiNmU.'
+closing transaction 'z9hG4bKpc4jWqYCWTDwv35dk0wyTQ..'
+15:05:00.354 sipapi DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 54138) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r2214209241.invalid;received=127.0.0.1;rport=54138;branch=z9hG4bKMDZkYWY4ZjYyM2IxYzVhNjg5ODRmOTE5ZGNmYTBiNmU.
+From: "Kundan" <sip:kundan@localhost>;tag=6210662529487231876
+To: <sip:alan@localhost>;tag=20263546555860207958
+CSeq: 3 BYE
+Call-ID: 8400613494@r2214209241.invalid
+
+
+15:05:31.71 sipapi DEBUG - ('127.0.0.1', 54138)=>('127.0.0.1', 5080) on type='ws' length 0
+15:05:31.104 sipapi DEBUG - ('127.0.0.1', 54175)=>('127.0.0.1', 5080) on type='ws' length 0
