@@ -78,6 +78,26 @@ if (typeof sip == "undefined") {
         return Object.prototype.toString.apply(obj) === '[object Array]';
     };
     
+    // modified from parseUri 1.2.2, (c) Steven Levithan <stevenlevithan.com>, MIT License, http://blog.stevenlevithan.com/archives/parseuri
+    
+    sip.parse_uri_options = {
+        strictMode: false,
+        key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
+        q:   { name:   "queryKey", parser: /(?:^|&)([^&=]*)=?([^&]*)/g },
+        parser: {
+            strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+            loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+        }
+    };
+    
+    sip.parse_uri = function(str) {
+        var	o = sip.parse_uri_options, m = o.parser[o.strictMode ? "strict" : "loose"].exec(str), uri = {}, i = 14;
+        while (i--) uri[o.key[i]] = m[i] || "";
+        uri[o.q.name] = {};
+        uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) { if ($1) uri[o.q.name][$1] = $2; });
+        return uri;
+    };
+    
     
     // Base64 encode/decode ported from http://www.webtoolkit.info/
 
@@ -691,20 +711,55 @@ if (typeof sip == "undefined") {
     }
     
     Header.prototype._parseParams = function(params, unquote) {
-        var parts = params.split(';');
-        for (var i=0; i<parts.length; ++i) {
-            var nv = parts[i];
-            var nsv = sip.str_partition(nv, '=');
-            var n = sip.str_strip(nsv[0]);
-            var v = sip.str_strip(nsv[2]);
-            if (n) {
-                if (v && unquote) {
-                    v = sip._unquote(v);
+        try {
+            var length = params.length, index = 0;
+            while (index < length) {
+                var sep1 = params.indexOf('=', index);
+                var sep2 = params.indexOf(';', index);
+                if (sep2 < 0) {
+                    sep2 = length;
                 }
-                this[n.toLowerCase()] = v;
+                var n = "", v = "";
+                if (sep1 >= 0 && sep1 < sep2) {
+                    var n = sip.str_strip(params.substring(index, sep1).toLowerCase());
+                    if (params.charAt(sep1+1) == '"') {
+                        sep1 += 1;
+                        sep2 = params.indexOf('"', sep1+2);
+                    }
+                    v = sip.str_strip(params.substring(sep1+1, sep2));
+                    index = sep2 + 1;
+                }
+                else if (sep1 < 0 || sep1 >= 0 && sep1 > sep2) {
+                    n = sip.str_strip(params.substring(index, sep2).toLowerCase());
+                    index = sep2 + 1;
+                }
+                else {
+                    break;
+                }
+                if (n) {
+                    this[n] = v;
+                }
             }
+        } catch (error) {
+            log("ignoring parameter exception: " + error);
         }
     };
+        
+    //Header.prototype._parseParams = function(params, unquote) {
+    //    var parts = params.split(';');
+    //    for (var i=0; i<parts.length; ++i) {
+    //        var nv = parts[i];
+    //        var nsv = sip.str_partition(nv, '=');
+    //        var n = sip.str_strip(nsv[0]);
+    //        var v = sip.str_strip(nsv[2]);
+    //        if (n) {
+    //            if (v && unquote) {
+    //                v = sip._unquote(v);
+    //            }
+    //            this[n.toLowerCase()] = v;
+    //        }
+    //    }
+    //};
     
     Header.prototype._parse = function(value, name) {
         if (sip._address.indexOf(name) >= 0) {
@@ -751,6 +806,9 @@ if (typeof sip == "undefined") {
             for (var s in this) {
                 if (typeof s == 'string' && ex.indexOf(s.toLowerCase()) < 0 && typeof this[s] != 'function') {
                     var v = this[s];
+                    if (v && !/^[a-zA-Z0-9\-_\.=]*$/.test(v)) {
+                        v = '"' + v + '"';
+                    }
                     rest.push(v ? s.toLowerCase() + '=' + v : s);
                 }
             }
@@ -1948,9 +2006,10 @@ if (typeof sip == "undefined") {
         else {
             if (this.canCreateDialog(this.request, response)) {
                 var dialog = sip.Dialog.createClient(this.stack, this.request, response, transaction);
+                dialog.autoack = this.autoack;
                 this.stack.dialogCreated(dialog, this);
                 this.stack.receivedResponse(dialog, response);
-                if (this.autoack && this.request.method == 'INVITE') {
+                if (dialog.autoack && this.request.method == 'INVITE') {
                     dialog.sendRequest(dialog.createRequest('ACK'));
                 }
             }
@@ -2353,7 +2412,7 @@ if (typeof sip == "undefined") {
         this.dialogs = {};
         this.transactions = {};
         this.serverMethods = ['INVITE','BYE','MESSAGE','SUBSCRIBE','NOTIFY'];
-        this.uri = new sip.URI(((transport.type == 'tls') ? 'sips' : 'sip') + ':' + transport.host + ':' + transport.port);
+        this.uri = new sip.URI(((transport.type == 'tls') ? 'sips' : 'sip') + ':' + transport.hostport);
     }
     
     Stack.prototype.close = function() {
@@ -2377,7 +2436,8 @@ if (typeof sip == "undefined") {
             throw new String('No transport in stack');
         if (secure && !this.transport.secure)
             throw new String('Cannot find a secure transport');
-        return new sip.Header('SIP/2.0/' + this.transport.type.toUpperCase() + ' ' + this.transport.host + ':' + this.transport.port + ';rport', 'Via');
+        //return new sip.Header('SIP/2.0/' + this.transport.type.toUpperCase() + ' ' + this.transport.hostport + (this.transport.type == 'ws' || this.transport.type == 'wss' ? '': ';rport'), 'Via');
+        return new sip.Header('SIP/2.0/' + this.transport.type.toUpperCase() + ' ' + this.transport.hostport +';rport', 'Via');
     };
 
     Stack.prototype.send = function(data, dest, transport) {
@@ -3318,8 +3378,9 @@ if (typeof sip == "undefined") {
     
     function TransportInfo(host, port, type, secure, reliable, congestionControlled) {
         this.host = host || "127.0.0.1";
-        this.port = port || 5060;
+        this.port = port || (secure ? 5061 : 5060);
         this.type = type || "udp";
+        this.hostport = this.host + (port ? ":" + port : "");
         this.secure = secure === undefined ? true : secure;
         this.reliable = reliable === undefined ? true : reliable;
         this.congestionControlled = congestionControlled === undefined ? true : congestionControlled;

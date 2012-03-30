@@ -18,7 +18,7 @@ function getQuerystring(key, default_) {
 }
 
 function cleanHTML(value) {
-    return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return ("" + value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 function Phone() {
@@ -61,6 +61,7 @@ function Phone() {
     
     // private attributes
     this._handlers = {};
+    this.network_type = "Flash";
     this.listen_ip = null;
     this._listen_port = null;
     this._stack = null;
@@ -76,6 +77,20 @@ function Phone() {
     this._remote_sdp = null;
     this._rtp = []; // RealTimeSocket instances
     this._gw = null;
+    
+    // HTML5
+    this.has_html5_websocket = false;
+    this.has_html5_video = false;
+    this.has_html5_webrtc = false;
+    this.websocket_path = "/sip";
+    this._webrtc_local_stream = null;
+    this._webrtc_peer_connection = null;
+    this.enable_sound_alert = false;
+    this.webrtc_stun = "STUN stun.l.google.com:19302";
+    
+    // SIP requirements for websocket
+    this._instance_id = "";
+    this._gruu = "";
 };
 
 Phone.prototype.populate = function() {
@@ -92,6 +107,62 @@ Phone.prototype.populate = function() {
             else
                 this.setProperty(attr, param);
         }
+    }
+};
+
+Phone.prototype.detectHTML5 = function() {
+    this.setProperty("has_html5_websocket", typeof WebSocket != "undefined");
+    this.setProperty("has_html5_video", !!document.createElement('video').canPlayType);
+    this.setProperty("has_html5_webrtc", typeof navigator.webkitGetUserMedia != "undefined");
+    log("detecting HTML support websocket=" + this.has_html5_websocket + " video=" + this.has_html5_video + " webrtc=" + this.has_html5_webrtc);
+    if (!this.has_html5_websocket || !this.has_html5_video || !this.has_html5_webrtc) {
+        $("webrtc-network").innerHTML += '<font color="red">Some HTML5 features are missing in your browser</font>';
+    }
+    
+    if (this.has_html5_websocket) {
+        // SIP over websocket works
+        this.setProperty("network_status", "available");
+        this.enableButtons(true);
+        this.enableBox('config', true);
+        $("websocket_path").value = this.websocket_path;
+        $("listen_ip").style.visibility = "hidden";
+        
+        this.listen_ip = 'r' + Math.floor(Math.random() * 10000000000) + ".invalid";
+        this._listen_port = 0;
+
+        if (this.outbound_proxy_address == "127.0.0.1:5060") {
+            var outbound_proxy_address = "127.0.0.1:5080";
+            if (window.location.href) {
+                var uri = sip.parse_uri(window.location.href);
+                outbound_proxy_address = uri.host + ":5080";
+            }
+            this.setProperty("outbound_proxy", true);
+            this.setProperty("outbound_proxy_address", outbound_proxy_address);
+        }
+    }
+    
+    if (this.has_html5_video) {
+        // add <video> to local and remote video boxes
+        var local = document.createElement("video");
+        local.id = "html5-local-video";
+        local.style.width = "240";
+        local.style.height = "168";
+//        local.style.backgroundColor = "#000000";
+        local.autoplay = "autoplay";
+        $('local-video').appendChild(local);
+        
+        var remote = document.createElement("video");
+        remote.id = "html5-remote-video";
+        remote.style.width = "240";
+        remote.style.height = "168";
+//        remote.style.backgroundColor = "#000000";
+        remote.autoplay = "autoplay";
+        $('remote-video').appendChild(remote);
+        
+        var audio = document.createElement("audio");
+        audio.id = "html5-audio";
+        audio.autoplay = "autoplay";
+        $("webrtc-network").appendChild(audio);
     }
 };
 
@@ -141,9 +212,24 @@ Phone.prototype.setProperty = function(name, value) {
                     this.setProperty("location", location);
             }
         }
+        else if (name == "network_type") {
+            if (value == "Flash" && this.transport == "ws") {
+                this.setProperty("transport", "udp");
+            }
+            else if (value == "WebRTC" && this.transport != "ws") {
+                this.setProperty("transport", "ws");
+            }
+        }
     }
     else {
         this.dispatchEvent({"type": "propertyChange", "property": name, "newValue": value});
+    }
+};
+
+Phone.prototype.enableButtons = function(enable) {
+    var inputs = ["register_button", "call_button", "target_type", "target_scheme", "target_value"];
+    for (var i=0; i<inputs.length; ++i) {
+        this.enable(inputs[i], enable);
     }
 };
 
@@ -151,10 +237,7 @@ Phone.prototype.statusChanged = function(value) {
     this.setProperty("network_status", value);
     var enable = (value == "connected");
     
-    var inputs = ["register_button", "call_button", "target_type", "target_scheme", "target_value"];
-    for (var i=0; i<inputs.length; ++i) {
-        this.enable(inputs[i], enable);
-    }
+    this.enableButtons(enable);
     
     if (enable) {
         // enable config edit only
@@ -191,13 +274,13 @@ Phone.prototype.enableBox = function(name, enable) {
     
     var inputs = [];
     if (name == 'config')
-        inputs = ["displayname", "username", "domain", "authname", "password", "transport_udp"];
+        inputs = ["displayname", "username", "domain", "authname", "password"];
         //inputs = ["displayname", "username", "domain", "authname", "password", "transport_udp", "transport_tcp", "transport_ws"];
     else if (name == 'register')
         inputs = ["outbound_target", "outbound_proxy", "outbound_proxy_address", "register_interval", "local_aor"];
         //inputs = ["outbound_domain", "outbound_target", "outbound_proxy", "outbound_proxy_address", "register_interval", "rport", "sipoutbound", "local_aor"];
     else if (name == 'network')
-        inputs = ["listen_ip"];
+        inputs = ["listen_ip", "network_type", "websocket_path", "enable_sound_alert"];
     else if (name == 'call')
         inputs = ['has_audio', 'has_video'];
         // inputs = ['has_audio', 'has_tones', 'has_video', 'has_text', 'has_location']; // TODO: eventually use this
@@ -244,7 +327,7 @@ Phone.prototype.register = function() {
     
         this.createSocket();
     }
-    else if (this.sock_state == "bound") {
+    else if (this.sock_state == "bound" || this.sock_state == "connected") {
         if (this._reg && this.register_state != "not registered") {
             this.setProperty("register_state", "unregistering");
             this.setProperty("register_button.disabled", true);
@@ -263,6 +346,16 @@ Phone.prototype.register = function() {
     }
 };
 
+Phone.prototype.changeNetworkType = function() {
+    var current = this.network_type;
+    var other = (current == 'Flash' ? 'WebRTC' : 'Flash');
+    var result = confirm('Using the ' + current + ' network. Would you like to relaunch with the ' + other + ' network');
+    if (result) {
+        window.location = 'phone.html?network_type=' + other;
+    }
+    return false;
+};
+
 Phone.prototype.call = function() {
     log("call() " + this.target_aor);
     if (this.sock_state == "idle") {
@@ -273,7 +366,7 @@ Phone.prototype.call = function() {
         
         this.createSocket();
     }
-    else if (this.sock_state == "bound") {
+    else if (this.sock_state == "bound" || this.sock_state == "connected") {
         if (this.call_state == "idle") {
             this.setProperty("call_state", "inviting");
             this.setProperty("call_button.disabled", true);
@@ -300,7 +393,7 @@ Phone.prototype.end = function() {
         else if (this.call_state == "incoming") {
             this.sendInviteResponse(603, 'Decline');
         }
-        else if (this.call_state == "active") {
+        else if (this.call_state == "active" || this.call_state == "accepted") {
             this.sendBye();
         }
         else if (this.call_state != "failed" && this.call_state != "closed") {
@@ -310,7 +403,24 @@ Phone.prototype.end = function() {
         this.setProperty("end_button.disabled", true);
         this.setProperty("call_state", "idle");
     }
-}
+};
+
+Phone.prototype.createUUID4 = function() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+};
+
+Phone.prototype.createInstanceId = function() {
+    if (!this._instance_id && typeof localStorage != "undefined") {
+        this._instance_id = localStorage.getItem("instance_id");
+        if (!this._instance_id) {
+            this._instance_id = "<urn:uuid:" + this.createUUID4() + ">";
+            localStorage.setItem("instance_id", this._instance_id);
+        }
+    }
+};
 
 Phone.prototype.createSocket = function() {
     log("createSocket() transport=" + this.transport);
@@ -323,8 +433,21 @@ Phone.prototype.createSocket = function() {
         this._sock.bind(0, "0.0.0.0");
         this._sock.receive();
     }
+    else if (this.transport == "ws") {
+        log("  connecting to " + this.outbound_proxy_address);
+        try {
+            this._sock = new WebSocket('ws://' + this.outbound_proxy_address + this.websocket_path, ["sip"]);
+            var parent = this;
+            this._sock.onopen = function() { parent.onWebSocketOpen(); };
+            this._sock.onclose = function() { parent.onWebSocketClose(); };
+            this._sock.onerror = function(error) { parent.onWebSocketError(error); };
+            this._sock.onmessage = function(msg) { parent.onWebSocketMessage(msg); };
+        } catch (error) {
+            log("error in websocket: " + error, "error");
+        }
+    }
     else {
-        log("TCP transport is not yet implemented", "error");
+        log(this.transport + " transport is not yet implemented", "error");
         this.setProperty("sock_state", "idle");
         if (this.register_state == "waiting") {
             this.setProperty("register_state", "not registered");
@@ -347,17 +470,7 @@ Phone.prototype.onSockPropertyChange = function(event) {
         }
         else {
             listen_port = null;
-            this.setProperty("sock_state", "idle");
-            if (this.register_state == "waiting") {
-                this.setProperty("register_state", "not registered");
-                this.setProperty("register_button", "Register");
-                this.setProperty("register_button.disabled", false);
-            }
-            if (this.call_state == "waiting") {
-                this.setProperty("call_state", "idle");
-                this.setProperty("call_button.disabled", false);
-                this.setProperty("end_button.disabled", true);
-            }
+            this.resetSockState();
         }
     }
     else if (event.property == "localPort") {
@@ -368,6 +481,33 @@ Phone.prototype.onSockPropertyChange = function(event) {
             this.createStack();
         }
     }
+    else if (event.property == "connected") {
+        // TCP or WS socket
+        log("socket connected=" + event.newValue);
+        if (event.newValue) {
+            this.setProperty("sock_state", "connected");
+            this.createStack();
+        }
+        else {
+            this.resetSockState();
+        }
+    }
+};
+
+Phone.prototype.resetSockState = function() {
+    this.setProperty("sock_state", "idle");
+    if (this.register_state == "waiting" || this.register_state == "registered") {
+        this.setProperty("register_state", "not registered");
+        this.setProperty("register_button", "Register");
+        this.setProperty("register_button.disabled", false);
+        this._reg = null;
+    }
+    if (this.call_state == "waiting") {
+        this.setProperty("call_state", "idle");
+        this.setProperty("call_button.disabled", false);
+        this.setProperty("end_button.disabled", true);
+    }
+    
 };
 
 Phone.prototype.createStack = function() {
@@ -396,23 +536,36 @@ Phone.prototype.sendRegister = function() {
         this._reg.remoteParty = new sip.Address(this.local_aor);
         this._reg.localParty = new sip.Address(this.local_aor);
         if (this.outbound == "proxy") {
-            this._reg.remoteTarget = new sip.URI("sip:" + this.username + "@" + this.outbound_proxy_address);
+            var outbound_proxy = this.getRouteHeader();
+            if (this.transport != "udp")
+                outbound_proxy.value.uri.param['transport'] = this.transport;
+            this._reg.routeSet = [outbound_proxy];
+//            For REGISTER should we change uri instead of routeSet?
+//            this._reg.remoteTarget = new sip.URI("sip:" + this.username + "@" + this.outbound_proxy_address);
         }
     } 
     
-    var m = this._reg.createRequest('REGISTER');
-    var c = new sip.Header(this._stack.uri.toString(), 'Contact');
-    c.value.uri.user = this.username;
-    m.setItem('Contact', c);
+    var m = this.createRegister();
     m.setItem('Expires', new sip.Header("" + this.register_interval, 'Expires'))
     this._reg.sendRequest(m);
 };
 
-Phone.prototype.sendUnregister = function() {
+Phone.prototype.createRegister = function() {
     var m = this._reg.createRequest('REGISTER');
     var c = new sip.Header(this._stack.uri.toString(), 'Contact');
     c.value.uri.user = this.username;
+    if (this.transport == "ws" || this.transport == "wss") {
+        this.createInstanceId();
+        c.setItem('reg-id', '1');
+        c.setItem('+sip.instance', this._instance_id);
+        m.setItem('Supported', new sip.Header('path, outbound, gruu', 'Supported'));
+    }
     m.setItem('Contact', c);
+    return m;
+};
+
+Phone.prototype.sendUnregister = function() {
+    var m = this.createRegister();
     m.setItem('Expires', new sip.Header("0", 'Expires'))
     this._reg.sendRequest(m);
 };
@@ -453,7 +606,122 @@ Phone.prototype.sendInvite = function() {
     
     this.dispatchMessage("Inviting " + this._call.remoteParty.toString() + " ...");
     
-    this.createMediaSockets();
+    if (this.network_type == "WebRTC") {
+        this.createWebRtcConnection();
+    }
+    else {
+        this.createMediaSockets();
+    }
+};
+
+Phone.prototype.setVideoProperty = function(videoname, attr, value) {
+    if (this.network_type == "WebRTC") {
+        log("set " + videoname + "." + attr + " = " + value);
+        var obj = $("html5-" + videoname);
+        if (obj) {
+            if (attr == "controls") {
+                obj.controls = value;
+            }
+            else if (attr == "live" && this.has_html5_webrtc) {
+                if (value) {
+                    log("local-stream=" + (this._webrtc_local_stream === null));
+                    if (this._webrtc_local_stream == null) {
+                        var phone = this;
+                        navigator.webkitGetUserMedia("video,audio",
+                            function(stream) { phone.onUserMediaSuccess(stream); },
+                            function(error) { phone.onUserMediaError(error); });
+                    }
+                    else {
+                        this.onUserMediaSuccess(this._webrtc_local_stream);
+                    }
+                }
+                else {
+                    obj.setAttribute('src', null);
+                }
+            }
+            else {
+                log("ignoring set property '" + attr + "' on '" + videoname + '"');
+            }
+        }
+        else {
+            log("cannot get video object of id 'html5-" + videoname + "' to set property '" + attr + "'");
+        }
+    }
+    else {
+        var obj = getFlashMovie(videoname);
+        if (obj) {
+            obj.setProperty(attr, value);
+        }
+        else {
+            log("cannot get video object of name '" + videoname + "' to set property '" + attr + "'");
+        }
+    }
+};
+
+Phone.prototype.getVideoProperty = function(videoname, attr) {
+    var result = undefined;
+    if (this.network_type == "WebRTC") {
+        var obj = $("html5-" + videoname);
+        if (obj) {
+            if (attr == "controls") {
+                result = obj.controls;
+            }
+            else {
+                log("ignoring get property '" + attr + "' on '" + videoname + '"');
+            }
+        }
+        else {
+            log("cannot get video object of id 'html5-" + videoname + "' to get property '" + attr + "'");
+        }
+        log("get " + videoname + "." + attr + " = " + result);
+    }
+    else {
+        var obj = getFlashMovie(videoname);
+        if (obj) {
+            result = obj.getProperty(attr);
+        }
+        else {
+            log("cannot get video object of name '" + videoname + "' to get property '" + attr + "'");
+        }
+    }
+    return result;
+};
+
+Phone.prototype.onUserMediaSuccess = function(stream) {
+    log("webrtc - accessing user media successfully");
+    if (stream !== this._webrtc_local_stream) {
+        this._webrtc_local_stream = stream;
+        if (this.call_state == "inviting" || this.call_state == "accepting") {
+            // need to start peer-connection also
+            this.createdWebRtcLocalStream();
+        }
+    }
+    
+    var video = $("html5-local-video");
+    if (video) {
+        var url = webkitURL.createObjectURL(stream);
+        log('webrtc - local-video.src="' + url + '"');
+        video.setAttribute('src', url);
+    }
+};
+
+Phone.prototype.onUserMediaError = function(error) {
+    log("webrtc - failed to get access to local media: " + error.code);
+    var obj = $("local-video-on");
+    if (obj) {
+        obj.checked = false;
+    }
+    if (this.call_state == "inviting" || this.call_state == "accepting") {
+        if (this.call_state == "accepting") {
+            ua.sendResponse(ua.createResponse(603, 'Declined Media Devices'));
+        }
+        
+        this.setProperty("call_state", "failed");
+        this.setProperty("call_button.disabled", true);
+        this.setProperty("end_button.disabled", false);
+        this.dispatchMessage('Failed: cannot access user media devices');
+        this.hungup();
+    }
 };
 
 Phone.prototype.createMediaSockets = function() {
@@ -591,21 +859,231 @@ Phone.prototype.createdMediaSockets = function() {
     }
 };
 
+Phone.prototype.createWebRtcConnection = function() {
+    try {
+        if ((this.has_audio || this.has_video) && !this.has_html5_webrtc) {
+            throw new String("missing WebRTC, cannot use audio or video")
+        }
+        if (this._webrtc_local_stream == null) {
+            this.setVideoProperty("local-video", "live", true);
+        }
+        else {
+            this.createdWebRtcLocalStream();
+        }
+    }
+    catch (e) {
+        if (this.call_state == "accepting") {
+            ua.sendResponse(ua.createResponse(500, 'Error in getting user media'));
+        }
+        
+        this.setProperty("call_state", "failed");
+        this.setProperty("call_button.disabled", true);
+        this.setProperty("end_button.disabled", false);
+        this.dispatchMessage('Failed: "' + e + '"');
+        this.hungup();
+    }
+};
+
+Phone.prototype.createdWebRtcLocalStream = function() {
+    var phone = this;
+    this._webrtc_peer_connection = new webkitDeprecatedPeerConnection(this.webrtc_stun, function(message) { phone.onWebRtcSendMessage(message); });
+    this._webrtc_peer_connection.onconnecting = function(message) { phone.onWebRtcConnecting(message); };
+    this._webrtc_peer_connection.onopen = function(message) { phone.onWebRtcOpen(message) };
+    this._webrtc_peer_connection.onaddstream = function(event) { phone.onWebRtcAddStream(event.stream); };
+    this._webrtc_peer_connection.onremovestream = function(event) { phone.onWebRtcRemoveStream(); };
+    if (this.call_state == "accepting" && this._call != null && this._call.request != null) {
+        var result = this.webrtcSDP2JSON(this._call.request);
+        this._webrtc_peer_connection.processSignalingMessage(result);
+    }
+    if (this._webrtc_local_stream != null) {
+        this._webrtc_peer_connection.addStream(this._webrtc_local_stream);
+    }
+};
+
+Phone.prototype.webrtcJSON2SDP = function(message) {
+    // convert from Chrome's message to SDP and X-WebRtc headers
+    var header = null, type = null, body = null;
+    if (false && message.substr(0, 3) == "SDP") {
+        var json = JSON.parse(message.substr(4));
+        for (var attr in json) {
+            if (attr == "sdp") {
+                var sdp = json[attr];
+                body = sdp.replace(/\\r\\n/g, "\r\n");
+                type = "application/sdp";
+            }
+            else {
+                if (header == null)
+                    header = {};
+                header[attr] = json[attr];
+            }
+        }
+    }
+    else {
+        type = "application/x-webrtc";
+        body = sip.b64_encode(message);
+    }
+    return [header, type, body];
+};    
+
+Phone.prototype.webrtcSDP2JSON = function(message) {
+    try {
+        var contentType = message.hasItem('Content-Type') ? message.first('Content-Type').value : null;
+        var body = message.body;
+        if (contentType == "application/x-webrtc") {
+            body = sip.b64_decode(body);
+            log("webrtc - found " + body);
+            return body;
+        }
+        else if (contentType == "application/sdp") {
+            var obj = message.hasItem('X-Webrtc') ? JSON.parse(sip.b64_decode(message.first('X-Webrtc').value)) : {};
+            obj.sdp = body; // body.replace(/\r\n/g, '\r\n')
+            var result = "SDP\n" + JSON.stringify(obj, null, "   ") + "\n";
+            //var result = 'SDP\n{\n   "messageType" : "' + obj.messageType + '",\n   "offererSessionId" : "' + obj.offererSessionId
+            //    + '",\n   "sdp" : "' + obj.sdp.replace(/\r\n/g, '\\r\\n') + '",\n   "seq" : ' + obj.seq + ',\n   "tieBreaker" : ' + obj.tieBreaker + '\n}\n';
+            log("webrtc - parsed to " + result);
+        }
+    }
+    catch (error) {
+        log("webrtc - extracting from message failed: " + error);
+    }
+    return "";
+};
+
+Phone.prototype.onWebRtcSendMessage = function(message) {
+    log("webrtc - send message (" + message + ")");
+    
+    if (this.call_state == "inviting") {
+        this._local_sdp = message;
+        var m = this._call.createRequest('INVITE');
+        //var c = new sip.Header(this._stack.uri.toString(), 'Contact');
+        //c.value.uri.user = this.username;
+        var c = new sip.Header((new sip.Address(this.local_aor)).uri.toString(), 'Contact');
+        m.setItem('Contact', c);
+        if (this.user_agent)
+            m.setItem('User-Agent', new sip.Header(this.user_agent, 'User-Agent'));
+        
+        var result = this.webrtcJSON2SDP(message);
+        var header = result[0], contentType = result[1], body = result[2];
+        if (header) {
+            var value = sip.b64_encode(JSON.stringify(header));
+            m.setItem('X-Webrtc', new sip.Header(value, 'X-Webrtc'));
+        }
+        if (contentType && body) {
+            m.setItem('Content-Type', new sip.Header(contentType, 'Content-Type'));
+            m.setBody(body);
+        }
+        
+        this._call.sendRequest(m);
+    }
+    else if (this.call_state == "accepted") {
+        // send in ACK is possible, otherwise re-INVITE.
+        this.setProperty('call_state', 'active');
+        var m = this._call.createRequest('ACK');
+        var result = this.webrtcJSON2SDP(message);
+        var header = result[0], contentType = result[1], body = result[2];
+        if (header) {
+            var value = sip.b64_decode(JSON.stringify(header));
+            m.setItem('X-Webrtc', new sip.Header(value, 'X-Webrtc'));
+        }
+        if (contentType && body) {
+            m.setItem('Content-Type', new sip.Header(contentType, 'Content-Type'));
+            m.setBody(body);
+        }
+        this._call.sendRequest(m);
+    }
+    else if (this.call_state == "accepting") {
+        this._local_sdp = message;
+        var ua = this._call;
+        
+        this.setProperty('call_state', 'active');
+        var m = this._call.createResponse(200, 'OK');
+        //var c = new sip.Header(this._stack.uri.toString(), 'Contact');
+        //c.value.uri.user = this.username;
+        var c = new sip.Header((new sip.Address(this.local_aor)).uri.toString(), 'Contact');
+        m.setItem('Contact', c);
+        if (this.server)
+            m.setItem('Server', new sip.Header(this.server, 'Server'));
+            
+        var result = this.webrtcJSON2SDP(message);
+        var header = result[0], contentType = result[1], body = result[2];
+        if (header) {
+            var value = sip.b64_encode(JSON.stringify(header));
+            m.setItem('X-Webrtc', new sip.Header(value, 'X-Webrtc'));
+        }
+        if (contentType && body) {
+            m.setItem('Content-Type', new sip.Header(contentType, 'Content-Type'));
+            m.setBody(body);
+        }
+        this._call.sendResponse(m);
+    }
+    else {
+        log('invalid call state in onWebRtcSendMessage: ' + this.call_state);
+    }
+};
+
+Phone.prototype.onWebRtcConnecting = function(event) {
+    log("webrtc - onconnecting(" + event + ")");
+};
+
+Phone.prototype.onWebRtcOpen = function(message) {
+    log("webrtc - onopen(" + message + ")");
+};
+
+Phone.prototype.onWebRtcAddStream = function(stream) {
+    log("webrtc - onaddstream(...)");
+    var video = $("html5-remote-video");
+    if (video) {
+        var url = webkitURL.createObjectURL(stream);
+        log('webrtc - remote-video.src="' + url + '"');
+        video.setAttribute('src', url);
+    }
+};
+
+Phone.prototype.onWebRtcRemoveStream = function() {
+    log("webrtc - onremovestream()");
+    var video = $("html5-remote-video");
+    if (video) {
+        log("webrtc - remote-video.src=null");
+        video.setAttribute('src', null);
+    }
+};
+
 Phone.prototype.hungup = function() {
     if (this._call != null) {
         this._call = null;
     }
-    getFlashMovie("local-video").setProperty("src", null);
-    getFlashMovie("remote-video").setProperty("src", null);
-    if (this._gw != null) {
-        this._gw.close();
-        this._gw = null;
-    }
-    if (this._rtp && this._rtp.length > 0) {
-        for (var i=0; i<this._rtp.length; ++i) {
-            this._rtp[i].close();
+    if (this.network_type == "WebRTC") {
+        var local = $("html5-local-video");
+        if (local) {
+            local.setAttribute('src', null);
         }
-        this._rtp.splice(0, this._rtp.length);
+        var remote = $("html5-remote-video");
+        if (remote) {
+            remote.setAttribute('src', null);
+        }
+        if (this._webrtc_peer_connection) {
+            try {
+                this._webrtc_peer_connection.close();
+            }
+            catch (error) {
+                log("webrtc - error closing peer connection: " + error);
+            }
+            this._webrtc_peer_connection = null;
+        }
+    }
+    else {
+        getFlashMovie("local-video").setProperty("src", null);
+        getFlashMovie("remote-video").setProperty("src", null);
+        if (this._gw != null) {
+            this._gw.close();
+            this._gw = null;
+        }
+        if (this._rtp && this._rtp.length > 0) {
+            for (var i=0; i<this._rtp.length; ++i) {
+                this._rtp[i].close();
+            }
+            this._rtp.splice(0, this._rtp.length);
+        }
     }
     this._local_sdp = null;
     this._remote_sdp = null;
@@ -625,19 +1103,37 @@ Phone.prototype.receivedInviteResponse = function(ua, response) {
             this.hungup();
         }
         else {
-            if (response.hasItem('Content-Type') && response.first('Content-Type').value.toLowerCase() == 'application/sdp') {
-                var answer = new sip.SDP(response.body);
-                this._remote_sdp = answer;
-                this.createMediaConnections();
-                
-                this.setProperty("call_state", "active");
-                this.dispatchMessage('Connected');
+            if (this.network_type == "WebRTC") {
+                if (this._webrtc_peer_connection) {
+                    this.setProperty("call_state", "accepted");
+                    ua.autoack = false; // don't send ACK automatically
+                    var result = this.webrtcSDP2JSON(response);
+                    log("processSignalingMessage(" +  result + ")")
+                    this._webrtc_peer_connection.processSignalingMessage(result);
+                    this.dispatchMessage('Connected');
+                }
+                else {
+                    // failed to get peer-connection
+                    this.setProperty("call_state", "failed");
+                    this.sendBye();
+                    this.dispatchMessage("No peer connection found");
+                }
             }
             else {
-                // failed to get SDP
-                this.dispatchMessage("Missing session description");
-                this.sendBye();
-                this.setProperty("call_state", "failed");
+                if (response.hasItem('Content-Type') && response.first('Content-Type').value.toLowerCase() == 'application/sdp') {
+                    var answer = new sip.SDP(response.body);
+                    this._remote_sdp = answer;
+                    this.createMediaConnections();
+                    
+                    this.setProperty("call_state", "active");
+                    this.dispatchMessage('Connected');
+                }
+                else {
+                    // failed to get SDP
+                    this.dispatchMessage("Missing session description");
+                    this.sendBye();
+                    this.setProperty("call_state", "failed");
+                }
             }
         }
     }
@@ -646,10 +1142,25 @@ Phone.prototype.receivedInviteResponse = function(ua, response) {
             this.dispatchMessage('Progress "' + response.response + ' ' + response.responsetext + '"');
             if (response.response >= 180) {
                 this.setProperty("call_state", "ringback");
+                this.playSound("ringback");
             }
         }
     }
 };
+
+Phone.prototype.receivedAck = function(ua, request) {
+    if (this.network_type == "WebRTC") {
+        this.dispatchMessage('Connected');
+        if (this._webrtc_peer_connection) {
+            var result = this.webrtcSDP2JSON(request);
+            if (result) {
+                log("processSignalingMessage(" + result + ")");
+                this._webrtc_peer_connection.processSignalingMessage(result);
+            }
+        }
+    }
+};
+
 
 Phone.prototype.createMediaConnections = function() {
     log('create media connections');
@@ -686,6 +1197,16 @@ Phone.prototype.createMediaConnections = function() {
     }
 };
 
+Phone.prototype.playSound = function(value) {
+    if (this.enable_sound_alert) {
+        var audio = $("html5-audio");
+        if (audio) {
+            // TODO: use .ogg for chrome/firefox/opera and .mp3 for IE/safari
+            audio.setAttribute('src',(value ? value + ".ogg" : value));
+        }
+    }
+};
+
 Phone.prototype.receivedInvite = function(ua, request) {
     if (this.call_state == "idle") {
         this._call = ua;
@@ -696,10 +1217,12 @@ Phone.prototype.receivedInvite = function(ua, request) {
         this.setProperty("target_value", from.uri.user + '@' + from.uri.host);
         this.dispatchMessage('Incoming call from ' + from.toString());
         ua.sendResponse(ua.createResponse(180, 'Ringing'));
+        this.playSound("ringing");
     }
     else {
         this.dispatchMessage('Missed call from ' + from.toString());
         ua.sendResponse(ua.createResponse(486, 'Busy Here'));
+        this.playSound("alert");
     }
 };
 
@@ -707,7 +1230,12 @@ Phone.prototype.sendInviteResponse = function(code, text) {
     if (this._call) {
         if (code >= 200 && code < 300) {
             this.setProperty("call_state", "accepting");
-            this.createMediaSockets();
+            if (this.network_type == "WebRTC") {
+                this.createWebRtcConnection();
+            }
+            else {
+                this.createMediaSockets();
+            }
         }
         else if (code >= 300) {
             this._call.sendResponse(this._call.createResponse(code, text));
@@ -790,6 +1318,7 @@ Phone.prototype.receivedMessage = function(ua, request) {
     sender = request.first("From").value.getDisplayable();
     if (text && sender) {
         this.dispatchMessage(text, sender);
+        this.playSound("alert");
     }
     
     if (this.call_state == "idle") {
@@ -805,6 +1334,7 @@ Phone.prototype.onSockData = function(event) {
 };
 
 Phone.prototype.onSockError = function(event) {
+    // do not use event to mean Flash Network's event
     this._sock = null;
     this.setProperty("sock_state", "idle");
     this.setProperty("register_state", "not registered");
@@ -813,6 +1343,23 @@ Phone.prototype.onSockError = function(event) {
     this.setProperty("register_button.disabled", true);
     this.setProperty("call_state", "idle");
     this.hungup();
+};
+
+Phone.prototype.onWebSocketOpen = function() {
+    log("websocket connected");
+    this.onSockPropertyChange({"property": "connected", "oldValue": false, "newValue": true});
+};
+
+Phone.prototype.onWebSocketClose = function() {
+    this.onSockPropertyChange({"property": "connected", "oldValue": true, "newValue": false});
+};
+
+Phone.prototype.onWebSocketError = function(error) {
+    this.onSockError({"code": "websocket-error", "reason": error});
+};
+
+Phone.prototype.onWebSocketMessage = function(msg) {
+    this.onSockData({"data": msg.data, "srcPort": 0, "srcAddress": "127.0.0.1"});
 };
 
 Phone.prototype.createServer = function(request, uri, stack) {
@@ -831,6 +1378,9 @@ Phone.prototype.receivedRequest = function(ua, request, stack) {
     }
     else if (method == "MESSAGE") {
         this.receivedMessage(ua, request);
+    }
+    else if (method == "ACK") {
+        this.receivedAck(ua, request);
     }
     else {
         log("ignoring received request method=" + method);
@@ -964,9 +1514,10 @@ Phone.prototype.print = function(content) {
 
 Phone.prototype.toggleControls = function(name) {
     try {
-        var obj = getFlashMovie(name);
-        var controls = obj.getProperty('controls');
-        obj.setProperty('controls', !controls);
+        this.setVideoProperty(name, 'controls', !this.getVideoProperty(name, 'controls'));
+        //var obj = getFlashMovie(name);
+        //var controls = obj.getProperty('controls');
+        //obj.setProperty('controls', !controls);
         return false;
     }
     catch (ex) {
@@ -1012,7 +1563,8 @@ Phone.prototype.help = function(name) {
     }
     else if (name == "flash-network") {
         text = 'This area shows the <a href="http://theintencity.com/flash-network" target="_blank">Flash Network</a> activities including the first time initialization prompts, the authentication prompts and any network status. It also displays the selected local IP address that is used for your phone. For most of the prompts, you will follow the standard Flash Network <a href="http://theintencity.com/flash-network/userguide.html" target="_blank">user guide</a>.<br/><br/>'
-        + 'For changing the selected local IP address, click on the <img src="edit.png"></img> button and enter the new IP address. This must be done before the SIP listening socket is created. The SIP listening socket is created the first time you click on Register or Call button.';
+        + 'For changing the selected local IP address, click on the <img src="edit.png"></img> button and enter the new IP address. This must be done before the SIP listening socket is created. The SIP listening socket is created the first time you click on Register or Call button.<br/><br/>'
+        + 'For trying out the experimental WebRTC technology that uses WebSocket for signaling, click on the change link in the title and confirm the changed launch when prompted. Alternatively, you can use the <tt>?network_type=WebRTC</tt> URL parameter on this page to launch with WebRTC and WebSocket support.' ;
     }
     else if (name == "program-log") {
         text = 'This area displays the debug trace for the software including all the necessary SIP messages that are needed for debugging any problems. To report any issues, please attach your full program log. You can click on the check box <input type="checkbox" checked="checked"/> to toggle the auto-scroll mode of this view. Click on the <img src="print.png"></img> button to print the full program log.';

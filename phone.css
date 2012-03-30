@@ -115,17 +115,17 @@ img.print-img {
 }
 
 select {
-  border: 0;
-  -webkit-appearance: none;
   font-size: 14px;
   background-color: #f0f0f0;
   outline: none;
+  border: 0;
+  -webkit-appearance: none;
+  text-align: right;
+  direction: rtl;
 }
 select.uri-scheme {
   /* width: 28px; */
   width: 62px;
-  text-align: right;
-  direction: rtl;
 }
 input.uri-value {
   width: 154px;
