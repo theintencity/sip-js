@@ -2254,7 +2254,7 @@ if (typeof sip == "undefined") {
         log('request contact ' + request.Contact);
         if (request.hasItem("Contact"))
             d.remoteTarget = new sip.URI(request.first('Contact').value.uri.toString());
-        stack.dialogs[d.id] = d;
+        stack.dialogs[d.getId()] = d;
         return d;
     };
     
@@ -2273,7 +2273,7 @@ if (typeof sip == "undefined") {
         d.remoteParty = new sip.Address(request.getItem("To").value.toString());
         if (response.hasItem("Contact"))
             d.remoteTarget = new sip.URI(response.first('Contact').value.uri.toString());
-        stack.dialogs[d.id] = d;
+        stack.dialogs[d.getId()] = d;
         return d;
     };
     
@@ -2551,9 +2551,12 @@ if (typeof sip == "undefined") {
         if (!t) {
             var app = null;
             if (r.method != 'CANCEL' && r.getItem("To")['tag'] !== undefined) {
+                log("request has To tag");
                 var d = this.findDialog(r);
                 if (!d) {
+                    log("no exiting dialog found");
                     if (r.method != 'ACK') {
+                        log("creating new UAS");
                         var u = this.createServer(r, uri);
                         if (u) {
                             app = u;
@@ -2587,10 +2590,12 @@ if (typeof sip == "undefined") {
                     }
                 }
                 else {
+                    log("found existing dialog");
                     app = d;
                 }
             }
             else if (r.method != 'CANCEL') {
+                log("creating new UAS");
                 var u = this.createServer(r, uri);
                 if (u) { 
                     app = u;
@@ -2607,6 +2612,7 @@ if (typeof sip == "undefined") {
                 }
             }
             else {
+                log("finding original transaction");
                 var o = this.findTransaction(sip.Transaction.createId(r.first('Via')["branch"], 'INVITE'));
                 if (!o) { 
                     this.send(sip.Message.createResponse(481, "Original transaction does not exist", null, null, r));
@@ -2617,20 +2623,24 @@ if (typeof sip == "undefined") {
                 }
             }
             if (app) {
+                log("creating new server transaction");
                 t = app.createTransaction(r) ;
                 if (r.method == 'ACK' && t && this.transactions[t.id] !== undefined) {
                     delete this.transactions[t.id];
                 }
             }
             else if (r.method != 'ACK') {
+                log("could not find any app to handle the request");
                 this.send(Message.createResponse(404, "Not found", null, null, r));
             }
         }
         else {
+            log("found existing transaction");
             if ((t instanceof sip.ServerTransaction) || (t instanceof sip.InviteServerTransaction)) {
                 t.receivedRequest(r);
             }
             else {
+                log("the transaction was not a server transaction");
                 this.send(sip.Message.createResponse(482, 'Loop detected', null, null, r));
             }
         }
