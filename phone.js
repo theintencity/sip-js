@@ -404,8 +404,11 @@ Phone.prototype.end = function() {
         else if (this.call_state == "active" || this.call_state == "accepted" || this.call_state == "accepting") {
             this.sendBye();
         }
-        else if (this.call_state != "failed" && this.call_state != "closed") {
-            log("ignoring end in " + this.call_state + " state");
+        else {
+            if (this.call_state != "failed" && this.call_state != "closed") {
+                log("ignoring end in " + this.call_state + " state");
+            }
+            this.hungup();
         }
         this.setProperty("call_button.disabled", false);
         this.setProperty("end_button.disabled", true);
