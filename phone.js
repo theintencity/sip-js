@@ -117,6 +117,8 @@ Phone.prototype.populate = function() {
                 param = (typeof param == "number" ? param : parseInt(param));
             else if (typeof this[attr] == "boolean")
                 param = (typeof param == "boolean" ? param : (param != "false" ? true : false));
+            else
+                param = unescape(param);
             if (def == param)
                 this.dispatchEvent({"type": "propertyChange", "property": attr, "newValue": param});
             else
@@ -218,15 +220,6 @@ Phone.prototype.setProperty = function(name, value) {
         else if (name == "target_value") {
             this.setProperty("target_aor", this.target_scheme + ":" + this.target_value);
         }
-        else if (name == "has_location") {
-            if (value) {
-                var location = prompt("Enter your civic location or geodatic co-ordinates\nFor example,  \"40.8097 -73.9608\" or\n\"660 King Street, Unit 252, San Francisco, CA 94118\"");
-                if (!location)
-                    this.setProperty("has_location", false);
-                else
-                    this.setProperty("location", location);
-            }
-        }
         else if (name == "network_type") {
             if (value == "Flash" && this.transport == "ws") {
                 this.setProperty("transport", "udp");
@@ -297,7 +290,7 @@ Phone.prototype.enableBox = function(name, enable) {
     else if (name == 'network')
         inputs = ["listen_ip", "network_type", "websocket_path", "enable_sound_alert"];
     else if (name == 'call')
-        inputs = ['has_audio', 'has_video'];
+        inputs = ['has_audio', 'has_video', 'has_location'];
         // inputs = ['has_audio', 'has_tones', 'has_video', 'has_text', 'has_location']; // TODO: eventually use this
     
     for (var i=0; i<inputs.length; ++i) {
@@ -825,8 +818,17 @@ Phone.prototype.createdMediaSockets = function() {
             m.setItem('Contact', c);
             if (this.user_agent)
                 m.setItem('User-Agent', new sip.Header(this.user_agent, 'User-Agent'));
-            m.setItem('Content-Type', new sip.Header('application/sdp', 'Content-Type'));
-            m.setBody(this._local_sdp.toString());
+                
+            if (this.has_location && this.location) {
+                var xml = this.locationToXML(this.location, this.target_value);
+                var multipart = this.createMultipartBody('application/sdp', this._local_sdp.toString(), 'application/pidf+xml', xml);
+                m.setItem('Content-Type', new sip.Header('multipart/mixed; boundary="' + multipart[0] + '"', 'Content-Type'));
+                m.setBody(multipart[1]);
+            }
+            else {
+                m.setItem('Content-Type', new sip.Header('application/sdp', 'Content-Type'));
+                m.setBody(this._local_sdp.toString());
+            }
         
             this._call.sendRequest(m);
         }
@@ -1557,6 +1559,54 @@ Phone.prototype.sendText = function(text) {
             this.sendMessage(text);
         }
     }
+};
+
+Phone.prototype.setLocation = function() {
+    var location = prompt("Enter your civic location or geodatic co-ordinates\nFor example,  \"40.8097 -73.9608\" or\n\"A1=US,A2=CA,A3=San Francisco,HNO=542,RD=5th,STS=Ave\"");
+    this.setProperty("location", location);
+};
+
+Phone.prototype.locationToXML = function(location, userhost) {
+    var geo = /^([\d\.\-]+)\s+([\d\.\-]+)(\s+([\d\.]+))?$/;
+    var match = location.match(geo);
+    var result = null;
+    if (match) {
+        var latitude = match[1], longitude = match[2], radius = match[4];
+        if (radius) {
+            result = '<location id="location0" profile="geodetic-2d"><Circle id="point0" xmlns="http://www.opengis.net/pidflo/1.0" srsName="urn:ogc:def:crs:EPSG::4326"><pos xmlns="http://www.opengis.net/gml">' + latitude + ' ' + longitude + '</pos><radius  uom="urn:ogc:def:uom:EPSG::9001">' + radius + '</radius></Circle></location>';
+        }
+        else {
+            result = '<location id="location0" profile="geodetic-2d"><Point id="point0" xmlns="http://www.opengis.net/gml" srsName="urn:ogc:def:crs:EPSG::4326"><pos>' + latitude + ' ' + longitude + '</pos><radius uom="urn:ogc:def:uom:EPSG::9001">' + radius + '</radius></Point></location>';
+        }
+    }
+    else {
+        var parts = location.split(',');
+        var attrs = [];
+        for (var i=0; i<parts.length; ++i) {
+            var part = parts[i];
+            var index = part.indexOf('=');
+            if (index > 0) {
+                var aname = part.substr(0, index), avalue = part.substr(index+1);
+                attrs.push('<' + aname + '>' + avalue + '</' + aname + '>');
+            }
+        }
+        result = '<location id="location0" profile="civic"><civicAddress xmlns="urn:ietf:params:xml:ns:pidf:geopriv10:civicAddr">' + attrs.join('') + '</civicAddress></location>';
+    }
+    
+    return '<presence entity="pres:' + userhost + '" xmlns="urn:ietf:params:xml:ns:pidf"><tuple><status><geopriv xmlns="urn:ietf:params:xml:ns:pidf:geopriv10"><location-info>' + result + '</location-info></geopriv></status></tuple></presence>';
+};
+
+// must have even number of arguments: type, content, type, content, ...
+Phone.prototype.createMultipartBody = function() {
+    var boundary = "boundary-" + Math.floor(Math.random() * 1000000000);
+    var parts = [];
+    for (var i=0; i<arguments.length; i+=2) {
+        var type = arguments[i];
+        var content = arguments[i+1];
+        parts.push('Content-Type: ' + type + '\r\n\r\n' + content);
+    }
+    var multipart = '--' + boundary + '\r\n' + parts.join('\r\n--' + boundary + '\r\n') + '\r\n--' + boundary + '--';
+    return [boundary, multipart];
 };
 
 Phone.prototype.print = function(content) {

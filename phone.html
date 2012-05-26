@@ -229,7 +229,8 @@
                     onclick="phone.setProperty('has_text', $('has_text').checked)"></input>Text<br/>
                 <input type="checkbox" class="checkbox" id="has_location" disabled="disabled"
                     title="Caller location for emergency calls"
-                    onclick="phone.setProperty('has_location', $('has_location').checked)"></input>Location<br/>
+                    onclick="phone.setProperty('has_location', $('has_location').checked)"></input>
+                    <span title="Set your location" onclick="phone.setLocation()">Location<br/>
             </div>
             <div style="position: absolute; left: 6px; bottom: 6px;">
                 <span id="call_state">idle</span>
