@@ -710,12 +710,12 @@ if (typeof sip == "undefined") {
         this.value = this._parse(sip.str_strip(value), this.name ? this.name.toLowerCase() : null);
     }
     
-    Header.prototype._parseParams = function(params, unquote) {
+    Header.prototype._parseParams = function(params, delimiter, unquote) {
         try {
             var length = params.length, index = 0;
             while (index < length) {
                 var sep1 = params.indexOf('=', index);
-                var sep2 = params.indexOf(';', index);
+                var sep2 = params.indexOf(delimiter, index);
                 if (sep2 < 0) {
                     sep2 = length;
                 }
@@ -724,10 +724,16 @@ if (typeof sip == "undefined") {
                     var n = sip.str_strip(params.substring(index, sep1).toLowerCase());
                     if (params.charAt(sep1+1) == '"') {
                         sep1 += 1;
-                        sep2 = params.indexOf('"', sep1+2);
+                        sep2 = params.indexOf('"', sep1+1);
                     }
-                    v = sip.str_strip(params.substring(sep1+1, sep2));
-                    index = sep2 + 1;
+                    if (sep2 >= 0) {
+                        v = sip.str_strip(params.substring(sep1+1, sep2));
+                        index = sep2 + 1;
+                    }
+                    else {
+                        v = sip.str_strip(params.substring(sep1+1));
+                        index = length;
+                    }
                 }
                 else if (sep1 < 0 || sep1 >= 0 && sep1 > sep2) {
                     n = sip.str_strip(params.substring(index, sep2).toLowerCase());
@@ -769,7 +775,7 @@ if (typeof sip == "undefined") {
             var rest = value.substr(count);
             value = addr;
             if (rest) {
-                this._parseParams(rest, false);
+                this._parseParams(rest, ';', false);
             }
         }
         else if (sip._comma.indexOf(name) < 0 && sip._unstructured.indexOf(name) < 0) {
@@ -777,7 +783,7 @@ if (typeof sip == "undefined") {
             value = vsr[0];
             var rest = vsr[2];
             if (rest) {
-                this._parseParams(rest, false);
+                this._parseParams(rest, ';', false);
             }
         }
         else if (sip._comma.indexOf(name) >= 0) {
@@ -785,7 +791,7 @@ if (typeof sip == "undefined") {
             this.authMethod = asr[0];
             var rest = asr[2];
             if (rest) {
-                this._parseParams(rest, true);
+                this._parseParams(rest, ',', true);
             }
         }
         else if (name == 'cseq') {
