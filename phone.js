@@ -638,9 +638,17 @@ Phone.prototype.setVideoProperty = function(videoname, attr, value) {
                     log("local-stream=" + (this._webrtc_local_stream === null));
                     if (this._webrtc_local_stream == null) {
                         var phone = this;
-                        navigator.webkitGetUserMedia("video,audio",
-                            function(stream) { phone.onUserMediaSuccess(stream); },
-                            function(error) { phone.onUserMediaError(error); });
+                        try {
+                            navigator.webkitGetUserMedia({"video": true, "audio": true},
+                                function(stream) { phone.onUserMediaSuccess(stream); },
+                                function(error) { phone.onUserMediaError(error); });
+                        }
+                        catch (e) {
+                            // try older style
+                            navigator.webkitGetUserMedia("video,audio",
+                                function(stream) { phone.onUserMediaSuccess(stream); },
+                                function(error) { phone.onUserMediaError(error); });
+                        }
                     }
                     else {
                         this.onUserMediaSuccess(this._webrtc_local_stream);
