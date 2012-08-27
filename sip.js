@@ -1438,7 +1438,7 @@ if (typeof sip == "undefined") {
         var a = t.getItem("To").value.uri.equals(r.getItem("To").value.uri);
         a = a && t.getItem("From").value.uri.equals(r.getItem("From").value.uri);
         a = a && (t.getItem("Call-ID").value == r.getItem("Call-ID").value);
-        a = a && (r.getItem("CSeq").value == r.getItem("CSeq").value);
+        a = a && (t.getItem("CSeq").value == r.getItem("CSeq").value);
         a = a && (t.getItem("From").tag == r.getItem("From").tag);
         a = a && (t2.server == t1.server);
         return a;
