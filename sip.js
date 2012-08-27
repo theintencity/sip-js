@@ -546,7 +546,7 @@ if (typeof sip == "undefined") {
     URI.prototype.toString = function() {
         var user = this.scheme == 'tel' ? null : this.user;
         var host = this.scheme == 'tel' ? this.user : this.host;
-        var params = sip.map(function(x) { return x[1] !== null ? x[0] + '=' + x[1] : x[0];}, sip.dict_items(this.param)).join(';');
+        var params = sip.map(function(x) { return x[1] !== null ? x[0] + '=' + x[1] : x[0];}, sip.dict_items(this.param).sort(function(a, b) { return a[0] == b[0] ? 0 : (a[0] < b[0] ? -1: 1)})).join(';');
         return this.scheme && host ? (this.scheme + ':' + (user ? (user + 
           (this.password ? (':'+this.password) : '') + '@') : '') + 
           (host ? ((host ? host : '') + (this.port ? (':'+this.port) : '')) : '') + 
@@ -1592,7 +1592,7 @@ if (typeof sip == "undefined") {
         this.sendResponse = function(response) {
             this.lastResponse = response;
             if (response.is1xx()) {
-                if (this.state == 'trying' || this.state == 'proceedings') {
+                if (this.state == 'trying' || this.state == 'proceeding') {
                     this.state = 'proceeding';
                     this.stack.send(response, this.remote, this.transport);
                 }
@@ -1979,7 +1979,6 @@ if (typeof sip == "undefined") {
         }
         var target = new sip.URI(this.remoteCandiates.shift());
         this.request.first('Via').branch += 'A'
-        //TODO: this is a bug in rfc3261.py that it should use self.transaction instead of just transaction
         this.transaction = sip.Transaction.createClient(this.stack, this, this.request, this.stack.transport, target.getHostPort());
     };
     
@@ -2361,7 +2360,6 @@ if (typeof sip == "undefined") {
         }
         this.remoteSeq = request.getItem("CSeq").number;
         
-        //TODO bug in original code, Contect instead of Contact
         if (request.method == 'INVITE' && request.hasItem("Contact"))
             this.remoteTarget = request.first('Contact').value.uri.dup();
         
@@ -2448,7 +2446,6 @@ if (typeof sip == "undefined") {
 
     Stack.prototype.send = function(data, dest, transport) {
         if (dest && (dest instanceof sip.URI)) {
-            //TODO: bug in original code, don't use dest.uri.host but use dest.host.
             if (!dest.host)
                 throw new String('No host in destination uri');
             dest = [dest.host, dest.port || (this.transport.type == 'tls' || this.transport.secure ? 5061 : 5060)];
@@ -2667,7 +2664,6 @@ if (typeof sip == "undefined") {
                     d.receivedResponse(null, r);
             }
             else {
-                // TODO: bug in original, don't print the full transaction list, which may be huge.
                 log('transaction id ' + sip.Transaction.createId(branch, method) + ' not found');
                 if (method == 'INVITE' && r.isfinal()) {
                     var m = sip.Message.createRequest('ACK', r.getItem('To').value.uri.toString());
@@ -2902,7 +2898,6 @@ if (typeof sip == "undefined") {
         else
             A2 = httpMethod + ':' + uri.toString() + ':' + H(entityBody && entityBody.toString() || "");
         if (qop && (qop == 'auth' || qop == 'auth-int')) {
-            var a = nonce + ':' + nc.toString() + ':' + cnonce + ':' + qop + ':' + A2;
             return sip._quote(KD(H(A1), nonce + ':' + nc.toString() + ':' + cnonce + ':' + qop + ':' + H(A2)));
         }
         else {
