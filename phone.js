@@ -130,7 +130,7 @@ Phone.prototype.populate = function() {
 Phone.prototype.detectHTML5 = function() {
     this.setProperty("has_html5_websocket", typeof WebSocket != "undefined");
     this.setProperty("has_html5_video", !!document.createElement('video').canPlayType);
-    this.setProperty("has_html5_webrtc", typeof navigator.webkitGetUserMedia != "undefined");
+    this.setProperty("has_html5_webrtc", typeof navigator.webkitGetUserMedia != "undefined" && typeof webkitDeprecatedPeerConnection != "undefined");
     log("detecting HTML support websocket=" + this.has_html5_websocket + " video=" + this.has_html5_video + " webrtc=" + this.has_html5_webrtc);
     if (!this.has_html5_websocket || !this.has_html5_video || !this.has_html5_webrtc) {
         $("webrtc-network").innerHTML += '<font color="red">Some HTML5 features are missing in your browser</font>';
@@ -142,6 +142,7 @@ Phone.prototype.detectHTML5 = function() {
         this.enableButtons(true);
         this.enableBox('config', true);
         $("websocket_path").value = this.websocket_path;
+        $("webrtc_stun").value = this.webrtc_stun;
         $("listen_ip").style.visibility = "hidden";
         
         this.listen_ip = 'r' + Math.floor(Math.random() * 10000000000) + ".invalid";
@@ -288,7 +289,7 @@ Phone.prototype.enableBox = function(name, enable) {
         inputs = ["outbound_target", "outbound_proxy", "outbound_proxy_address", "register_interval", "local_aor"];
         //inputs = ["outbound_domain", "outbound_target", "outbound_proxy", "outbound_proxy_address", "register_interval", "rport", "sipoutbound", "local_aor"];
     else if (name == 'network')
-        inputs = ["listen_ip", "network_type", "websocket_path", "enable_sound_alert"];
+        inputs = ["listen_ip", "network_type", "websocket_path", "enable_sound_alert", "webrtc_stun"];
     else if (name == 'call')
         inputs = ['has_audio', 'has_video', 'has_location'];
         // inputs = ['has_audio', 'has_tones', 'has_video', 'has_text', 'has_location']; // TODO: eventually use this

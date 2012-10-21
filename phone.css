@@ -30,6 +30,9 @@ a {
 input {
   outline: none;
 }
+input.text {
+    height: 19px;
+}
 input.text[disabled] {
   background-color: #f0f0f0;
 }

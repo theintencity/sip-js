@@ -325,6 +325,11 @@
             <input type="checkbox" id="enable_sound_alert" disabled="disabled"
                 title="enable or disable sound alert for text messages and call"
                 onclick="phone.setProperty('enable_sound_alert', $('enable_sound_alert').checked)" />Alert
+            <br/>
+            Config:
+            <input type="text" class="text" id="webrtc_stun" style="width: 130px;" disabled="disabled"
+                title="peer connection configuration"
+                onkeyup="setTimeout(phone.setProperty('webrtc_stun', $('webrtc_stun').value),100)"/>
             <br/><br/>
             Detecting HTML5 support:
             <ol style="margin-top: 0px; margin-bottom: 0px;">
