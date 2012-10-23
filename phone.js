@@ -101,7 +101,8 @@ function Phone() {
     this._webrtc_local_stream = null;
     this._webrtc_peer_connection = null;
     this.enable_sound_alert = false;
-    this.webrtc_stun = "STUN stun.l.google.com:19302";
+    this.webrtc_servers = "stun://stun.l.google.com:19302"; // comma separated list, each item is either "url" or "url|credential"
+    this._sdp_timeout = 500; // 0.5s after calling createOffer or createAnswer, use the SDP
     
     // SIP requirements for websocket
     this._instance_id = "";
@@ -130,7 +131,7 @@ Phone.prototype.populate = function() {
 Phone.prototype.detectHTML5 = function() {
     this.setProperty("has_html5_websocket", typeof WebSocket != "undefined");
     this.setProperty("has_html5_video", !!document.createElement('video').canPlayType);
-    this.setProperty("has_html5_webrtc", typeof navigator.webkitGetUserMedia != "undefined" && typeof webkitDeprecatedPeerConnection != "undefined");
+    this.setProperty("has_html5_webrtc", typeof navigator.webkitGetUserMedia != "undefined" && typeof webkitRTCPeerConnection != "undefined");
     log("detecting HTML support websocket=" + this.has_html5_websocket + " video=" + this.has_html5_video + " webrtc=" + this.has_html5_webrtc);
     if (!this.has_html5_websocket || !this.has_html5_video || !this.has_html5_webrtc) {
         $("webrtc-network").innerHTML += '<font color="red">Some HTML5 features are missing in your browser</font>';
@@ -142,7 +143,7 @@ Phone.prototype.detectHTML5 = function() {
         this.enableButtons(true);
         this.enableBox('config', true);
         $("websocket_path").value = this.websocket_path;
-        $("webrtc_stun").value = this.webrtc_stun;
+        $("webrtc_servers").value = this.webrtc_servers;
         $("listen_ip").style.visibility = "hidden";
         
         this.listen_ip = 'r' + Math.floor(Math.random() * 10000000000) + ".invalid";
@@ -289,7 +290,7 @@ Phone.prototype.enableBox = function(name, enable) {
         inputs = ["outbound_target", "outbound_proxy", "outbound_proxy_address", "register_interval", "local_aor"];
         //inputs = ["outbound_domain", "outbound_target", "outbound_proxy", "outbound_proxy_address", "register_interval", "rport", "sipoutbound", "local_aor"];
     else if (name == 'network')
-        inputs = ["listen_ip", "network_type", "websocket_path", "enable_sound_alert", "webrtc_stun"];
+        inputs = ["listen_ip", "network_type", "websocket_path", "enable_sound_alert", "webrtc_servers"];
     else if (name == 'call')
         inputs = ['has_audio', 'has_video', 'has_location'];
         // inputs = ['has_audio', 'has_tones', 'has_video', 'has_text', 'has_location']; // TODO: eventually use this
@@ -913,101 +914,68 @@ Phone.prototype.createWebRtcConnection = function() {
     }
 };
 
+Phone.prototype.getIceServers = function() {
+    var parts = this.webrtc_servers.split(","); // comma separated list
+    var result = [];
+    for (var i=0; i<parts.length; ++i) {
+        var part = parts[i];
+        if (part) {
+            var index = part.indexOf("|");
+            if (index < 0)
+                result.push({url: part});
+            else
+                result.push({url: part.substr(0, index), credential: part.substr(index+1)});
+        }
+    }
+    return result;
+};
+
+// extract SDP from the SIP message
+Phone.prototype.getSDP = function(message) {
+    var type = message.hasItem("Content-Type") ? message.first("Content-Type").value : null;
+    return (type == "application/sdp" || message.body) ? message.body : null;
+};
+
 Phone.prototype.createdWebRtcLocalStream = function() {
     var phone = this;
-    this._webrtc_peer_connection = new webkitDeprecatedPeerConnection(this.webrtc_stun, function(message) { phone.onWebRtcSendMessage(message); });
+    this._webrtc_peer_connection = new webkitRTCPeerConnection({iceServers: this.getIceServers()}, null);
     this._webrtc_peer_connection.onconnecting = function(message) { phone.onWebRtcConnecting(message); };
     this._webrtc_peer_connection.onopen = function(message) { phone.onWebRtcOpen(message) };
     this._webrtc_peer_connection.onaddstream = function(event) { phone.onWebRtcAddStream(event.stream); };
     this._webrtc_peer_connection.onremovestream = function(event) { phone.onWebRtcRemoveStream(); };
+    //we use timeout instead of onicecandidate event handler
+    //this._webrtc_peer_connection.onicecandidate = function(event) { console.log(event.candidate);};
     if (this.call_state == "accepting" && this._call != null && this._call.request != null) {
-        var result = this.webrtcSDP2JSON(this._call.request);
+        var result = this.getSDP(this._call.request);
         if (result) {
-            log("webrtc - processSignalingMessage(" + result.replace(/\n/g, '\\n').substr(0, 40) + "...)");
-            this._webrtc_peer_connection.processSignalingMessage(result);
+            this._webrtc_peer_connection.setRemoteDescription(new RTCSessionDescription({type: "offer", sdp: result}));
         }
     }
     if (this._webrtc_local_stream != null) {
         this._webrtc_peer_connection.addStream(this._webrtc_local_stream);
     }
-};
-
-Phone.prototype.webrtcJSON2SDP = function(message, m) {
-    // convert from Chrome's message to SDP and X-WebRtc headers
-    var header = null, type = null, body = null;
-    
-    log("webrtc - JSON to SIP/SDP")
-    if (message.substr(0, 3) == "SDP") {
-        var json = JSON.parse(message.substr(4));
-        for (var attr in json) {
-            if (attr == "sdp") {
-                var sdp = json[attr];
-                body = sdp.replace(/\\r\\n/g, "\r\n");
-                type = "application/sdp";
-            }
-            else {
-                if (header == null)
-                    header = {};
-                header[attr] = json[attr];
-            }
-        }
-    }
-    else {
-        type = "application/x-webrtc";
-        body = sip.b64_encode(message);
-    }
-    if (header) {
-        var value = sip.b64_encode(JSON.stringify(header));
-        m.setItem('X-Webrtc', new sip.Header(value, 'X-Webrtc'));
-    }
-    if (type && body) {
-        m.setItem('Content-Type', new sip.Header(type, 'Content-Type'));
-        m.setBody(body);
-    }
-};    
-
-Phone.prototype.webrtcSDP2JSON = function(message) {
-    try {
-        log("webrtc - SIP/SDP to JSON");
-        var contentType = message.hasItem('Content-Type') ? message.first('Content-Type').value : null;
-        var body = message.body;
-        if (contentType == "application/x-webrtc") {
-            body = sip.b64_decode(body);
-            log("webrtc - found " + body);
-            return body;
-        }
-        else if (contentType == "application/sdp" || contentType == null) {
-            if (message.hasItem('X-Webrtc')) {
-                var obj = JSON.parse(sip.b64_decode(message.first('X-Webrtc').value));
-                if (contentType == "application/sdp" && body) {
-                    obj.sdp = body; // body.replace(/\r\n/g, '\r\n')
-                }
-                var result = "SDP\n" + JSON.stringify(obj, null, "   ") + "\n";
-                //var result = 'SDP\n{\n   "messageType" : "' + obj.messageType + '",\n   "offererSessionId" : "' + obj.offererSessionId
-                //    + '",\n   "sdp" : "' + obj.sdp.replace(/\r\n/g, '\\r\\n') + '",\n   "seq" : ' + obj.seq + ',\n   "tieBreaker" : ' + obj.tieBreaker + '\n}\n';
-                log("webrtc - parsed to " + result.replace(/\n/g, '\\n').substr(0, 4) + "... hash=" + sip.MD5(result));
-                return result;
-            }
-            else {
-                return null;
-            }
-        }
-    }
-    catch (error) {
-        log("webrtc - extracting from message failed: " + error);
-    }
-    return null;
-};
-
-Phone.prototype.onWebRtcSendMessage = function(message) {
-    log("webrtc - send message (" + message.replace(/\n/g, '\\n').substr(0, 40) + "...) hash=" + sip.MD5(message));
     
     if (this.call_state == "inviting") {
-        this._local_sdp = message;
-        
-        // check the translation
-        // this.testJSON2SDP(message);
-    
+        this._webrtc_peer_connection.createOffer(function(offer) {
+            phone._webrtc_peer_connection.setLocalDescription(offer);
+            setTimeout(function() {
+                phone.onWebRtcSendMessage();
+            }, phone._sdp_timeout);
+        });
+    }
+    else if (this.call_state == "accepting") {
+        this._webrtc_peer_connection.createAnswer(function(offer) {
+            phone._webrtc_peer_connection.setLocalDescription(offer);
+            setTimeout(function() {
+                phone.onWebRtcSendMessage();
+            }, phone._sdp_timeout);
+        });
+    }
+};
+
+Phone.prototype.onWebRtcSendMessage = function() {
+    if (this.call_state == "inviting") {
+        this._local_sdp = this._webrtc_peer_connection.localDescription.sdp;
         var m = this._call.createRequest('INVITE');
         //var c = new sip.Header(this._stack.uri.toString(), 'Contact');
         //c.value.uri.user = this.username;
@@ -1015,18 +983,12 @@ Phone.prototype.onWebRtcSendMessage = function(message) {
         m.setItem('Contact', c);
         if (this.user_agent)
             m.setItem('User-Agent', new sip.Header(this.user_agent, 'User-Agent'));
-        this.webrtcJSON2SDP(message, m);
-        this._call.sendRequest(m);
-    }
-    else if (this.call_state == "accepted") {
-        // send in ACK is possible, otherwise re-INVITE.
-        this.setProperty('call_state', 'active');
-        var m = this._call.createRequest('ACK');
-        this.webrtcJSON2SDP(message, m);
+        m.setItem('Content-Type', new sip.Header("application/sdp", 'Content-Type'));
+        m.setBody(this._local_sdp);
         this._call.sendRequest(m);
     }
     else if (this.call_state == "accepting") {
-        this._local_sdp = message;
+        this._local_sdp = this._webrtc_peer_connection.localDescription.sdp;
         var ua = this._call;
         
         this.setProperty('call_state', 'active');
@@ -1038,11 +1000,14 @@ Phone.prototype.onWebRtcSendMessage = function(message) {
         m.setItem('Contact', c);
         if (this.server)
             m.setItem('Server', new sip.Header(this.server, 'Server'));
-            
-        this.webrtcJSON2SDP(message, m);
+        m.setItem('Content-Type', new sip.Header("application/sdp", 'Content-Type'));
+        m.setBody(this._local_sdp);
+        
         this._call.sendResponse(m);
     }
     else if (this.call_state == "active") {
+        this._local_sdp = this._webrtc_peer_connection.localDescription.sdp;
+        
         // need to send re-INVITE with new SDP
         var ua = this._call;
         
@@ -1053,7 +1018,8 @@ Phone.prototype.onWebRtcSendMessage = function(message) {
         m.setItem('Contact', c);
         if (this.user_agent)
             m.setItem('User-Agent', new sip.Header(this.user_agent, 'User-Agent'));
-        this.webrtcJSON2SDP(message, m);
+        m.setItem('Content-Type', new sip.Header("application/sdp", 'Content-Type'));
+        m.setBody(this._local_sdp);
         this._call.sendRequest(m);
     }
     else {
@@ -1147,19 +1113,15 @@ Phone.prototype.receivedInviteResponse = function(ua, response) {
         else {
             if (this.network_type == "WebRTC") {
                 if (this._webrtc_peer_connection) {
+                    ua.autoack = true;
                     if (this.call_state == "inviting" || this.call_state == "ringback") {
-                        this.setProperty("call_state", "accepted");
-                        ua.autoack = false; // don't send ACK automatically
+                        this.setProperty("call_state", "active");
                         this.dispatchMessage('Connected');
                         
-                        var result = this.webrtcSDP2JSON(response);
+                        var result = this.getSDP(response);
                         if (result) {
-                            log("webrtc - processSignalingMessage(" + result.replace(/\n/g, '\\n').substr(0, 40) + "...)");
-                            this._webrtc_peer_connection.processSignalingMessage(result);
+                            this._webrtc_peer_connection.setRemoteDescription(new RTCSessionDescription({type: "answer", sdp: result}));
                         }
-                    }
-                    else {
-                        ua.autoack = true;
                     }
                 }
                 else {
@@ -1203,11 +1165,7 @@ Phone.prototype.receivedInviteResponse = function(ua, response) {
 Phone.prototype.receivedAck = function(ua, request) {
     if (this.network_type == "WebRTC") {
         if (this._webrtc_peer_connection) {
-            var result = this.webrtcSDP2JSON(request);
-            if (result) {
-                log("webrtc - processSignalingMessage(" + result.replace(/\n/g, '\\n').substr(0, 40) + "...)");
-                this._webrtc_peer_connection.processSignalingMessage(result);
-            }
+            // do not handle SDP in ACK
         }
     }
 };
@@ -1283,10 +1241,9 @@ Phone.prototype.receivedInvite = function(ua, request) {
         this._call.sendResponse(m);
         
         if (this._webrtc_peer_connection) {
-            var result = this.webrtcSDP2JSON(request);
+            var result = this.getSDP(request);
             if (result) {
-                log("webrtc - processSignalingMessage(" + result.replace(/\n/g, '\\n').substr(0, 40) + "...)");
-                this._webrtc_peer_connection.processSignalingMessage(result);
+                this._webrtc_peer_connection.setRemoteDescription(new RTCSessionDescription({type: "offer", sdp: result}));
             }
         }
     }
@@ -1685,7 +1642,7 @@ Phone.prototype.help = function(name) {
     else if (name == "flash-network") {
         text = 'This area shows the <a href="http://theintencity.com/flash-network" target="_blank">Flash Network</a> activities including the first time initialization prompts, the authentication prompts and any network status. It also displays the selected local IP address that is used for your phone. For most of the prompts, you will follow the standard Flash Network <a href="http://theintencity.com/flash-network/userguide.html" target="_blank">user guide</a>.<br/><br/>'
         + 'For changing the selected local IP address, click on the <img src="edit.png"></img> button and enter the new IP address. This must be done before the SIP listening socket is created. The SIP listening socket is created the first time you click on Register or Call button.<br/><br/>'
-        + 'For trying out the experimental WebRTC technology that uses WebSocket for signaling, click on the change link in the title and confirm the changed launch when prompted. Alternatively, you can use the <tt>?network_type=WebRTC</tt> URL parameter on this page to launch with WebRTC and WebSocket support.' ;
+        + 'For trying out the experimental WebRTC technology that uses WebSocket for signaling, click on the change link in the title and confirm the changed launch when prompted. Alternatively, you can use the <tt>?network_type=WebRTC</tt> URL parameter on this page to launch with WebRTC and WebSocket support. In the WebRTC mode it connects using WebSocket for signaling and WebRTC for media path. You can change the WebSocket URL\' path and WebRTC peer connection\' configuration in this box. The configuration is a optional comma separated list of STUN or TURN servers with optional credentials, e.g., "stun://host1,turn://host2|mypass"' ;
     }
     else if (name == "program-log") {
         text = 'This area displays the debug trace for the software including all the necessary SIP messages that are needed for debugging any problems. To report any issues, please attach your full program log. You can click on the check box <input type="checkbox" checked="checked"/> to toggle the auto-scroll mode of this view. Click on the <img src="print.png"></img> button to print the full program log.';
