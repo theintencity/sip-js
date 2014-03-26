@@ -482,7 +482,7 @@ if (typeof sip == "undefined") {
     
     sip._testURI = function() {
         assert((new sip.URI("sip:kundan@example.net")).toString() == "sip:kundan@example.net", 'URI("sip:kundan@example.net")');
-        assert((new sip.URI("sip:kundan:passwd@example.net:5060;transport=udp;lr?name=value&another=another")).toString() == "sip:kundan:passwd@example.net:5060;transport=udp;lr?name=value&another=another", 'URI("sip:kundan:passwd@example.net:5060;transport=udp;lr?name=value&another=another")');
+        assert((new sip.URI("sip:kundan:passwd@example.net:5060;transport=udp;lr?name=value&another=another")).toString() == "sip:kundan:passwd@example.net:5060;transport=udp;lr?name=value&another=another" || (new sip.URI("sip:kundan:passwd@example.net:5060;transport=udp;lr?name=value&another=another")).toString() == "sip:kundan:passwd@example.net:5060;lr;transport=udp?name=value&another=another", 'URI("sip:kundan:passwd@example.net:5060;transport=udp;lr?name=value&another=another")');
         assert((new sip.URI("sip:192.1.2.3:5060")).toString() == "sip:192.1.2.3:5060", 'URI("sip:192.1.2.3:5060")');
         assert((new sip.URI("sip:kundan@example.net")).equals(new sip.URI("sip:Kundan@Example.NET")), 'URI("sip:kundan@example.net").equals(URI("sip:Kundan@Example.NET"))');
         assert((new sip.URI()).toString() == "", 'URI() empty');
@@ -919,7 +919,24 @@ if (typeof sip == "undefined") {
             "CSeq: 1 INVITE\r\n" +
             "Content-Length: 10\r\n" +
             "\r\nsomebody\r\n";
-        assert((new sip.Message(t1)).toString() == t1, "Message(t1)")
+        assert((new sip.Message(t1)).toString() == t1, "Message(t1)");
+        var t2 =
+            'SIP/2.0 401 Unauthorized\r\n' +
+            'Via: SIP/2.0/UDP 10.146.71.152:2387;rport;branch=z9hG4bKYmUyZGI0;received=10.146.71.152\r\n' +
+            'From: "tsdev02" <sip:tsdev02@172.16.2.171:5060>;tag=18281779052185579848\r\n' +
+            'To: "tsdev02" <sip:tsdev02@172.16.2.171:5060>;tag=sipproxy137.696619428.11870406616\r\n' +
+            'Call-ID: 7471771271@10.146.71.152\r\n' + 
+            'CSeq: 1 REGISTER\r\n' +
+            'WWW-Authenticate: Digest realm="example.com",\r\n' + 
+            '    domain="example.com",\r\n' +
+            '    nonce="a8a353b0baa009f5a7b5d5d07f3f3e0c",\r\n' + 
+            '    stale=TRUE,\r\n' +
+            '    algorithm=MD5,\r\n' +
+            '    qop="auth"\r\n' + 
+            'Expires: 3600\r\n' +
+            'Date: 26 Mar 2014 01:24:11 GMT\r\n' +
+            'Content-Length: 0\r\n\r\n';
+        assert((new sip.Message(t2).toString()) == t2.replace(/\r\n\ \ \ \ /g, "    "), "Message(t2)");
     };
     
     function Message(value) {
@@ -962,7 +979,7 @@ if (typeof sip == "undefined") {
         var indexCRLFCRLF = value.indexOf("\r\n\r\n");
         var indexLFLF = value.indexOf("\n\n");
         var firstheaders, body;
-        if (indexCRLFCRLF >=0 && indexLFLF >= 0) {
+        if (indexCRLFCRLF >= 0 && indexLFLF >= 0) {
             // use lower value
             if (indexCRLFCRLF < indexLFLF)
                 indexLFLF = -1;
@@ -995,6 +1012,9 @@ if (typeof sip == "undefined") {
             firstline = firstheaders.substr(0, indexLF);
             headers = firstheaders.substr(indexLF+1);
         }
+        else {
+            throw new String("no first line found");
+        }
         
         var parts = firstline.split(" ");
         if (parts.length < 3) {
@@ -1016,14 +1036,24 @@ if (typeof sip == "undefined") {
         }
         
         parts = headers.split("\n");
+        var hlist = [];
         for (var i=0; i<parts.length; ++i) {
             var h = parts[i];
-            if (h && h.charAt(h.length-1) == "\r") {
+            if (h && h.charAt(h.length-1) == '\r') {
                 h = h.substr(0, h.length-1);
             }
-            if (h.charAt(0) == " " || h.charAt(0) == "\t") {
-                // need to handle the line folding
+            if (h && (h.charAt(0) == " " || h.charAt(0) == "\t")) {
+                if (hlist.length > 0) {
+                    hlist[hlist.length-1] = hlist[hlist.length-1] + h;
+                }
             }
+            else {
+                hlist.push(h);
+            }
+        }
+        
+        for (var i=0; i<hlist.length; ++i) {
+            var h = hlist[i];
             try {
                 var hdrs = sip.Header.createHeaders(h);
                 var name = hdrs[0];
