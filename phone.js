@@ -1485,7 +1485,12 @@ Phone.prototype.resolve = function(host, type, callback, stack) {
 
 Phone.prototype.send = function(data, addr, stack) {
     log("=> " + addr[0] + ":" + addr[1] + "\n" + data);
-    this._sock.send(data, addr[0], addr[1]);
+    if (this._sock instanceof WebSocket) {
+        this._sock.send(data);
+    }
+    else {
+        this._sock.send(data, addr[0], addr[1]);
+    }
 };
 
 Phone.prototype.sendDigit = function(digit) {
