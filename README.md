@@ -1,6 +1,6 @@
 # SIP in JavaScript #
 
-> This project was migrated from <https://code.google.com/p/sip-js on May 17, 2015>  
+> This project was migrated from <https://code.google.com/p/sip-js> on May 17, 2015
 > Keywords: *SIP*, *JavaScript*, *VoIP*, *Browser*  
 > Members: *kundan10* (Project Manager), *mamtasingh05* (JavaScript/CSS expert), *theintencity* (Flash Network)  
 > Links: [Support](http://groups.google.com/group/myprojectguide), [Video](http://www.youtube.com/watch?v=tfwmBgJHpWs), [Demo](http://theintencity.com/sip-js/phone.html)  
