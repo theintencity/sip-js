@@ -7,6 +7,8 @@
 > License: [GNU Lesser GPL](http://www.gnu.org/licenses/lgpl.html)  
 > Others: starred by 52 users  
 
+![logo](/logo.png)
+
 This project aims at providing a complete SIP stack in Java script for implementing SIP based audio and video user agents in the browser. This is not related to the server side sip.js project.
 
 We have ported the SIP stack of the [p2p-sip](https://github.com/theintencity/p2p-sip) project from Python to Java script and created an example web phone application for demonstration.
