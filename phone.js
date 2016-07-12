@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2012, Intencity Cloud Technologies
 // Copyright (c) 2011-2012, Kundan Singh
 // This software is licensed under LGPL.
-// See README and http://code.google.com/p/sip-js for details.
+// See README and https://github.com/theintencity/sip-js for details.
 
 function getFlashMovie(name) {
     var isIE = navigator.appName.indexOf("Microsoft") != -1;
@@ -720,7 +720,7 @@ Phone.prototype.onUserMediaSuccess = function(stream) {
     
     var video = $("html5-local-video");
     if (video) {
-        var url = webkitURL.createObjectURL(stream);
+        var url = (URL.createObjectURL || webkitURL.createObjectURL)(stream);
         log('webrtc - local-video.src="' + url + '"');
         video.setAttribute('src', url);
     }
@@ -948,7 +948,7 @@ Phone.prototype.createdWebRtcLocalStream = function() {
     if (this.call_state == "accepting" && this._call != null && this._call.request != null) {
         var result = this.getSDP(this._call.request);
         if (result) {
-            this._webrtc_peer_connection.setRemoteDescription(new RTCSessionDescription({type: "offer", sdp: result}));
+            this._webrtc_peer_connection.setRemoteDescription(new RTCSessionDescription({type: "offer", sdp: result}), function() {}, function() {});
         }
     }
     if (this._webrtc_local_stream != null) {
@@ -957,19 +957,19 @@ Phone.prototype.createdWebRtcLocalStream = function() {
     
     if (this.call_state == "inviting") {
         this._webrtc_peer_connection.createOffer(function(offer) {
-            phone._webrtc_peer_connection.setLocalDescription(offer);
+            phone._webrtc_peer_connection.setLocalDescription(offer, function() { }, function() { });
             setTimeout(function() {
                 phone.onWebRtcSendMessage();
             }, phone._sdp_timeout);
-        });
+        }, function() { });
     }
     else if (this.call_state == "accepting") {
         this._webrtc_peer_connection.createAnswer(function(offer) {
-            phone._webrtc_peer_connection.setLocalDescription(offer);
+            phone._webrtc_peer_connection.setLocalDescription(offer, function() { }, function() { });
             setTimeout(function() {
                 phone.onWebRtcSendMessage();
             }, phone._sdp_timeout);
-        });
+        }, function() { });
     }
 };
 
@@ -1039,7 +1039,7 @@ Phone.prototype.onWebRtcAddStream = function(stream) {
     log("webrtc - onaddstream(...)");
     var video = $("html5-remote-video");
     if (video) {
-        var url = webkitURL.createObjectURL(stream);
+        var url = (URL.createObjectURL || webkitURL.createObjectURL)(stream);
         log('webrtc - remote-video.src="' + url + '"');
         video.setAttribute('src', url);
     }
@@ -1075,6 +1075,21 @@ Phone.prototype.hungup = function() {
                 log("webrtc - error closing peer connection: " + error);
             }
             this._webrtc_peer_connection = null;
+        }
+        if (this._webrtc_local_stream) {
+            try {
+                this._webrtc_local_stream.stop();
+            } catch(e) {
+                var audios = this._webrtc_local_stream.getAudioTracks();
+                var videos = this._webrtc_local_stream.getVideoTracks();
+                for (var i=0; i<audios.length; ++i) {
+                    audios[i].stop();
+                }
+                for (var i=0; i<videos.length; ++i) {
+                    videos[i].stop();
+                }
+            }
+            this._webrtc_local_stream = null;
         }
     }
     else {
@@ -1120,7 +1135,7 @@ Phone.prototype.receivedInviteResponse = function(ua, response) {
                         
                         var result = this.getSDP(response);
                         if (result) {
-                            this._webrtc_peer_connection.setRemoteDescription(new RTCSessionDescription({type: "answer", sdp: result}));
+                            this._webrtc_peer_connection.setRemoteDescription(new RTCSessionDescription({type: "answer", sdp: result}), function() { }, function() { });
                         }
                     }
                 }
@@ -1243,7 +1258,7 @@ Phone.prototype.receivedInvite = function(ua, request) {
         if (this._webrtc_peer_connection) {
             var result = this.getSDP(request);
             if (result) {
-                this._webrtc_peer_connection.setRemoteDescription(new RTCSessionDescription({type: "offer", sdp: result}));
+                this._webrtc_peer_connection.setRemoteDescription(new RTCSessionDescription({type: "offer", sdp: result}), function() { }, function() { });
             }
         }
     }
@@ -1611,7 +1626,7 @@ Phone.prototype.toggleControls = function(name) {
 Phone.prototype.help = function(name) {
     var text = null;
     if (name == "default") {
-        text = 'This web-based phone allows you to register with a server, and make or receive VoIP calls from web. This is a demonstration of the <a href="http://code.google.com/p/sip-js">SIP in Javascript</a> project.<br/><br/>'
+        text = 'This web-based phone allows you to register with a server, and make or receive VoIP calls from web. This is a demonstration of the <a href="https://github.com/theintencity/sip-js">SIP in Javascript</a> project.<br/><br/>'
         + 'Please click on help <a href="#" onclick="return help(\'default\');"><img src="help.png"></img></a> anywhere on this page to learn how to use that part of the web phone.<br/><br/>'
         + 'Additionally, the edit <img src="edit.png"></img> and save <img src="save.png"></img> buttons allow you to edit and save certain configuration properties in that box.The buttons and controls are enabled only when they make sense in a particular system state.<br/><br/>'
         + 'Once you reach this page, the Flash Network application kicks in to launch the separate application that assists this page in network activity. The first time initialization includes installation and launch of the <a href="http://theintencity.com/flash-network" target="_blank">Flash Network</a> application. Once the initialization is complete and the <input href="#" value="Register" type="button" class="button" disabled="disabled"/> and <input href="#" value="Call" type="button" class="button" disabled="disabled"/> buttons are enabled, you can proceed with using this web phone. All the controls except Flash Network are disabled until the initialization is complete.';
@@ -1639,10 +1654,10 @@ Phone.prototype.help = function(name) {
         + 'Click on the print <img src="print.png"></img> button to print this history.';
     }
     else if (name == "local-video") {
-        text = 'This area displays your camera view in a video call. It uses the external <a href="http://code.google.com/p/flash-videoio" target="_blank">Flash VideoIO</a> project to facilitate audio and video device capture. You may click on the check box <input type="checkbox"/> to toggle your camera view independent of a video call. You may click on the edit <img src="edit.png"></img> button to enable or disable the VideoIO\'s control panel in the video display.';
+        text = 'This area displays your camera view in a video call. It uses the external <a href="https://github.com/theintencity/flash-videoio" target="_blank">Flash VideoIO</a> project to facilitate audio and video device capture. You may click on the check box <input type="checkbox"/> to toggle your camera view independent of a video call. You may click on the edit <img src="edit.png"></img> button to enable or disable the VideoIO\'s control panel in the video display.';
     }
     else if (name == "remote-video") {
-        text = 'This area displays the received video view in a video call. It uses the external <a href="http://code.google.com/p/flash-videoio" target="_blank">Flash VideoIO</a> project to facilitate audio and video playback and display. You may click on the edit <img src="edit.png"></img> button to enable or disable the VideoIO\'s control panel in the video display.';
+        text = 'This area displays the received video view in a video call. It uses the external <a href="https://github.com/theintencity/flash-videoio" target="_blank">Flash VideoIO</a> project to facilitate audio and video playback and display. You may click on the edit <img src="edit.png"></img> button to enable or disable the VideoIO\'s control panel in the video display.';
     }
     else if (name == "flash-network") {
         text = 'This area shows the <a href="http://theintencity.com/flash-network" target="_blank">Flash Network</a> activities including the first time initialization prompts, the authentication prompts and any network status. It also displays the selected local IP address that is used for your phone. For most of the prompts, you will follow the standard Flash Network <a href="http://theintencity.com/flash-network/userguide.html" target="_blank">user guide</a>.<br/><br/>'

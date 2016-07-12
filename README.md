@@ -22,7 +22,7 @@ The project implements SIP and related standards in Javascript: RFC 3261, RFC 45
 Currently, native browsers do not expose Java script API for primitive capabilities such as UDP or TCP socket, microphone and camera access. We keep the network and device part flexible so that the application can use either the WebRTC effort proposed by Google and available in the Chrome (development release) browser, as well as the browser plugins such as Flash Player via the separate [flash-network](https://github.com/theintencity/flash-network) project.
 
 # Implementation #
-An initial prototype implementation of SIP in Javascript is available as [sip.js](/sip.js) along with an example phone application in [phone.html](/phone.html) and [phone.js](/phone.js).
+An initial prototype implementation of SIP in Javascript is available as [sip.js](/sip.js) along with an example phone application in [phone.html](/web/phone.html) and [phone.js](/web/phone.js).
 
 ## Demonstration ##
 You can view our demo video at [http://www.youtube.com/watch?v=tfwmBgJHpWs](http://www.youtube.com/watch?v=tfwmBgJHpWs).
