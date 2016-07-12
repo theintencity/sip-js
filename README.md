@@ -7,7 +7,7 @@
 > License: [GNU Lesser GPL](http://www.gnu.org/licenses/lgpl.html)  
 > Others: starred by 52 users  
 
-![logo](/logo.png)
+![logo](/web/logo.png)
 
 This project aims at providing a complete SIP stack in Java script for implementing SIP based audio and video user agents in the browser. This is not related to the server side sip.js project.
 
@@ -29,9 +29,9 @@ You can view our demo video at [http://www.youtube.com/watch?v=tfwmBgJHpWs](http
 
 We have created a [Web-based SIP phone](http://theintencity.com/sip-js/phone.html) application for demonstration.  It has been tested on Chrome, but should work on Firefox and Safari, and may work on Internet Explorer. The demonstration page includes a "Getting Started" guide if you would like to use it. The source code is available in SVN in this project.
 
-The default demonstration application uses the Flash Network project for network and devices. To change to use the SIP over `WebSocket` with native `WebRTC` extensions of the Google Chrome [Canary](http://www.webrtc.org/running-the-demos) release, checkout the latest sources, put them under a web server, run a local SIP proxy server that supports SIP over `WebSocket`, and visit  `phone.html?network_type=WebRTC` in your browser URL. You can use the [sipd](https://github.com/theintencity/p2p-sip) (/src/app/sipd.py) SIP server of [p2p-sip](https://github.com/theintencity/p2p-sip/) project that supports SIP over `WebSocket`. Ideally you should run the SIP server on the same host as your web server for the demo. Please send a mail to the support group if you face problem running the demo.
+The default demonstration application uses the Flash Network project for network and devices. To change to use the SIP over `WebSocket` with native `WebRTC` extensions of the Google Chrome [Canary](http://www.webrtc.org/running-the-demos) release, checkout the latest sources, put them under a web server, run a local SIP proxy server that supports SIP over `WebSocket`, and visit  `web/phone.html?network_type=WebRTC` in your browser URL. You can use the SIP server of [rtclite](https://github.com/theintencity/rtclite) project that supports SIP over `WebSocket`. Ideally you should run the SIP server on the same host as your web server for the demo. Please send a mail to the support group if you face problem running the demo.
 ```
-python app/sipd.py -d -t ws -l 0.0.0.0:5080 -r localhost
+python -m rtclite.app.sip.server -d -t ws -l 0.0.0.0:5080 -r localhost
 ```
 
 **New**: Vitali Fomine has kindly reported that the SIP server of [OfficeSIP](http://www.officesip.com) 3.2+ also works with sip-js as well as others ([Youtube Video](http://www.youtube.com/watch?v=006YInl2f2w), [Russian](http://habrahabr.ru/post/144129/)). This gives you a wider choice on available SIP servers supporting WebSocket.
@@ -50,6 +50,6 @@ The web phone application is only for demonstration purpose, and not robust for 
 
 There are other similar projects that implement a SIP stack in Javascript and a SIP endpoint using HTML5. The first demonstration ever done on this technology was the [SIP on the web](http://www.youtube.com/watch?v=qfFlK1KyF6Q) project by José Millán and Iñaki Castillo. Although [sipml5](http://code.google.com/p/sipml5/) looks promising, our humble observation is that it is _not_ the world's first open source HTML5 SIP client, as falsely boosted on their project website, because SIP on the web and this open source SIP-JS projects were available before sipml5 (unless the authors of SIP-on-the-web created sipml5).
 
-The SIP-over-WebSocket concept is also gaining popularity in the SIP community. A partial list of SIP servers that support this: [OfficeSIP](http://www.officesip.com/), [Kamailio](http://www.kamailio.org/w/2012/07/websockets/), [p2p-sip](https://github.com/theintencity/p2p-sip)' sipd.py
+The SIP-over-WebSocket concept is also gaining popularity in the SIP community. A partial list of SIP servers that support this: [OfficeSIP](http://www.officesip.com/), [Kamailio](http://www.kamailio.org/w/2012/07/websockets/), [p2p-sip](https://github.com/theintencity/p2p-sip)' sipd.py, [rtclite](https://github.com/theintencity/rtclite)' server.py.
 
 Please get in touch with the [project owner](mailto:theintencity@gmail.com) if you would like to add a reference to your implementation or would like to correct the information in this section.
