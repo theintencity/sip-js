@@ -3,8 +3,6 @@
 // This software is licensed under LGPL.
 // See README and https://github.com/theintencity/sip-js for details.
 
-// THIS FILE IS NO LONGER USED. MIGRATED TO index.js
-
 function getFlashMovie(name) {
     var isIE = navigator.appName.indexOf("Microsoft") != -1;
     return (isIE) ? window[name] : document[name];
@@ -151,12 +149,15 @@ Phone.prototype.detectHTML5 = function() {
         this.listen_ip = 'r' + Math.floor(Math.random() * 10000000000) + ".invalid";
         this._listen_port = 0;
 
-        if (this.outbound_proxy_address == "127.0.0.1:5060") {
+        if (!is_app && this.outbound_proxy_address == "127.0.0.1:5060") {
             var outbound_proxy_address = "127.0.0.1:5080";
-            if (window.location.href) {
+            if (!is_app && window.location.href) {
                 var uri = sip.parse_uri(window.location.href);
                 outbound_proxy_address = uri.host + ":5080";
             }
+            //if (is_app) {
+            //    outbound_proxy_address = "192.168.1.8:5080";
+            //}
             this.setProperty("outbound_proxy", true);
             this.setProperty("outbound_proxy_address", outbound_proxy_address);
         }
@@ -170,6 +171,7 @@ Phone.prototype.detectHTML5 = function() {
         local.style.height = "168px";
 //        local.style.backgroundColor = "#000000";
         local.autoplay = "autoplay";
+        local.muted = true;
         $('local-video').appendChild(local);
         
         var remote = document.createElement("video");
@@ -228,7 +230,7 @@ Phone.prototype.setProperty = function(name, value) {
             if (value == "Flash" && this.transport == "ws") {
                 this.setProperty("transport", "udp");
             }
-            else if (value == "WebRTC" && this.transport != "ws") {
+            else if (value == "WebRTC" && !is_app && this.transport != "ws") {
                 this.setProperty("transport", "ws");
             }
         }
@@ -286,7 +288,7 @@ Phone.prototype.enableBox = function(name, enable) {
     
     var inputs = [];
     if (name == 'config')
-        inputs = ["displayname", "username", "domain", "authname", "password"];
+        inputs = ["displayname", "username", "domain", "authname", "password", "transport_udp", "transport_tcp", "transport_ws"];
         //inputs = ["displayname", "username", "domain", "authname", "password", "transport_udp", "transport_tcp", "transport_ws"];
     else if (name == 'register')
         inputs = ["outbound_target", "outbound_proxy", "outbound_proxy_address", "register_interval", "local_aor"];
@@ -363,7 +365,7 @@ Phone.prototype.changeNetworkType = function() {
     var other = (current == 'Flash' ? 'WebRTC' : 'Flash');
     var result = confirm('Using the ' + current + ' network. Would you like to relaunch with the ' + other + ' network');
     if (result) {
-        window.location = 'phone.html?network_type=' + other;
+        window.location = 'index.html?network_type=' + other;
     }
     return false;
 };
@@ -428,25 +430,45 @@ Phone.prototype.createUUID4 = function() {
 };
 
 Phone.prototype.createInstanceId = function() {
-    if (!this._instance_id && typeof localStorage != "undefined") {
+    if (!is_app && !this._instance_id && typeof localStorage != "undefined") {
         this._instance_id = localStorage.getItem("instance_id");
         if (!this._instance_id) {
             this._instance_id = "<urn:uuid:" + this.createUUID4() + ">";
             localStorage.setItem("instance_id", this._instance_id);
         }
+    } else if (is_app) {
+        this._instance_id = "<urn:uuid:" + this.createUUID4() + ">";
     }
 };
 
 Phone.prototype.createSocket = function() {
     log("createSocket() transport=" + this.transport);
     if (this.transport == "udp") {
-        this._sock = new network.DatagramSocket();
-        var parent = this;
-        this._sock.addEventListener("propertyChange", function(event) { parent.onSockPropertyChange(event); });
-        this._sock.addEventListener("data", function(event) { parent.onSockData(event); });
-        this._sock.addEventListener("ioError", function(event) { parent.onSockError(event); });
-        this._sock.bind(0, "0.0.0.0");
-        this._sock.receive();
+        if (!is_app) {
+            this._sock = new network.DatagramSocket();
+            var parent = this;
+            this._sock.addEventListener("propertyChange", function(event) { parent.onSockPropertyChange(event); });
+            this._sock.addEventListener("data", function(event) { parent.onSockData(event); });
+            this._sock.addEventListener("ioError", function(event) { parent.onSockError(event); });
+            this._sock.bind(0, "0.0.0.0");
+            this._sock.receive();
+        } else {
+            var parent = this;
+            chrome.sockets.udp.onReceiveError.addListener(function(info) { parent.onSocketError(info); });
+            chrome.sockets.udp.onReceive.addListener(function(info) { parent.onSocketData(info); });
+            chrome.sockets.udp.create({bufferSize: 8192}, function(info) { parent.onSocketCreate(info); });
+            this._sock = {id: null, pending: [], localAddress: "", localPort: 0};
+            this._sock.send = function(data, addr, port) {
+                if (this.id === null) {
+                    this.pending.push({data: data, addr: addr, port: port});
+                } else {
+                    data = str2ab(data);
+                    chrome.sockets.udp.send(parent._sock.id, data, addr, port, function(result) {
+                        log("sent code=" + result.resultCode + " bytes=" + result.bytesSent);
+                    });
+                }
+            };
+        }
     }
     else if (this.transport == "ws") {
         log("  connecting to " + this.outbound_proxy_address);
@@ -950,7 +972,12 @@ Phone.prototype.createdWebRtcLocalStream = function() {
     if (this.call_state == "accepting" && this._call != null && this._call.request != null) {
         var result = this.getSDP(this._call.request);
         if (result) {
-            this._webrtc_peer_connection.setRemoteDescription(new RTCSessionDescription({type: "offer", sdp: result}), function() {}, function() {});
+            var description = new RTCSessionDescription({type: "offer", sdp: result});
+            this._webrtc_peer_connection.setRemoteDescription(description, function() {
+                // success
+            }, function(error) {
+                // TODO: handle error
+            });
         }
     }
     if (this._webrtc_local_stream != null) {
@@ -959,19 +986,29 @@ Phone.prototype.createdWebRtcLocalStream = function() {
     
     if (this.call_state == "inviting") {
         this._webrtc_peer_connection.createOffer(function(offer) {
-            phone._webrtc_peer_connection.setLocalDescription(offer, function() { }, function() { });
+            offer.sdp = offer.sdp.replace(/;\suseinbandfec=1/g, '');
+            phone._webrtc_peer_connection.setLocalDescription(offer, function() { }, function(error) {
+                // TODO: handle error
+            });
             setTimeout(function() {
                 phone.onWebRtcSendMessage();
             }, phone._sdp_timeout);
-        }, function() { });
+        }, function(error) {
+            // TODO: handle error
+        });
     }
     else if (this.call_state == "accepting") {
         this._webrtc_peer_connection.createAnswer(function(offer) {
-            phone._webrtc_peer_connection.setLocalDescription(offer, function() { }, function() { });
+            offer.sdp = offer.sdp.replace(/;\suseinbandfec=1/g, '');
+            phone._webrtc_peer_connection.setLocalDescription(offer, function() { }, function(error) {
+                // TODO: handle error
+            });
             setTimeout(function() {
                 phone.onWebRtcSendMessage();
             }, phone._sdp_timeout);
-        }, function() { });
+        }, function(error) {
+            // TODO: handle error
+        });
     }
 };
 
@@ -1137,7 +1174,11 @@ Phone.prototype.receivedInviteResponse = function(ua, response) {
                         
                         var result = this.getSDP(response);
                         if (result) {
-                            this._webrtc_peer_connection.setRemoteDescription(new RTCSessionDescription({type: "answer", sdp: result}), function() { }, function() { });
+                            var description = new RTCSessionDescription({type: "answer", sdp: result});
+                            this._webrtc_peer_connection.setRemoteDescription(description, function() {
+                            }, function(error) {
+                                // TODO: handle error
+                            });
                         }
                     }
                 }
@@ -1228,7 +1269,7 @@ Phone.prototype.playSound = function(value) {
         var audio = $("html5-audio");
         if (audio) {
             // TODO: use .ogg for chrome/firefox/opera and .mp3 for IE/safari
-            audio.setAttribute('src',(value ? value + ".ogg" : value));
+            audio.setAttribute('src',(value ? 'assets/' + value + ".ogg" : value));
         }
     }
 };
@@ -1260,7 +1301,11 @@ Phone.prototype.receivedInvite = function(ua, request) {
         if (this._webrtc_peer_connection) {
             var result = this.getSDP(request);
             if (result) {
-                this._webrtc_peer_connection.setRemoteDescription(new RTCSessionDescription({type: "offer", sdp: result}), function() { }, function() { });
+                var description = new RTCSessionDescription({type: "offer", sdp: result});
+                this._webrtc_peer_connection.setRemoteDescription(description, function() {
+                }, function(error) {
+                    // TODO: handle error
+                });
             }
         }
     }
@@ -1409,6 +1454,56 @@ Phone.prototype.onWebSocketMessage = function(msg) {
     this.onSockData({"data": msg.data, "srcPort": 0, "srcAddress": "127.0.0.1"});
 };
 
+Phone.prototype.onSocketCreate = function(info) {
+    var parent = this;
+    this._sock.id = info.socketId;
+    chrome.system.network.getNetworkInterfaces(function(list) {
+        if (list) {
+            for (var i=0; i<list.length; ++i) {
+                if (list[i].address.match(/^\d+\.\d+\.\d+\.\d+$/)) {
+                    parent.listen_ip = list[i].address;
+                    log("listen_ip=" + parent.listen_ip);
+                }
+            }
+        }
+        chrome.sockets.udp.bind(parent._sock.id, "0.0.0.0", 0, function(result) {
+            if (result < 0) {
+                parent.onSockError({"code": "socket-error", "reason": "cannot bind socket " + result});
+                return;
+            }
+            chrome.sockets.udp.getInfo(parent._sock.id, function(info) {
+                parent._sock.localAddress = info.localAddress;
+                parent._sock.localPort = info.localPort;
+                parent.onSockPropertyChange({"property": "localPort", "oldValue": 0, "newValue": info.localPort});
+                
+                if (parent._sock.pending.length > 0) {
+                    var pending = parent._sock.pending.slice(0);
+                    parent._sock.pending.splice(0, parent._sock.pending.length);
+                    for (var i=0; i<pending.length; ++i) {
+                        var data = pending[i].data, addr = pending[i].addr, port = pending[i].port;
+                        parent._sock.send(data, addr, port);
+                    }
+                }
+            });
+        });
+    });
+};
+
+Phone.prototype.onSocketError = function(info) {
+    if (info.socketId != this._sock.id) {
+        return;
+    }
+    this.onSockError({"code": "socket-error", "reason": "error receiving on socket " + info.resultCode});
+};
+Phone.prototype.onSocketData = function(info) {
+    if (info.socketId != this._sock.id) {
+        return;
+    }
+    var data = ab2str(info.data);
+    this.onSockData({"data": data, "srcPort": info.remotePort, "srcAddress": info.remoteAddress});
+};
+
+
 Phone.prototype.createServer = function(request, uri, stack) {
     log("Phone.createServer() for method=" + request.method);
     return (request.method != "CANCEL" ? new sip.UserAgent(this._stack, request) : null);
@@ -1461,6 +1556,8 @@ Phone.prototype.cancelled = function(ua, request, stack) {
         if (ua == this._call) {
             this.dispatchMessage("Incoming call cancelled");
             this.setProperty("call_state", "idle");
+            this.setProperty("call_button.disabled", false);
+            this.setProperty("end_button.disabled", true);
             this.hungup();
         }
         else {
@@ -1629,17 +1726,17 @@ Phone.prototype.help = function(name) {
     var text = null;
     if (name == "default") {
         text = 'This web-based phone allows you to register with a server, and make or receive VoIP calls from web. This is a demonstration of the <a href="https://github.com/theintencity/sip-js">SIP in Javascript</a> project.<br/><br/>'
-        + 'Please click on help <a href="#" onclick="return help(\'default\');"><img src="help.png"></img></a> anywhere on this page to learn how to use that part of the web phone.<br/><br/>'
-        + 'Additionally, the edit <img src="edit.png"></img> and save <img src="save.png"></img> buttons allow you to edit and save certain configuration properties in that box.The buttons and controls are enabled only when they make sense in a particular system state.<br/><br/>'
-        + 'Once you reach this page, the Flash Network application kicks in to launch the separate application that assists this page in network activity. The first time initialization includes installation and launch of the <a href="http://theintencity.com/flash-network" target="_blank">Flash Network</a> application. Once the initialization is complete and the <input href="#" value="Register" type="button" class="button" disabled="disabled"/> and <input href="#" value="Call" type="button" class="button" disabled="disabled"/> buttons are enabled, you can proceed with using this web phone. All the controls except Flash Network are disabled until the initialization is complete.';
+        + 'Please click on help <a href="#" onclick="return help(\'default\');"><img src="assets/help.png"></img></a> anywhere on this page to learn how to use that part of the web phone.<br/><br/>'
+        + 'Additionally, the edit <img src="assets/edit.png"></img> and save <img src="assets/save.png"></img> buttons allow you to edit and save certain configuration properties in that box.The buttons and controls are enabled only when they make sense in a particular system state.<br/><br/>'
+        + 'Once you reach this page, the Flash Network application kicks in to launch the separate application that assists this page in network activity. The first time initialization includes installation and launch of the <a href="http://theintencity.kundansingh.com/flash-network" target="_blank">Flash Network</a> application. Once the initialization is complete and the <input href="#" value="Register" type="button" class="button" disabled="disabled"/> and <input href="#" value="Call" type="button" class="button" disabled="disabled"/> buttons are enabled, you can proceed with using this web phone. All the controls except Flash Network are disabled until the initialization is complete.';
     }
     else if (name == "configuration") {
-        text = 'Click on the edit <img src="edit.png"></img> button in the Configuration box to enable the configuration controls. Type the values in various edit boxes to set the configuration properties. This must be done before clicking on the <input type="button" class="button" value="Register"/> or <input type="button" class="callbutton" value="Call"/> button for that function to use the correct configuration properties.<br/><br/>'
+        text = 'Click on the edit <img src="assets/edit.png"></img> button in the Configuration box to enable the configuration controls. Type the values in various edit boxes to set the configuration properties. This must be done before clicking on the <input type="button" class="button" value="Register"/> or <input type="button" class="callbutton" value="Call"/> button for that function to use the correct configuration properties.<br/><br/>'
         + 'You may use your full name as the display name. The user name and domain are provided by your VoIP provider, and are used to define your address-of-record such as sip:myname@iptel.org. The auth name and password are used for registration as well as for password authenticated outbound calls. Usually the auth name is same as your user name. We prefer to use the UDP transport, but occassionally you may need to use TCP. The WS transport indicates emerging WebSocket for SIP signaling transport while using WebRTC for media path.<br/><br/>'
         + 'The features that are not yet implemented are not enabled, e.g., TCP and WS are future work.';
     }
     else if (name == "register") {
-        text = 'To register (login) with your VoIP service provider, enter the configuration properties and the registration properties, and click on <input type="button" class="button" value="Register"/>. You need to click on the edit <img src="edit.png"></img> button in the Register box to enable the registration properties controls. The registration properties are as follows.<br/><br/>The outbound messages can be sent via the target domain or a specific proxy address. The registration interval should be small for web phone such as 3 minutes, i.e., 180 seconds. The "rport" feature allows traversal across NAT boundaries for responses over UDP transport. The "sip-outbound" feature allows traversal across NAT boundaries for incoming requests over UDP and TCP transport. The AoR (address-of-record) is automatically updated when you change the configuration parameters. There are two status indications, first for listening SIP socket and second for registration. The registration status indicates the current status of your login, e.g., "registered" or "not registered".<br/><br/>'
+        text = 'To register (login) with your VoIP service provider, enter the configuration properties and the registration properties, and click on <input type="button" class="button" value="Register"/>. You need to click on the edit <img src="assets/edit.png"></img> button in the Register box to enable the registration properties controls. The registration properties are as follows.<br/><br/>The outbound messages can be sent via the target domain or a specific proxy address. The registration interval should be small for web phone such as 3 minutes, i.e., 180 seconds. The "rport" feature allows traversal across NAT boundaries for responses over UDP transport. The "sip-outbound" feature allows traversal across NAT boundaries for incoming requests over UDP and TCP transport. The AoR (address-of-record) is automatically updated when you change the configuration parameters. There are two status indications, first for listening SIP socket and second for registration. The registration status indicates the current status of your login, e.g., "registered" or "not registered".<br/><br/>'
         + 'The features that are not yet implemented are not enabled, e.g., sip-outbound is future work, rport is always enabled, and AoR is read-only based on your Configuration properties.';
     }
     else if (name == "call") {
@@ -1648,26 +1745,26 @@ Phone.prototype.help = function(name) {
         + 'To do a self test call, just set your target destination to correspond to your own user name and domain configuration parameters and click on the Call button. This is useful for testing the call signaling and media flow in a loopback mode.<br/><br/>'
         + 'To dial a phone number or urn address, click on "sip:" to select the correct target address scheme. If you use the dial-pad to enter the target number, the scheme is automatically changed to "tel:"<br/><br/>'
         + 'You do not need to register, to make an outbound call. But without registering you will not be able to receive an incoming call, unless the caller dials your dynamic IP and port directly.<br/><br/>'
-        + 'Click on the edit <img src="edit.png"></img> button in the Call box to enable the media capabilities of the call. Default is to select audio and video, but this allows you to make an audio-only call. The features that are not yet implemented are not enabled, e.g., Text, Tones and Location are for future work.';
+        + 'Click on the edit <img src="assets/edit.png"></img> button in the Call box to enable the media capabilities of the call. Default is to select audio and video, but this allows you to make an audio-only call. The features that are not yet implemented are not enabled, e.g., Text, Tones and Location are for future work.';
     }
     else if (name == "im") {
         text = 'To send a text message simple type your text message in the edit box in the bottom left corner, and press enter or click on the <input type="button" class="button" value="Send"/> button. The text chat history including sent and received message as well as any call related system messages are shown in the text area above.<br/><br/>'
         + 'The outbound text message is sent to the target destination address of the Call box if you are not in a call, and is sent to the remote party if you are in a call. Thus, if you are in a call, then changing the target destination address does not change the text message target. For incoming message outside a call, the target destination address is updated with the source of the received text message.<br/><br/>'
-        + 'Click on the print <img src="print.png"></img> button to print this history.';
+        + 'Click on the print <img src="assets/print.png"></img> button to print this history.';
     }
     else if (name == "local-video") {
-        text = 'This area displays your camera view in a video call. It uses the external <a href="https://github.com/theintencity/flash-videoio" target="_blank">Flash VideoIO</a> project to facilitate audio and video device capture. You may click on the check box <input type="checkbox"/> to toggle your camera view independent of a video call. You may click on the edit <img src="edit.png"></img> button to enable or disable the VideoIO\'s control panel in the video display.';
+        text = 'This area displays your camera view in a video call. It uses the external <a href="https://github.com/theintencity/flash-videoio" target="_blank">Flash VideoIO</a> project to facilitate audio and video device capture. You may click on the check box <input type="checkbox"/> to toggle your camera view independent of a video call. You may click on the edit <img src="assets/edit.png"></img> button to enable or disable the VideoIO\'s control panel in the video display.';
     }
     else if (name == "remote-video") {
-        text = 'This area displays the received video view in a video call. It uses the external <a href="https://github.com/theintencity/flash-videoio" target="_blank">Flash VideoIO</a> project to facilitate audio and video playback and display. You may click on the edit <img src="edit.png"></img> button to enable or disable the VideoIO\'s control panel in the video display.';
+        text = 'This area displays the received video view in a video call. It uses the external <a href="https://github.com/theintencity/flash-videoio" target="_blank">Flash VideoIO</a> project to facilitate audio and video playback and display. You may click on the edit <img src="assets/edit.png"></img> button to enable or disable the VideoIO\'s control panel in the video display.';
     }
     else if (name == "flash-network") {
-        text = 'This area shows the <a href="http://theintencity.com/flash-network" target="_blank">Flash Network</a> activities including the first time initialization prompts, the authentication prompts and any network status. It also displays the selected local IP address that is used for your phone. For most of the prompts, you will follow the standard Flash Network <a href="http://theintencity.com/flash-network/userguide.html" target="_blank">user guide</a>.<br/><br/>'
-        + 'For changing the selected local IP address, click on the <img src="edit.png"></img> button and enter the new IP address. This must be done before the SIP listening socket is created. The SIP listening socket is created the first time you click on Register or Call button.<br/><br/>'
+        text = 'This area shows the <a href="http://theintencity.kundansingh.com/flash-network" target="_blank">Flash Network</a> activities including the first time initialization prompts, the authentication prompts and any network status. It also displays the selected local IP address that is used for your phone. For most of the prompts, you will follow the standard Flash Network <a href="http://theintencity.kundansingh.com/flash-network/userguide.html" target="_blank">user guide</a>.<br/><br/>'
+        + 'For changing the selected local IP address, click on the <img src="assets/edit.png"></img> button and enter the new IP address. This must be done before the SIP listening socket is created. The SIP listening socket is created the first time you click on Register or Call button.<br/><br/>'
         + 'For trying out the experimental WebRTC technology that uses WebSocket for signaling, click on the change link in the title and confirm the changed launch when prompted. Alternatively, you can use the <tt>?network_type=WebRTC</tt> URL parameter on this page to launch with WebRTC and WebSocket support. In the WebRTC mode it connects using WebSocket for signaling and WebRTC for media path. You can change the WebSocket URL\' path and WebRTC peer connection\' configuration in this box. The configuration is a optional comma separated list of STUN or TURN servers with optional credentials, e.g., "stun://host1,turn://host2|mypass"' ;
     }
     else if (name == "program-log") {
-        text = 'This area displays the debug trace for the software including all the necessary SIP messages that are needed for debugging any problems. To report any issues, please attach your full program log. You can click on the check box <input type="checkbox" checked="checked"/> to toggle the auto-scroll mode of this view. Click on the <img src="print.png"></img> button to print the full program log.';
+        text = 'This area displays the debug trace for the software including all the necessary SIP messages that are needed for debugging any problems. To report any issues, please attach your full program log. You can click on the check box <input type="checkbox" checked="checked"/> to toggle the auto-scroll mode of this view. Click on the <img src="assets/print.png"></img> button to print the full program log.';
     }
     if (!text)
         text = 'Help text for this feature is not written';
