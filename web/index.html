@@ -20,15 +20,15 @@
     
 </head> 
  
-<body is_app="false">
+<body is-app="false" is-mobile="false" is-compact="false" active-box="config" orientation="landscape">
     <div id="config-box" class="content-box has-shadow">
         <div class="content-header">Configuration
             <div class="help-div">
-                <a id="config-box-save" href="#" title="Save configuration">
+                <a id="config-box-save" class="save" href="#" title="Save configuration">
                     <img id="save_config" src="assets/save.png" class="help-img" style="visibility: hidden;"></img></a>
-                <a id="config-box-edit" href="#" title="Edit configuration">
+                <a id="config-box-edit" class="edit" href="#" title="Edit configuration">
                     <img id="edit_config" src="assets/edit.png" class="help-img" style="visibility: visible;"></img></a>
-                <a id="config-box-help" href="#" title="How to configure your phone?">
+                <a id="config-box-help" class="help" href="#" title="How to configure your phone?">
                     <img src="assets/help.png" class="help-img"></img></a>
             </div>
         </div>
@@ -62,11 +62,11 @@
     <div id="register-box" class="content-box has-shadow">
         <div class="content-header">Register
             <div class="help-div">
-                <a id="register-box-save" href="#" title="Save register parameters">
+                <a id="register-box-save" class="save" href="#" title="Save register parameters">
                     <img id="save_register" src="assets/save.png" class="help-img" style="visibility: hidden;"></img></a>
-                <a id="register-box-edit" href="#" title="Edit register parameters">
+                <a id="register-box-edit" class="edit" href="#" title="Edit register parameters">
                     <img id="edit_register" src="assets/edit.png" class="help-img" style="visibility: visible;"></img></a>
-                <a id="register-box-help" href="#" title="How to register/login?">
+                <a id="register-box-help" class="help" href="#" title="How to register/login?">
                     <img src="assets/help.png" class="help-img"></img>
             </a></div>
         </div>
@@ -105,11 +105,11 @@
     <div id="call-box" class="content-box has-shadow">
         <div class="content-header">Call
             <div class="help-div">
-                <a id="call-box-save" href="#" title="Save call capabilities">
+                <a id="call-box-save" class="save" href="#" title="Save call capabilities">
                     <img id="save_call" src="assets/save.png" class="help-img" style="visibility: hidden;"></img></a>
-                <a id="call-box-edit" href="#" title="Edit call capabilities">
+                <a id="call-box-edit" class="edit" href="#" title="Edit call capabilities">
                     <img id="edit_call" src="assets/edit.png" class="help-img" style="visibility: visible;"></img></a>
-                <a id="call-box-help" href="#" title="How to make/receive call?">
+                <a id="call-box-help" class="help" href="#" title="How to make/receive call?">
                     <img src="assets/help.png" class="help-img"></img>
             </a></div>
         </div>
@@ -212,9 +212,9 @@
     <div id="im-box" class="content-box has-shadow">
         <div class="content-header">Text Chat
             <div class="help-div">
-                <a id="im-box-print" href="#" title="Print text chat">
+                <a id="im-box-print" class="save" href="#" title="Print text chat">
                     <img src="assets/print.png" class="print-img"></img></a>
-                <a id="im-box-help" href="#" title="How to send/receive text chat?">
+                <a id="im-box-help" class="help" href="#" title="How to send/receive text chat?">
                     <img src="assets/help.png" class="help-img"></img></a>
             </div>
         </div>
@@ -234,7 +234,7 @@
             <div class="help-div">
                 <a id="local-video-box-toggle" href="#" title="Toggle control panel">
                     <img src="assets/edit.png" class="help-img" style="visibility: visible;"></img></a>
-                <a id="local-video-box-help" href="#" title="What is local video?">
+                <a id="local-video-box-help" class="help" href="#" title="What is local video?">
                     <img src="assets/help.png" class="help-img"></img></a>
             </div>
         </div>
@@ -249,7 +249,7 @@
             <div class="help-div">
                 <a id="remote-video-box-toggle" href="#" title="Toggle control panel">
                     <img src="assets/edit.png" class="help-img" style="visibility: visible;"></img></a>
-                <a id="remote-video-box-help" href="#" title="What is remote video?">
+                <a id="remote-video-box-help" class="help" href="#" title="What is remote video?">
                     <img src="assets/help.png" class="help-img"></img></a>
             </div>
         </div>
@@ -264,11 +264,11 @@
             Network
             (<a id="flash-network-box-change-type" href="#">change</a>)
             <div class="help-div">
-                <a id="flash-network-box-save" href="#" title="Save network properties">
+                <a id="flash-network-box-save" class="save" href="#" title="Save network properties">
                     <img id="save_network" src="assets/save.png" class="help-img" style="visibility: hidden;"></img></a>
-                <a id="flash-network-box-edit" href="#" title="Edit network properties">
+                <a id="flash-network-box-edit" class="edit" href="#" title="Edit network properties">
                     <img id="edit_network" src="assets/edit.png" class="help-img" style="visibility: visible;"></img></a>
-                <a id="flash-network-box-help" href="#" title="What is Flash Network?">
+                <a id="flash-network-box-help" class="help" href="#" title="What is Flash Network?">
                     <img src="assets/help.png" class="help-img"></img>
             </a></div>
         </div>
@@ -307,7 +307,7 @@
     <div id="help-box" class="content-box has-shadow">
         <div class="content-header">Getting Started
             <div class="help-div">
-                <a id="help-box-help" href="#" title="Getting started guide">
+                <a id="help-box-help" class="help" href="#" title="Getting started guide">
                     <img src="assets/help.png" class="help-img"></img></a>
             </div>
         </div>
@@ -320,13 +320,24 @@
             <div class="help-div">
                 <a id="log-box-print" href="#" title="Print text chat">
                     <img src="assets/print.png" class="print-img"></img></a>
-                <a id="log-box-help" href="#" title="What is Program Log?">
+                <a id="log-box-help" class="help" href="#" title="What is Program Log?">
                     <img src="assets/help.png" class="help-img"></img></a>
             </div>
         </div>
         <div id="log-text-div">
             <textarea id="log-text" readonly="readonly">This box displays the program trace</textarea>
         </div>
+    </div>
+    
+    <div id="button-bar">
+        <a id="config-button" class="config has-gradient has-shadow" href="#" title="Configuration and SIP registration">
+            <img src="assets/config.png" class="config-img" alt="config"/></a>
+        <a id="call-button" class="call has-gradient has-shadow" href="#" title="SIP call and messaging">
+            <img src="assets/call.png" class="call-img" alt="call"/></a>
+        <a id="video-button" class="video has-gradient has-shadow" href="#" title="Local and remote video">
+            <img src="assets/video.png" class="video-img" alt="video"/></a>
+        <a id="help-button" class="help has-gradient has-shadow" href="#" title="Help and network configuration">
+            <img src="assets/help2.png" class="help2-img" alt="help"/></a>
     </div>
 </body>
 </html>

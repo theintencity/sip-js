@@ -1,6 +1,4 @@
 
-var is_app = (window.chrome && chrome.app && chrome.app.runtime ? true : false);
-
 function $(name) {
     return document.getElementById(name);
 }
@@ -14,10 +12,9 @@ function log(msg, type) {
         log_text.value += "\n" + msg;
         if (phone && phone.log_scroll)
             log_text.scrollTop = log_text.scrollHeight;
-    } else {
-        if (typeof console != "undefined" && console.log !== undefined) {
-            console.log(msg);
-        }
+    } 
+    if (typeof console != "undefined" && console.log !== undefined) {
+        console.log(msg);
     }
 };
 

@@ -40,6 +40,7 @@ function Phone() {
     this.sock_state = "idle";
     this.register_state = "not registered";
     this.register_button = 'Register';
+    this.register_timer = null;
 
     // properties in call
     this.call_state = "idle";
@@ -234,6 +235,23 @@ Phone.prototype.setProperty = function(name, value) {
                 this.setProperty("transport", "ws");
             }
         }
+        else if (name == "call_state") {
+            if (is_compact) {
+                if (value == "active" && this.has_video && document.body.getAttribute("active-box") == "call") {
+                    document.body.setAttribute("active-box", "video");
+                } else if (oldValue == "active" && value != "active" && (document.body.getAttribute("active-box") == "local" || document.body.getAttribute("active-box") == "remote")) {
+                    document.body.setAttribute("active-box", "call");
+                } else if (value == "incoming") {
+                    document.body.setAttribute("active-box", "call");
+                }
+            }
+        } else if (name == "register_state") {
+            if (is_compact) {
+                if (value == "registered" && (document.body.getAttribute("active-box") == "config" || document.body.getAttribute("active-box") == "register")) {
+                    document.body.setAttribute("active-box", "call");
+                }
+            }
+        }
     }
     else {
         this.dispatchEvent({"type": "propertyChange", "property": name, "newValue": value});
@@ -283,8 +301,24 @@ Phone.prototype.enable = function(name, enable) {
 
 
 Phone.prototype.enableBox = function(name, enable) {
-    $('edit_' + name).style.visibility = (enable ? "hidden" : "visible");
-    $('save_' + name).style.visibility = (enable ? "visible" : "hidden");
+    log("enableBox(" + name + "," + enable + ")");
+    var boxes = ["config", "register", "call", "im", "network", "local", "remote", "help", "log"];
+    if (enable) {
+        var value = (name == "config" || name == "register" ? "config"
+                     : (name == "call" || name == "im" ? "call"
+                     : (name == "local" || name == "remote" ? "video"
+                     : (name == "network" || name == "help" ? "help" : null))));
+        if (value) {
+            document.body.setAttribute("active-box", value);
+        }
+    }
+    
+    if ($('edit_' + name)) {
+        $('edit_' + name).style.visibility = (enable ? "hidden" : "visible");
+    }
+    if ($('save_' + name)) {
+        $('save_' + name).style.visibility = (enable ? "visible" : "hidden");
+    }
     
     var inputs = [];
     if (name == 'config')
@@ -568,6 +602,10 @@ Phone.prototype.createStack = function() {
 };
 
 Phone.prototype.sendRegister = function() {
+    if (this.register_timer) {
+        clearTimeout(this.register_timer);
+        this.register_timer = null;
+    }
     if (this._reg == null) {
         this._reg = new sip.UserAgent(this._stack);
         this._reg.remoteParty = new sip.Address(this.local_aor);
@@ -602,6 +640,10 @@ Phone.prototype.createRegister = function() {
 };
 
 Phone.prototype.sendUnregister = function() {
+    if (this.register_timer) {
+        clearTimeout(this.register_timer);
+        this.register_timer = null;
+    }
     var m = this.createRegister();
     m.setItem('Expires', new sip.Header("0", 'Expires'))
     this._reg.sendRequest(m);
@@ -614,6 +656,7 @@ Phone.prototype.receivedRegisterResponse = function(ua, response) {
                 this.setProperty("register_state", "registered");
                 this.setProperty("register_button", "Unregister");
                 this.setProperty("register_button.disabled", false);
+                this.scheduleRefresh(response);
             }
             else {
                 this.setProperty("register_state", "not registered");
@@ -629,6 +672,23 @@ Phone.prototype.receivedRegisterResponse = function(ua, response) {
             this._reg = null;
         }
     }
+};
+
+Phone.prototype.scheduleRefresh = function(response) {
+    var interval = response.hasItem("Expires") ? parseInt(response.first("Expires").value) : this.register_interval;
+    if (interval >= 30) {
+        interval -= 5 + (Math.random() * 10);
+    }
+    interval = Math.ceil(interval * 1000);
+    log("regitration will refresh after " + interval + " ms");
+    var phone = this;
+    this.register_timer = setTimeout(function() {
+        phone.register_timer = null;
+        if (phone._reg && phone.register_state == "registered") {
+            phone.setProperty("register_state", "registering");
+            phone.sendRegister();
+        }
+    }, interval);
 };
 
 Phone.prototype.sendInvite = function() {
@@ -1722,7 +1782,7 @@ Phone.prototype.toggleControls = function(name) {
     }
 };
 
-Phone.prototype.help = function(name) {
+Phone.prototype.help = function(name, no_transition) {
     var text = null;
     if (name == "default") {
         text = 'This web-based phone allows you to register with a server, and make or receive VoIP calls from web. This is a demonstration of the <a href="https://github.com/theintencity/sip-js">SIP in Javascript</a> project.<br/><br/>'
@@ -1769,5 +1829,11 @@ Phone.prototype.help = function(name) {
     if (!text)
         text = 'Help text for this feature is not written';
     $("help").innerHTML = text;
+    if (is_compact && !no_transition) {
+        var phone = this;
+        setTimeout(function() {
+            phone.enableBox("help", true);
+        }, 0);
+    }
     return false;
 };

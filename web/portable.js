@@ -1,8 +1,51 @@
 var phone = null;
+var is_app = (window.chrome && chrome.app && chrome.app.runtime ? true : false);
+var is_mobile = !!(navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i));
+var is_compact = (is_mobile || window.innerWidth < 1000 || window.innerHeight < 400);
 
 window.onload = function() {
     
-    document.body.setAttribute("is_app", is_app);
+    if (is_mobile) {
+        window.log = function(msg, type) { // redefine to avoid HTML box
+            if (typeof console != "undefined" && console.log !== undefined) {
+                console.log(msg);
+            }
+        };
+    }
+    
+    document.body.setAttribute("is-app", is_app);
+    document.body.setAttribute("is-mobile", is_mobile);
+    document.body.setAttribute("is-compact", is_compact);
+    document.body.setAttribute("orientation", window.innerWidth >= window.innerHeight ? "landscape" : "portrait");
+    
+    function adjust_scale() {
+        if (is_compact) {
+            var w = window.innerWidth >= window.innerHeight ? 510 : 260;
+            var h = window.innerWidth >= window.innerHeight ? 260 : 470;
+            var scale = Math.min(window.innerWidth / w, window.innerHeight / h);
+            document.body.style.zoom = "" + scale;
+        } else {
+            document.body.style.zoom = "";
+        }
+        
+    }
+    adjust_scale();
+    
+    
+    window.addEventListener("resize", function(event) {
+        document.body.setAttribute("orientation", window.innerWidth >= window.innerHeight ? "landscape" : "portrait");
+        if (!is_mobile) {
+            is_compact = !!(window.innerWidth < 1000 || window.innerHeight < 400);
+            document.body.setAttribute("is-compact", is_compact);
+        }
+        adjust_scale();
+    });
     
     // load flash-network related scripts
     if (!is_app) {
@@ -23,6 +66,43 @@ window.onload = function() {
     }
 
     // moved inline scripts from phone.html
+    $("config-button").addEventListener("click", function(event) {
+        return is_compact && phone.enableBox("config", true);
+    });
+    $("call-button").addEventListener("click", function(event) {
+        return is_compact && phone.enableBox("call", true);
+    });
+    $("video-button").addEventListener("click", function(event) {
+        return is_compact && phone.enableBox("local", true);
+    });
+    $("help-button").addEventListener("click", function(event) {
+        return is_compact && phone.enableBox("help", true);
+    });
+    $("config-box").addEventListener("click", function(event) {
+        return is_compact && phone.enableBox("config", true);
+    });
+    $("register-box").addEventListener("click", function(event) {
+        return is_compact && phone.enableBox("register", true);
+    });
+    $("call-box").addEventListener("click", function(event) {
+        return is_compact && phone.enableBox("call", true);
+    });
+    $("im-box").addEventListener("click", function(event) {
+        return is_compact && phone.enableBox("im", true);
+    });
+    $("local-video-box").addEventListener("click", function(event) {
+        return is_compact && phone.enableBox("local", true);
+    });
+    $("remote-video-box").addEventListener("click", function(event) {
+        return is_compact && phone.enableBox("remote", true);
+    });
+    $("flash-network-box").addEventListener("click", function(event) {
+        return is_compact && phone.enableBox("network", true);
+    });
+    $("help-box").addEventListener("click", function(event) {
+        return is_compact && phone.enableBox("help", true);
+    });
+    
     $("config-box-save").addEventListener("click", function(event) {
         return phone.enableBox('config', false);
     });
@@ -80,7 +160,10 @@ window.onload = function() {
         setTimeout(function() { phone.setProperty('outbound_proxy_address', $('outbound_proxy_address').value); }, 100);
     });
     $("register_interval").addEventListener("click", function(event) {
-        phone.setProperty('register_interval', parseInt($('register_interval')).value);
+        phone.setProperty('register_interval', parseInt($('register_interval').value));
+    });
+    $("register_interval").addEventListener("keypress", function(event) {
+        setTimeout(function() { phone.setProperty('register_interval', parseInt($('register_interval').value)); }, 100);
     });
     $("rport").addEventListener("click", function(event) {
         phone.setProperty('rport', $('rport').checked);
@@ -355,7 +438,7 @@ window.onload = function() {
     });
     
     phone.populate();
-    phone.help("default");
+    phone.help("default", true);
     
     if (!is_app && phone.network_type != "WebRTC") {
         setTimeout(function() {

@@ -58,11 +58,12 @@ input.checkbox {
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#808080');
 }
 .has-gradient {
-  background: -moz-linear-gradient(100% 100% 90deg, #e0e0e0, #f0f0f0);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f0f0f0), to(#e0e0e0));
-  background: -webkit-linear-gradient(#f0f0f0, #e0e0e0);
-  background: -o-linear-gradient(#f0f0f0, #e0e0e0);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#e0e0e0');
+  background-color: #b0b0b0;
+  background: -moz-linear-gradient(100% 100% 90deg, #b0b0b0, #f0f0f0);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f0f0f0), to(#b0b0b0));
+  background: -webkit-linear-gradient(#f0f0f0, #b0b0b0);
+  background: -o-linear-gradient(#f0f0f0, #b0b0b0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0', endColorstr='#b0b0b0');
 }
 .heading {
   font-weight: bold;
@@ -315,4 +316,79 @@ textarea#im-history {
   background-color: #f0f0f0;
   border: none;
   outline: none;
+}
+
+div#local-video, div#remote-video {
+  overflow: hidden;
+}
+video {
+  object-fit: cover; -webkit-object-fit: cover; -moz-object-fit: cover;
+}
+
+/* compact view */
+body[is-compact="true"] div#log-box,
+body[is-compact="false"] div#button-bar,
+body[is-compact="true"] div.content-header a.save, body[is-compact="true"] div.content-header a.edit,
+body[is-compact="true"] div.content-box {
+  visibility: hidden; display: none;
+}
+
+body[is-compact="true"][active-box="config"] div#config-box,
+body[is-compact="true"][active-box="config"] div#register-box,
+body[is-compact="true"][active-box="call"] div#call-box,
+body[is-compact="true"][active-box="call"] div#im-box,
+body[is-compact="true"][active-box="video"] div#local-video-box,
+body[is-compact="true"][active-box="video"] div#remote-video-box,
+body[is-compact="true"][active-box="help"] div#flash-network-box,
+body[is-compact="true"][active-box="help"] div#help-box {
+  visibility: visible; display: block;
+}
+
+body[is-compact="true"][orientation="portrait"] div#button-bar {
+  position: absolute; top: 415px; width: 240px; height: 42px; left: 10px;
+  display: flex; flex-direction: row; justify-content: space-between;
+}
+body[is-compact="true"][orientation="landscape"] div#button-bar {
+  position: absolute; top: 210px; width: 200px; height: 42px; left: 10px; 
+  display: flex; flex-direction: row; justify-content: space-between;
+}
+body[is-compact="true"] div#button-bar > a {
+  position: relative; width: 44px; height: 44px;
+  box-sizing: border-box;
+  border: 1px solid #c0c0c0;
+  filter: brightness(90%); -webkit-filter: brightness(90%);
+}
+body[is-compact="true"] div#button-bar > a > img {
+  position: absolute; width: 32px; height: 32px; padding: 6px;
+  filter: invert(40%); -webkit-filter: invert(40%);
+}
+body[is-compact="true"][orientation="portrait"][active-box="config"] div#config-box,
+body[is-compact="true"][orientation="portrait"][active-box="call"] div#call-box,
+body[is-compact="true"][orientation="portrait"][active-box="video"] div#local-video-box,
+body[is-compact="true"][orientation="portrait"][active-box="help"] div#flash-network-box {
+  top: 10px; left: 10px;
+}
+body[is-compact="true"][orientation="portrait"][active-box="config"] div#register-box,
+body[is-compact="true"][orientation="portrait"][active-box="call"] div#im-box,
+body[is-compact="true"][orientation="portrait"][active-box="video"] div#remote-video-box,
+body[is-compact="true"][orientation="portrait"][active-box="help"] div#help-box {
+  top: 210px; left: 10px;
+}
+body[is-compact="true"][orientation="landscape"][active-box="config"] div#config-box,
+body[is-compact="true"][orientation="landscape"][active-box="call"] div#call-box,
+body[is-compact="true"][orientation="landscape"][active-box="video"] div#local-video-box,
+body[is-compact="true"][orientation="landscape"][active-box="help"] div#flash-network-box {
+  top: 10px; left: 10px;
+}
+body[is-compact="true"][orientation="landscape"][active-box="config"] div#register-box,
+body[is-compact="true"][orientation="landscape"][active-box="call"] div#im-box,
+body[is-compact="true"][orientation="landscape"][active-box="video"] div#remote-video-box,
+body[is-compact="true"][orientation="landscape"][active-box="help"] div#help-box {
+  top: 10px; left: 260px;
+}
+body[is-compact="true"][active-box="config"] div#button-bar #config-button,
+body[is-compact="true"][active-box="call"] div#button-bar #call-button,
+body[is-compact="true"][active-box="video"] div#button-bar #video-button,
+body[is-compact="true"][active-box="help"] div#button-bar #help-button {
+  filter: brightness(100%); -webkit-filter: brightness(110%);
 }
