@@ -1,0 +1,2899 @@
+23:30:43.287 sip.api INFO - starting agent on 0.0.0.0:5080 with transport ws, 0.0.0.0:5060 with transport udp
+23:30:54.233 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) connection type 'ws'
+23:30:54.247 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 583
+23:30:54.247 sip.api DEBUG - handshake
+GET /sip HTTP/1.1
+Host: localhost:5080
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+Upgrade: websocket
+Origin: http://localhost:8000
+Sec-WebSocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en-US,en;q=0.8
+Cookie: token=81843276b615b127dd0cddeaab356bc3
+Sec-WebSocket-Key: 15GvraeRVkmKVzn3nD4iWg==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-WebSocket-Protocol: sip
+
+
+23:30:54.263 sip.api DEBUG - ('127.0.0.1', 5080)=>('127.0.0.1', 59904)
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: W8dS/vv0xj01CBBM6u6p0DOlSvg=
+Sec-WebSocket-Protocol: sip
+
+
+23:30:54.282 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 555
+23:30:54.282 sip.api DEBUG - websocket received
+REGISTER sip:localhost SIP/2.0
+Via: SIP/2.0/WS r3755291698.invalid;rport;branch=z9hG4bKNTQ1NDAwODhhODExNzJhYTI4ZThhNzYxMTNhNjg1MWU.
+From: "Second" <sip:yourname@localhost>;tag=37381217158374972841
+To: "Second" <sip:yourname@localhost>
+Call-ID: 9706428781@r3755291698.invalid
+CSeq: 1 REGISTER
+Max-Forwards: 70
+Contact: <sip:yourname@r3755291698.invalid>;reg-id=1;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>"
+Route: <sip:localhost:5080;lr;transport=ws>
+Content-Length: 0
+Supported: path, outbound, gruu
+Expires: 180
+
+
+23:30:54.306 sip.api DEBUG - received request from stack 'REGISTER'
+23:30:54.307 sip.api DEBUG - save {'sip:yourname@localhost': [(Contact: <sip:yourname@r3755291698.invalid;transport=ws>;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";reg-id=1;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)]}
+23:30:54.307 sip.api DEBUG - locate 'sip:yourname@localhost' in
+{'sip:yourname@localhost': [(Contact: <sip:yourname@r3755291698.invalid;transport=ws>;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";reg-id=1;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)]}
+23:30:54.307 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:30:54.308 rfc3261 DEBUG - closing transaction 'z9hG4bKNTQ1NDAwODhhODExNzJhYTI4ZThhNzYxMTNhNjg1MWU.'
+23:30:54.308 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKNTQ1NDAwODhhODExNzJhYTI4ZThhNzYxMTNhNjg1MWU.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217158374972841
+Expires: 180
+To: "Second" <sip:yourname@localhost>;tag=120288259953
+Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>";reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=179
+CSeq: 1 REGISTER
+Call-ID: 9706428781@r3755291698.invalid
+
+
+23:30:57.765 sip.api DEBUG - ('127.0.0.1', 50865)=>('0.0.0.0', 5060) on type='udp'
+REGISTER sip:localhost SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport;branch=z9hG4bKNDBkZWRmZDUyYjg3ZmEyMTcyNTdkZDliZjRjMzEyZmY.
+From: "First Last" <sip:myname@localhost>;tag=49427536846526609388
+To: "First Last" <sip:myname@localhost>
+Call-ID: 3598464371@192.168.1.9
+CSeq: 1 REGISTER
+Max-Forwards: 70
+Contact: <sip:myname@192.168.1.9:50865>
+Route: <sip:127.0.0.1:5060;lr>
+Content-Length: 0
+Expires: 180
+
+
+23:30:57.766 sip.api DEBUG - received request from stack 'REGISTER'
+23:30:57.767 sip.api DEBUG - save {'sip:yourname@localhost': [(Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=179;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)], 'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>, 1469169237.767506, None)]}
+23:30:57.803 sip.api DEBUG - locate 'sip:myname@localhost' in
+{'sip:yourname@localhost': [(Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=179;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)], 'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>, 1469169237.767506, None)]}
+23:30:57.804 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:30:57.804 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKNDBkZWRmZDUyYjg3ZmEyMTcyNTdkZDliZjRjMzEyZmY.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536846526609388
+Expires: 180
+To: "First Last" <sip:myname@localhost>;tag=11161638907
+Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=179
+CSeq: 1 REGISTER
+Call-ID: 3598464371@192.168.1.9
+
+
+23:31:10.417 sip.api DEBUG - ('127.0.0.1', 50865)=>('0.0.0.0', 5060) on type='udp'
+INVITE sip:yourname@localhost SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport;branch=z9hG4bKMDM3YzdmNzBjMzU5YWRlYjU1NzBhNWNmNWFmOWM5Mjg.
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>
+Call-ID: 5305512586@192.168.1.9
+CSeq: 1 INVITE
+Max-Forwards: 70
+Contact: <sip:myname@localhost>
+Route: <sip:yourname@127.0.0.1:5060;lr>
+Content-Length: 3434
+User-Agent: sip-js/1.0
+Content-Type: application/sdp
+
+v=0
+o=- 6688814951545448457 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns
+m=audio 57289 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:59582 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 57289 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 59582 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:ZY1mxdLoFhUUzwq4
+a=ice-pwd:fjjXUAh93BTPs2EPCOGxW+q+
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:58161999 cname:/5st0K24HJtAwXXk
+a=ssrc:58161999 msid:Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns 5c356f5c-ba28-4e28-b5b7-05c51a19be76
+a=ssrc:58161999 mslabel:Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns
+a=ssrc:58161999 label:5c356f5c-ba28-4e28-b5b7-05c51a19be76
+m=video 54782 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:57949 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 54782 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 57949 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:ZY1mxdLoFhUUzwq4
+a=ice-pwd:fjjXUAh93BTPs2EPCOGxW+q+
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 3568954404 387235331
+a=ssrc:3568954404 cname:/5st0K24HJtAwXXk
+a=ssrc:3568954404 msid:Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns 39a3d28b-f8e7-4a4c-a8a1-ea4abd26fba3
+a=ssrc:3568954404 mslabel:Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns
+a=ssrc:3568954404 label:39a3d28b-f8e7-4a4c-a8a1-ea4abd26fba3
+a=ssrc:387235331 cname:/5st0K24HJtAwXXk
+a=ssrc:387235331 msid:Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns 39a3d28b-f8e7-4a4c-a8a1-ea4abd26fba3
+a=ssrc:387235331 mslabel:Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns
+a=ssrc:387235331 label:39a3d28b-f8e7-4a4c-a8a1-ea4abd26fba3
+
+23:31:10.450 sip.api DEBUG - received request from stack 'INVITE'
+23:31:10.450 sip.api DEBUG - locate 'sip:yourname@localhost' in
+{'sip:yourname@localhost': [(Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=179;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)], 'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=179, 1469169237.767506, None)]}
+23:31:10.451 sip.server DEBUG - locate returned [sip:yourname@127.0.0.1:59904;transport=ws]
+23:31:10.451 sip.api DEBUG - proxy 'INVITE' to [sip:yourname@127.0.0.1:59904;transport=ws]
+23:31:10.466 sip.api DEBUG - sending request on stack 'INVITE'
+23:31:10.467 rfc5658 DEBUG - createBranch method='INVITE' target=sip:yourname@127.0.0.1:59904;transport=ws
+23:31:10.468 rfc5658 DEBUG - forStack 'udp' to 'ws'
+23:31:10.468 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:10.468 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+INVITE sip:yourname@127.0.0.1:59904;transport=ws SIP/2.0
+Content-Length: 3434
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bKuy_IvMLqiOr11-sDA9qlbA..
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;rport=50865;branch=z9hG4bKMDM3YzdmNzBjMzU5YWRlYjU1NzBhNWNmNWFmOWM5Mjg.
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+User-Agent: sip-js/1.0
+To: <sip:yourname@localhost>
+Contact: <sip:myname@localhost>
+CSeq: 1 INVITE
+Max-Forwards: 69
+Call-ID: 5305512586@192.168.1.9
+Record-Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Record-Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Content-Type: application/sdp
+
+v=0
+o=- 6688814951545448457 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns
+m=audio 57289 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:59582 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 57289 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 59582 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:ZY1mxdLoFhUUzwq4
+a=ice-pwd:fjjXUAh93BTPs2EPCOGxW+q+
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:58161999 cname:/5st0K24HJtAwXXk
+a=ssrc:58161999 msid:Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns 5c356f5c-ba28-4e28-b5b7-05c51a19be76
+a=ssrc:58161999 mslabel:Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns
+a=ssrc:58161999 label:5c356f5c-ba28-4e28-b5b7-05c51a19be76
+m=video 54782 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:57949 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 54782 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 57949 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:ZY1mxdLoFhUUzwq4
+a=ice-pwd:fjjXUAh93BTPs2EPCOGxW+q+
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 3568954404 387235331
+a=ssrc:3568954404 cname:/5st0K24HJtAwXXk
+a=ssrc:3568954404 msid:Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns 39a3d28b-f8e7-4a4c-a8a1-ea4abd26fba3
+a=ssrc:3568954404 mslabel:Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns
+a=ssrc:3568954404 label:39a3d28b-f8e7-4a4c-a8a1-ea4abd26fba3
+a=ssrc:387235331 cname:/5st0K24HJtAwXXk
+a=ssrc:387235331 msid:Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns 39a3d28b-f8e7-4a4c-a8a1-ea4abd26fba3
+a=ssrc:387235331 mslabel:Lukt09qDEU2vEhg8NWmmLGuTFMOREWEBI3Ns
+a=ssrc:387235331 label:39a3d28b-f8e7-4a4c-a8a1-ea4abd26fba3
+
+23:31:10.522 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 420
+23:31:10.522 sip.api DEBUG - websocket received
+SIP/2.0 100 Trying
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bKuy_IvMLqiOr11-sDA9qlbA..;received=127.0.0.1
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;rport=50865;branch=z9hG4bKMDM3YzdmNzBjMzU5YWRlYjU1NzBhNWNmNWFmOWM5Mjg.
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>
+Call-ID: 5305512586@192.168.1.9
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:10.523 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:31:10.523 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKMDM3YzdmNzBjMzU5YWRlYjU1NzBhNWNmNWFmOWM5Mjg.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>
+CSeq: 1 INVITE
+Call-ID: 5305512586@192.168.1.9
+
+
+23:31:10.540 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 446
+23:31:10.540 sip.api DEBUG - websocket received
+SIP/2.0 180 Ringing
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bKuy_IvMLqiOr11-sDA9qlbA..;received=127.0.0.1
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;rport=50865;branch=z9hG4bKMDM3YzdmNzBjMzU5YWRlYjU1NzBhNWNmNWFmOWM5Mjg.
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>;tag=37381217151636985931
+Call-ID: 5305512586@192.168.1.9
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:10.541 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:31:10.542 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 180 Ringing
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKMDM3YzdmNzBjMzU5YWRlYjU1NzBhNWNmNWFmOWM5Mjg.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>;tag=37381217151636985931
+CSeq: 1 INVITE
+Call-ID: 5305512586@192.168.1.9
+
+
+23:31:12.862 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 3448
+23:31:12.864 sip.api DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bKuy_IvMLqiOr11-sDA9qlbA..;received=127.0.0.1
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;rport=50865;branch=z9hG4bKMDM3YzdmNzBjMzU5YWRlYjU1NzBhNWNmNWFmOWM5Mjg.
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>;tag=37381217151636985931
+Call-ID: 5305512586@192.168.1.9
+CSeq: 1 INVITE
+Content-Length: 2809
+Contact: <sip:yourname@localhost>
+Server: sip-js/1.0
+Content-Type: application/sdp
+Record-Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Record-Route: <sip:192.168.1.9:5060;lr;transport=udp>
+
+v=0
+o=- 3296340371185889925 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh
+m=audio 56244 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:9 IN IP4 0.0.0.0
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 56244 typ host generation 0
+a=ice-ufrag:UK1RfhC9uUwBCZOY
+a=ice-pwd:gUDboevVM7S0snCXiugaAnOa
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:active
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:2812109371 cname:eqMtnp6t0v+mghxy
+a=ssrc:2812109371 msid:DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh 7e8e7055-96c9-4fd2-9700-eedaee3cf960
+a=ssrc:2812109371 mslabel:DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh
+a=ssrc:2812109371 label:7e8e7055-96c9-4fd2-9700-eedaee3cf960
+m=video 9 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 0.0.0.0
+a=rtcp:9 IN IP4 0.0.0.0
+a=ice-ufrag:UK1RfhC9uUwBCZOY
+a=ice-pwd:gUDboevVM7S0snCXiugaAnOa
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:active
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 576445496 1444726329
+a=ssrc:576445496 cname:eqMtnp6t0v+mghxy
+a=ssrc:576445496 msid:DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh 60f7e88c-2e5e-4552-8753-b04bb89e419a
+a=ssrc:576445496 mslabel:DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh
+a=ssrc:576445496 label:60f7e88c-2e5e-4552-8753-b04bb89e419a
+a=ssrc:1444726329 cname:eqMtnp6t0v+mghxy
+a=ssrc:1444726329 msid:DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh 60f7e88c-2e5e-4552-8753-b04bb89e419a
+a=ssrc:1444726329 mslabel:DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh
+a=ssrc:1444726329 label:60f7e88c-2e5e-4552-8753-b04bb89e419a
+
+23:31:12.865 rfc3261 DEBUG - closing transaction 'z9hG4bKuy_IvMLqiOr11-sDA9qlbA..'
+23:31:12.866 rfc3261 DEBUG - received 1 responses out of 1
+23:31:12.866 rfc3261 DEBUG - closing transaction 'z9hG4bKMDM3YzdmNzBjMzU5YWRlYjU1NzBhNWNmNWFmOWM5Mjg.'
+23:31:12.866 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:31:12.867 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 200 OK
+Content-Length: 2809
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKMDM3YzdmNzBjMzU5YWRlYjU1NzBhNWNmNWFmOWM5Mjg.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>;tag=37381217151636985931
+Contact: <sip:yourname@localhost>
+CSeq: 1 INVITE
+Call-ID: 5305512586@192.168.1.9
+Record-Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Record-Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Server: sip-js/1.0
+Content-Type: application/sdp
+
+v=0
+o=- 3296340371185889925 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh
+m=audio 56244 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:9 IN IP4 0.0.0.0
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 56244 typ host generation 0
+a=ice-ufrag:UK1RfhC9uUwBCZOY
+a=ice-pwd:gUDboevVM7S0snCXiugaAnOa
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:active
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:2812109371 cname:eqMtnp6t0v+mghxy
+a=ssrc:2812109371 msid:DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh 7e8e7055-96c9-4fd2-9700-eedaee3cf960
+a=ssrc:2812109371 mslabel:DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh
+a=ssrc:2812109371 label:7e8e7055-96c9-4fd2-9700-eedaee3cf960
+m=video 9 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 0.0.0.0
+a=rtcp:9 IN IP4 0.0.0.0
+a=ice-ufrag:UK1RfhC9uUwBCZOY
+a=ice-pwd:gUDboevVM7S0snCXiugaAnOa
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:active
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 576445496 1444726329
+a=ssrc:576445496 cname:eqMtnp6t0v+mghxy
+a=ssrc:576445496 msid:DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh 60f7e88c-2e5e-4552-8753-b04bb89e419a
+a=ssrc:576445496 mslabel:DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh
+a=ssrc:576445496 label:60f7e88c-2e5e-4552-8753-b04bb89e419a
+a=ssrc:1444726329 cname:eqMtnp6t0v+mghxy
+a=ssrc:1444726329 msid:DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh 60f7e88c-2e5e-4552-8753-b04bb89e419a
+a=ssrc:1444726329 mslabel:DqmYZ78bUGRWRXxh9NpVrz2KFZrg4wFtm2yh
+a=ssrc:1444726329 label:60f7e88c-2e5e-4552-8753-b04bb89e419a
+
+23:31:12.930 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+ACK sip:yourname@localhost SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport;branch=z9hG4bKMDM3YzdmNzBjMzU5YWRlYjU1NzBhNWNmNWFmOWM5Mjg.
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>;tag=37381217151636985931
+Call-ID: 5305512586@192.168.1.9
+CSeq: 1 ACK
+Max-Forwards: 70
+Contact: <sip:myname@192.168.1.9:50865>
+Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Content-Length: 0
+
+
+23:31:12.931 rfc3261 DEBUG - no dialog for ACK, finding transaction
+23:31:12.931 rfc3261 DEBUG - No existing transaction for ACK
+23:31:12.931 sip.api DEBUG - received request from stack 'ACK'
+23:31:12.932 sip.api DEBUG - proxy 'ACK' to sip:192.168.1.9:5080;lr;transport=ws
+23:31:12.933 sip.api DEBUG - sending request on stack 'ACK'
+23:31:12.934 rfc5658 DEBUG - send dest=sip:192.168.1.9:5080;lr;transport=ws
+23:31:12.934 rfc5658 DEBUG - handover 'udp' to 'ws'
+23:31:12.935 rfc3261 DEBUG - no dialog for ACK, finding transaction
+23:31:12.935 rfc3261 DEBUG - No existing transaction for ACK
+23:31:12.935 sip.api DEBUG - received request from stack 'ACK'
+23:31:12.936 sip.api DEBUG - locate 'sip:yourname@localhost' in
+{'sip:yourname@localhost': [(Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=163;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)], 'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=179, 1469169237.767506, None)]}
+23:31:12.936 sip.server DEBUG - locate returned [sip:yourname@127.0.0.1:59904;transport=ws]
+23:31:12.936 sip.api DEBUG - proxy 'ACK' to [sip:yourname@127.0.0.1:59904;transport=ws]
+23:31:12.939 sip.api DEBUG - sending request on stack 'ACK'
+23:31:12.940 rfc5658 DEBUG - send dest=sip:yourname@127.0.0.1:59904;transport=ws
+23:31:12.940 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+ACK sip:yourname@127.0.0.1:59904;transport=ws SIP/2.0
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.9:5080;rport;branch=z9hG4bKuy_IvMLqiOr11-sDA9qlbA..
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport=50865;branch=z9hG4bKMDM3YzdmNzBjMzU5YWRlYjU1NzBhNWNmNWFmOWM5Mjg.
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>;tag=37381217151636985931
+Contact: <sip:myname@192.168.1.9:50865>
+CSeq: 1 ACK
+Max-Forwards: 68
+Call-ID: 5305512586@192.168.1.9
+
+
+23:31:15.547 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+BYE sip:yourname@localhost SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport;branch=z9hG4bKMDlhOWVkNmJlMGMzNzE0ODdiMzk0OTdlMWQ4OTU3ZGM.
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>;tag=37381217151636985931
+Call-ID: 5305512586@192.168.1.9
+CSeq: 2 BYE
+Max-Forwards: 70
+Contact: <sip:myname@192.168.1.9:50865>
+Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Content-Length: 0
+
+
+23:31:15.549 sip.api DEBUG - received request from stack 'BYE'
+23:31:15.549 sip.api DEBUG - proxy 'BYE' to sip:192.168.1.9:5080;lr;transport=ws
+23:31:15.551 sip.api DEBUG - sending request on stack 'BYE'
+23:31:15.551 rfc5658 DEBUG - createBranch method='BYE' target=sip:192.168.1.9:5080;lr;transport=ws
+23:31:15.551 rfc5658 DEBUG - handover 'udp' to 'ws'
+23:31:15.554 sip.api DEBUG - received request from stack 'BYE'
+23:31:15.555 sip.api DEBUG - locate 'sip:yourname@localhost' in
+{'sip:yourname@localhost': [(Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=161;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)], 'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=179, 1469169237.767506, None)]}
+23:31:15.555 sip.server DEBUG - locate returned [sip:yourname@127.0.0.1:59904;transport=ws]
+23:31:15.555 sip.api DEBUG - proxy 'BYE' to [sip:yourname@127.0.0.1:59904;transport=ws]
+23:31:15.556 sip.api DEBUG - sending request on stack 'BYE'
+23:31:15.556 rfc5658 DEBUG - createBranch method='BYE' target=sip:yourname@127.0.0.1:59904;transport=ws
+23:31:15.556 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:15.557 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+BYE sip:yourname@127.0.0.1:59904;transport=ws SIP/2.0
+Call-ID: 5305512586@192.168.1.9
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.9:5080;rport;branch=z9hG4bK6CFBlu4yX2ZeV3DjjDDMDg..
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport=50865;branch=z9hG4bKMDlhOWVkNmJlMGMzNzE0ODdiMzk0OTdlMWQ4OTU3ZGM.
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>;tag=37381217151636985931
+Contact: <sip:myname@192.168.1.9:50865>
+CSeq: 2 BYE
+Max-Forwards: 68
+
+
+23:31:15.649 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 419
+23:31:15.650 sip.api DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.9:5080;rport;branch=z9hG4bK6CFBlu4yX2ZeV3DjjDDMDg..;received=127.0.0.1
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport=50865;branch=z9hG4bKMDlhOWVkNmJlMGMzNzE0ODdiMzk0OTdlMWQ4OTU3ZGM.
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>;tag=37381217151636985931
+Call-ID: 5305512586@192.168.1.9
+CSeq: 2 BYE
+Content-Length: 0
+
+
+23:31:15.651 rfc3261 DEBUG - received 1 responses out of 1
+23:31:15.659 rfc5658 DEBUG - send dest=('192.168.1.9', 50865)
+23:31:15.660 rfc3261 DEBUG - closing transaction 'z9hG4bKMDlhOWVkNmJlMGMzNzE0ODdiMzk0OTdlMWQ4OTU3ZGM.'
+23:31:15.660 rfc3261 DEBUG - closing transaction 'z9hG4bK6CFBlu4yX2ZeV3DjjDDMDg..'
+23:31:15.660 sip.api DEBUG - ('0.0.0.0', 5060)=>('192.168.1.9', 50865) on type='udp'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport=50865;branch=z9hG4bKMDlhOWVkNmJlMGMzNzE0ODdiMzk0OTdlMWQ4OTU3ZGM.
+From: "First Last" <sip:myname@localhost>;tag=49427536845662250949
+To: <sip:yourname@localhost>;tag=37381217151636985931
+CSeq: 2 BYE
+Call-ID: 5305512586@192.168.1.9
+
+
+23:31:20.400 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 3908
+23:31:20.450 sip.api DEBUG - websocket received
+INVITE sip:myname@localhost SIP/2.0
+Via: SIP/2.0/WS r3755291698.invalid;rport;branch=z9hG4bKM2I1ZDM5YzMxZWY2Y2FlYjhjOGYyNTBkNjM5ZmM5NDU.
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>
+Call-ID: 2030281041@r3755291698.invalid
+CSeq: 1 INVITE
+Max-Forwards: 70
+Contact: <sip:yourname@localhost>
+Route: <sip:myname@localhost:5080;lr>
+Content-Length: 3439
+User-Agent: sip-js/1.0
+Content-Type: application/sdp
+
+v=0
+o=- 1450834074737832976 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c
+m=audio 63281 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:54976 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 63281 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 54976 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:LUwGJA5ykjXYtTUR
+a=ice-pwd:CFS1d5aoU1JzSJsVqtYfFC2C
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:31488142 cname:1yJqdZZVFwatvuM8
+a=ssrc:31488142 msid:XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c 9f593c30-af1c-4269-8b13-0f91355e5803
+a=ssrc:31488142 mslabel:XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c
+a=ssrc:31488142 label:9f593c30-af1c-4269-8b13-0f91355e5803
+m=video 59637 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:65174 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 59637 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 65174 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:LUwGJA5ykjXYtTUR
+a=ice-pwd:CFS1d5aoU1JzSJsVqtYfFC2C
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 1137695577 3972997760
+a=ssrc:1137695577 cname:1yJqdZZVFwatvuM8
+a=ssrc:1137695577 msid:XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c f7f0e950-dd38-46d6-91af-b8da73c311c6
+a=ssrc:1137695577 mslabel:XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c
+a=ssrc:1137695577 label:f7f0e950-dd38-46d6-91af-b8da73c311c6
+a=ssrc:3972997760 cname:1yJqdZZVFwatvuM8
+a=ssrc:3972997760 msid:XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c f7f0e950-dd38-46d6-91af-b8da73c311c6
+a=ssrc:3972997760 mslabel:XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c
+a=ssrc:3972997760 label:f7f0e950-dd38-46d6-91af-b8da73c311c6
+
+23:31:20.451 sip.api DEBUG - received request from stack 'INVITE'
+23:31:20.452 sip.api DEBUG - locate 'sip:myname@localhost' in
+{'sip:yourname@localhost': [(Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=158;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)], 'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=179, 1469169237.767506, None)]}
+23:31:20.452 sip.server DEBUG - locate returned [sip:myname@192.168.1.9:50865;transport=udp]
+23:31:20.452 sip.api DEBUG - proxy 'INVITE' to [sip:myname@192.168.1.9:50865;transport=udp]
+23:31:20.453 sip.api DEBUG - sending request on stack 'INVITE'
+23:31:20.453 rfc5658 DEBUG - createBranch method='INVITE' target=sip:myname@192.168.1.9:50865;transport=udp
+23:31:20.454 rfc5658 DEBUG - forStack 'ws' to 'udp'
+23:31:20.455 rfc5658 DEBUG - send dest=('192.168.1.9', 50865)
+23:31:20.455 sip.api DEBUG - ('0.0.0.0', 5060)=>('192.168.1.9', 50865) on type='udp'
+INVITE sip:myname@192.168.1.9:50865;transport=udp SIP/2.0
+Content-Length: 3439
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport;branch=z9hG4bK_LkLPY8p_ARTy2jPbPD9Ag..
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKM2I1ZDM5YzMxZWY2Y2FlYjhjOGYyNTBkNjM5ZmM5NDU.
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+User-Agent: sip-js/1.0
+To: <sip:myname@localhost>
+Contact: <sip:yourname@localhost>
+CSeq: 1 INVITE
+Max-Forwards: 69
+Call-ID: 2030281041@r3755291698.invalid
+Record-Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Record-Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Content-Type: application/sdp
+
+v=0
+o=- 1450834074737832976 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c
+m=audio 63281 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:54976 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 63281 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 54976 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:LUwGJA5ykjXYtTUR
+a=ice-pwd:CFS1d5aoU1JzSJsVqtYfFC2C
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:31488142 cname:1yJqdZZVFwatvuM8
+a=ssrc:31488142 msid:XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c 9f593c30-af1c-4269-8b13-0f91355e5803
+a=ssrc:31488142 mslabel:XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c
+a=ssrc:31488142 label:9f593c30-af1c-4269-8b13-0f91355e5803
+m=video 59637 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:65174 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 59637 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 65174 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:LUwGJA5ykjXYtTUR
+a=ice-pwd:CFS1d5aoU1JzSJsVqtYfFC2C
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 1137695577 3972997760
+a=ssrc:1137695577 cname:1yJqdZZVFwatvuM8
+a=ssrc:1137695577 msid:XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c f7f0e950-dd38-46d6-91af-b8da73c311c6
+a=ssrc:1137695577 mslabel:XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c
+a=ssrc:1137695577 label:f7f0e950-dd38-46d6-91af-b8da73c311c6
+a=ssrc:3972997760 cname:1yJqdZZVFwatvuM8
+a=ssrc:3972997760 msid:XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c f7f0e950-dd38-46d6-91af-b8da73c311c6
+a=ssrc:3972997760 mslabel:XWdGgnbd7ttgokigpn7QNnz95R6XmeKssT6c
+a=ssrc:3972997760 label:f7f0e950-dd38-46d6-91af-b8da73c311c6
+
+23:31:20.579 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bK_LkLPY8p_ARTy2jPbPD9Ag..;received=192.168.1.9
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKM2I1ZDM5YzMxZWY2Y2FlYjhjOGYyNTBkNjM5ZmM5NDU.
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>
+Call-ID: 2030281041@r3755291698.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:20.580 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:20.580 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKM2I1ZDM5YzMxZWY2Y2FlYjhjOGYyNTBkNjM5ZmM5NDU.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>
+CSeq: 1 INVITE
+Call-ID: 2030281041@r3755291698.invalid
+
+
+23:31:20.620 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 180 Ringing
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bK_LkLPY8p_ARTy2jPbPD9Ag..;received=192.168.1.9
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKM2I1ZDM5YzMxZWY2Y2FlYjhjOGYyNTBkNjM5ZmM5NDU.
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>;tag=49427536846210593218
+Call-ID: 2030281041@r3755291698.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:20.623 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:20.624 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 180 Ringing
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKM2I1ZDM5YzMxZWY2Y2FlYjhjOGYyNTBkNjM5ZmM5NDU.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>;tag=49427536846210593218
+CSeq: 1 INVITE
+Call-ID: 2030281041@r3755291698.invalid
+
+
+23:31:22.585 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bK_LkLPY8p_ARTy2jPbPD9Ag..;received=192.168.1.9
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKM2I1ZDM5YzMxZWY2Y2FlYjhjOGYyNTBkNjM5ZmM5NDU.
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>;tag=49427536846210593218
+Call-ID: 2030281041@r3755291698.invalid
+CSeq: 1 INVITE
+Content-Length: 2810
+Contact: <sip:myname@localhost>
+Server: sip-js/1.0
+Content-Type: application/sdp
+Record-Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Record-Route: <sip:192.168.1.9:5080;lr;transport=ws>
+
+v=0
+o=- 8518013927145519575 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS E6W1RN958leDyClysqffap1SZVnAjHP7LKgE
+m=audio 58589 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:9 IN IP4 0.0.0.0
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 58589 typ host generation 0
+a=ice-ufrag:Z7oFn3ng7LPbPyGM
+a=ice-pwd:8CPK5h2GAvdllSz67YqmjxY3
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:active
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:352816798 cname:+snuBV88r+IxCnTz
+a=ssrc:352816798 msid:E6W1RN958leDyClysqffap1SZVnAjHP7LKgE 7715c8dd-ead5-43b0-9266-6d6080696844
+a=ssrc:352816798 mslabel:E6W1RN958leDyClysqffap1SZVnAjHP7LKgE
+a=ssrc:352816798 label:7715c8dd-ead5-43b0-9266-6d6080696844
+m=video 9 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 0.0.0.0
+a=rtcp:9 IN IP4 0.0.0.0
+a=ice-ufrag:Z7oFn3ng7LPbPyGM
+a=ice-pwd:8CPK5h2GAvdllSz67YqmjxY3
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:active
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 1853639726 2109661468
+a=ssrc:1853639726 cname:+snuBV88r+IxCnTz
+a=ssrc:1853639726 msid:E6W1RN958leDyClysqffap1SZVnAjHP7LKgE 49323aab-8ca3-4fea-8d6f-a69700631fb6
+a=ssrc:1853639726 mslabel:E6W1RN958leDyClysqffap1SZVnAjHP7LKgE
+a=ssrc:1853639726 label:49323aab-8ca3-4fea-8d6f-a69700631fb6
+a=ssrc:2109661468 cname:+snuBV88r+IxCnTz
+a=ssrc:2109661468 msid:E6W1RN958leDyClysqffap1SZVnAjHP7LKgE 49323aab-8ca3-4fea-8d6f-a69700631fb6
+a=ssrc:2109661468 mslabel:E6W1RN958leDyClysqffap1SZVnAjHP7LKgE
+a=ssrc:2109661468 label:49323aab-8ca3-4fea-8d6f-a69700631fb6
+
+23:31:22.586 rfc3261 DEBUG - closing transaction 'z9hG4bK_LkLPY8p_ARTy2jPbPD9Ag..'
+23:31:22.586 rfc3261 DEBUG - received 1 responses out of 1
+23:31:22.586 rfc3261 DEBUG - closing transaction 'z9hG4bKM2I1ZDM5YzMxZWY2Y2FlYjhjOGYyNTBkNjM5ZmM5NDU.'
+23:31:22.586 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:22.587 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 2810
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKM2I1ZDM5YzMxZWY2Y2FlYjhjOGYyNTBkNjM5ZmM5NDU.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>;tag=49427536846210593218
+Contact: <sip:myname@localhost>
+CSeq: 1 INVITE
+Call-ID: 2030281041@r3755291698.invalid
+Record-Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Record-Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Server: sip-js/1.0
+Content-Type: application/sdp
+
+v=0
+o=- 8518013927145519575 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS E6W1RN958leDyClysqffap1SZVnAjHP7LKgE
+m=audio 58589 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:9 IN IP4 0.0.0.0
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 58589 typ host generation 0
+a=ice-ufrag:Z7oFn3ng7LPbPyGM
+a=ice-pwd:8CPK5h2GAvdllSz67YqmjxY3
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:active
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:352816798 cname:+snuBV88r+IxCnTz
+a=ssrc:352816798 msid:E6W1RN958leDyClysqffap1SZVnAjHP7LKgE 7715c8dd-ead5-43b0-9266-6d6080696844
+a=ssrc:352816798 mslabel:E6W1RN958leDyClysqffap1SZVnAjHP7LKgE
+a=ssrc:352816798 label:7715c8dd-ead5-43b0-9266-6d6080696844
+m=video 9 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 0.0.0.0
+a=rtcp:9 IN IP4 0.0.0.0
+a=ice-ufrag:Z7oFn3ng7LPbPyGM
+a=ice-pwd:8CPK5h2GAvdllSz67YqmjxY3
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:active
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 1853639726 2109661468
+a=ssrc:1853639726 cname:+snuBV88r+IxCnTz
+a=ssrc:1853639726 msid:E6W1RN958leDyClysqffap1SZVnAjHP7LKgE 49323aab-8ca3-4fea-8d6f-a69700631fb6
+a=ssrc:1853639726 mslabel:E6W1RN958leDyClysqffap1SZVnAjHP7LKgE
+a=ssrc:1853639726 label:49323aab-8ca3-4fea-8d6f-a69700631fb6
+a=ssrc:2109661468 cname:+snuBV88r+IxCnTz
+a=ssrc:2109661468 msid:E6W1RN958leDyClysqffap1SZVnAjHP7LKgE 49323aab-8ca3-4fea-8d6f-a69700631fb6
+a=ssrc:2109661468 mslabel:E6W1RN958leDyClysqffap1SZVnAjHP7LKgE
+a=ssrc:2109661468 label:49323aab-8ca3-4fea-8d6f-a69700631fb6
+
+23:31:22.688 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 496
+23:31:22.689 sip.api DEBUG - websocket received
+ACK sip:myname@localhost SIP/2.0
+Via: SIP/2.0/WS r3755291698.invalid;rport;branch=z9hG4bKM2I1ZDM5YzMxZWY2Y2FlYjhjOGYyNTBkNjM5ZmM5NDU.
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>;tag=49427536846210593218
+Call-ID: 2030281041@r3755291698.invalid
+CSeq: 1 ACK
+Max-Forwards: 70
+Contact: <sip:yourname@r3755291698.invalid>
+Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Content-Length: 0
+
+
+23:31:22.691 rfc3261 DEBUG - no dialog for ACK, finding transaction
+23:31:22.691 rfc3261 DEBUG - No existing transaction for ACK
+23:31:22.691 sip.api DEBUG - received request from stack 'ACK'
+23:31:22.691 sip.api DEBUG - proxy 'ACK' to sip:192.168.1.9:5060;lr;transport=udp
+23:31:22.692 sip.api DEBUG - sending request on stack 'ACK'
+23:31:22.693 rfc5658 DEBUG - send dest=sip:192.168.1.9:5060;lr;transport=udp
+23:31:22.693 rfc5658 DEBUG - handover 'ws' to 'udp'
+23:31:22.693 rfc3261 DEBUG - no dialog for ACK, finding transaction
+23:31:22.693 rfc3261 DEBUG - No existing transaction for ACK
+23:31:22.693 sip.api DEBUG - received request from stack 'ACK'
+23:31:22.693 sip.api DEBUG - locate 'sip:myname@localhost' in
+{'sip:yourname@localhost': [(Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=158;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)], 'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=157, 1469169237.767506, None)]}
+23:31:22.694 sip.server DEBUG - locate returned [sip:myname@192.168.1.9:50865;transport=udp]
+23:31:22.694 sip.api DEBUG - proxy 'ACK' to [sip:myname@192.168.1.9:50865;transport=udp]
+23:31:22.695 sip.api DEBUG - sending request on stack 'ACK'
+23:31:22.696 rfc5658 DEBUG - send dest=sip:myname@192.168.1.9:50865;transport=udp
+23:31:22.697 sip.api DEBUG - ('0.0.0.0', 5060)=>('192.168.1.9', 50865) on type='udp'
+ACK sip:myname@192.168.1.9:50865;transport=udp SIP/2.0
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:5060;rport;branch=z9hG4bK_LkLPY8p_ARTy2jPbPD9Ag..
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKM2I1ZDM5YzMxZWY2Y2FlYjhjOGYyNTBkNjM5ZmM5NDU.
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>;tag=49427536846210593218
+Contact: <sip:yourname@r3755291698.invalid>
+CSeq: 1 ACK
+Max-Forwards: 68
+Call-ID: 2030281041@r3755291698.invalid
+
+
+23:31:25.436 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 496
+23:31:25.437 sip.api DEBUG - websocket received
+BYE sip:myname@localhost SIP/2.0
+Via: SIP/2.0/WS r3755291698.invalid;rport;branch=z9hG4bKMzJmNjA4MTEwYTg0MmE5YmQ2YzQ3YTg5YWQxMzk3Y2M.
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>;tag=49427536846210593218
+Call-ID: 2030281041@r3755291698.invalid
+CSeq: 2 BYE
+Max-Forwards: 70
+Contact: <sip:yourname@r3755291698.invalid>
+Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Content-Length: 0
+
+
+23:31:25.438 sip.api DEBUG - received request from stack 'BYE'
+23:31:25.438 sip.api DEBUG - proxy 'BYE' to sip:192.168.1.9:5060;lr;transport=udp
+23:31:25.439 sip.api DEBUG - sending request on stack 'BYE'
+23:31:25.440 rfc5658 DEBUG - createBranch method='BYE' target=sip:192.168.1.9:5060;lr;transport=udp
+23:31:25.440 rfc5658 DEBUG - handover 'ws' to 'udp'
+23:31:25.441 sip.api DEBUG - received request from stack 'BYE'
+23:31:25.441 sip.api DEBUG - locate 'sip:myname@localhost' in
+{'sip:yourname@localhost': [(Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=158;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)], 'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=155, 1469169237.767506, None)]}
+23:31:25.442 sip.server DEBUG - locate returned [sip:myname@192.168.1.9:50865;transport=udp]
+23:31:25.442 sip.api DEBUG - proxy 'BYE' to [sip:myname@192.168.1.9:50865;transport=udp]
+23:31:25.444 sip.api DEBUG - sending request on stack 'BYE'
+23:31:25.444 rfc5658 DEBUG - createBranch method='BYE' target=sip:myname@192.168.1.9:50865;transport=udp
+23:31:25.444 rfc5658 DEBUG - send dest=('192.168.1.9', 50865)
+23:31:25.445 sip.api DEBUG - ('0.0.0.0', 5060)=>('192.168.1.9', 50865) on type='udp'
+BYE sip:myname@192.168.1.9:50865;transport=udp SIP/2.0
+Call-ID: 2030281041@r3755291698.invalid
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:5060;rport;branch=z9hG4bKy4r4mpu6mwL41zl6WddcfQ..
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKMzJmNjA4MTEwYTg0MmE5YmQ2YzQ3YTg5YWQxMzk3Y2M.
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>;tag=49427536846210593218
+Contact: <sip:yourname@r3755291698.invalid>
+CSeq: 2 BYE
+Max-Forwards: 68
+
+
+23:31:25.691 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.1.9:5060;rport=5060;branch=z9hG4bKy4r4mpu6mwL41zl6WddcfQ..;received=192.168.1.9
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKMzJmNjA4MTEwYTg0MmE5YmQ2YzQ3YTg5YWQxMzk3Y2M.
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>;tag=49427536846210593218
+Call-ID: 2030281041@r3755291698.invalid
+CSeq: 2 BYE
+Content-Length: 0
+
+
+23:31:25.692 rfc3261 DEBUG - received 1 responses out of 1
+23:31:25.693 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:25.693 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKMzJmNjA4MTEwYTg0MmE5YmQ2YzQ3YTg5YWQxMzk3Y2M.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217153910154451
+To: <sip:myname@localhost>;tag=49427536846210593218
+CSeq: 2 BYE
+Call-ID: 2030281041@r3755291698.invalid
+
+
+23:31:29.809 rfc3261 DEBUG - closing transaction 'z9hG4bKNDBkZWRmZDUyYjg3ZmEyMTcyNTdkZDliZjRjMzEyZmY.'
+23:31:30.695 rfc3261 DEBUG - closing transaction 'z9hG4bKy4r4mpu6mwL41zl6WddcfQ..'
+23:31:33.351 sip.api DEBUG - ('127.0.0.1', 50865)=>('0.0.0.0', 5060) on type='udp'
+INVITE sip:yourname@localhost SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport;branch=z9hG4bKZTZmOTJjNzEwNGQ5ODIwM2RhOTZkNWNiMDdhYTI2MTg.
+From: "First Last" <sip:myname@localhost>;tag=49427536846893140248
+To: <sip:yourname@localhost>
+Call-ID: 5659583248@192.168.1.9
+CSeq: 1 INVITE
+Max-Forwards: 70
+Contact: <sip:myname@localhost>
+Route: <sip:yourname@127.0.0.1:5060;lr>
+Content-Length: 3438
+User-Agent: sip-js/1.0
+Content-Type: application/sdp
+
+v=0
+o=- 6011584167924035326 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c
+m=audio 55419 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:59985 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 55419 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 59985 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:wW/fwCd5SjMkcffc
+a=ice-pwd:BgYY+W24JIL+VT4EX8ItKM7b
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:521776369 cname:ldWvI3y0zeqXpbBD
+a=ssrc:521776369 msid:nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c 374c8e74-e34d-4c3f-81c1-662a3f850d76
+a=ssrc:521776369 mslabel:nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c
+a=ssrc:521776369 label:374c8e74-e34d-4c3f-81c1-662a3f850d76
+m=video 60936 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:59999 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 60936 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 59999 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:wW/fwCd5SjMkcffc
+a=ice-pwd:BgYY+W24JIL+VT4EX8ItKM7b
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 903692577 3829780226
+a=ssrc:903692577 cname:ldWvI3y0zeqXpbBD
+a=ssrc:903692577 msid:nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c 134f596f-1992-44f1-a1b0-5c6755d05973
+a=ssrc:903692577 mslabel:nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c
+a=ssrc:903692577 label:134f596f-1992-44f1-a1b0-5c6755d05973
+a=ssrc:3829780226 cname:ldWvI3y0zeqXpbBD
+a=ssrc:3829780226 msid:nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c 134f596f-1992-44f1-a1b0-5c6755d05973
+a=ssrc:3829780226 mslabel:nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c
+a=ssrc:3829780226 label:134f596f-1992-44f1-a1b0-5c6755d05973
+
+23:31:33.352 sip.api DEBUG - received request from stack 'INVITE'
+23:31:33.352 sip.api DEBUG - locate 'sip:yourname@localhost' in
+{'sip:yourname@localhost': [(Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=158;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)], 'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=152, 1469169237.767506, None)]}
+23:31:33.353 sip.server DEBUG - locate returned [sip:yourname@127.0.0.1:59904;transport=ws]
+23:31:33.353 sip.api DEBUG - proxy 'INVITE' to [sip:yourname@127.0.0.1:59904;transport=ws]
+23:31:33.354 sip.api DEBUG - sending request on stack 'INVITE'
+23:31:33.354 rfc5658 DEBUG - createBranch method='INVITE' target=sip:yourname@127.0.0.1:59904;transport=ws
+23:31:33.355 rfc5658 DEBUG - forStack 'udp' to 'ws'
+23:31:33.356 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:33.357 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+INVITE sip:yourname@127.0.0.1:59904;transport=ws SIP/2.0
+Content-Length: 3438
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bKyBdZuNl8Q2C3bPPybH6Xig..
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;rport=50865;branch=z9hG4bKZTZmOTJjNzEwNGQ5ODIwM2RhOTZkNWNiMDdhYTI2MTg.
+From: "First Last" <sip:myname@localhost>;tag=49427536846893140248
+User-Agent: sip-js/1.0
+To: <sip:yourname@localhost>
+Contact: <sip:myname@localhost>
+CSeq: 1 INVITE
+Max-Forwards: 69
+Call-ID: 5659583248@192.168.1.9
+Record-Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Record-Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Content-Type: application/sdp
+
+v=0
+o=- 6011584167924035326 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c
+m=audio 55419 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:59985 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 55419 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 59985 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:wW/fwCd5SjMkcffc
+a=ice-pwd:BgYY+W24JIL+VT4EX8ItKM7b
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:521776369 cname:ldWvI3y0zeqXpbBD
+a=ssrc:521776369 msid:nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c 374c8e74-e34d-4c3f-81c1-662a3f850d76
+a=ssrc:521776369 mslabel:nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c
+a=ssrc:521776369 label:374c8e74-e34d-4c3f-81c1-662a3f850d76
+m=video 60936 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:59999 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 60936 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 59999 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:wW/fwCd5SjMkcffc
+a=ice-pwd:BgYY+W24JIL+VT4EX8ItKM7b
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 903692577 3829780226
+a=ssrc:903692577 cname:ldWvI3y0zeqXpbBD
+a=ssrc:903692577 msid:nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c 134f596f-1992-44f1-a1b0-5c6755d05973
+a=ssrc:903692577 mslabel:nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c
+a=ssrc:903692577 label:134f596f-1992-44f1-a1b0-5c6755d05973
+a=ssrc:3829780226 cname:ldWvI3y0zeqXpbBD
+a=ssrc:3829780226 msid:nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c 134f596f-1992-44f1-a1b0-5c6755d05973
+a=ssrc:3829780226 mslabel:nVoeE65Huxl3QpgWYo95hh08Y7pWA8usy87c
+a=ssrc:3829780226 label:134f596f-1992-44f1-a1b0-5c6755d05973
+
+23:31:33.521 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 420
+23:31:33.522 sip.api DEBUG - websocket received
+SIP/2.0 100 Trying
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bKyBdZuNl8Q2C3bPPybH6Xig..;received=127.0.0.1
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;rport=50865;branch=z9hG4bKZTZmOTJjNzEwNGQ5ODIwM2RhOTZkNWNiMDdhYTI2MTg.
+From: "First Last" <sip:myname@localhost>;tag=49427536846893140248
+To: <sip:yourname@localhost>
+Call-ID: 5659583248@192.168.1.9
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:33.522 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:31:33.523 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKZTZmOTJjNzEwNGQ5ODIwM2RhOTZkNWNiMDdhYTI2MTg.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536846893140248
+To: <sip:yourname@localhost>
+CSeq: 1 INVITE
+Call-ID: 5659583248@192.168.1.9
+
+
+23:31:33.583 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 445
+23:31:33.583 sip.api DEBUG - websocket received
+SIP/2.0 180 Ringing
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bKyBdZuNl8Q2C3bPPybH6Xig..;received=127.0.0.1
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;rport=50865;branch=z9hG4bKZTZmOTJjNzEwNGQ5ODIwM2RhOTZkNWNiMDdhYTI2MTg.
+From: "First Last" <sip:myname@localhost>;tag=49427536846893140248
+To: <sip:yourname@localhost>;tag=3738121715503927602
+Call-ID: 5659583248@192.168.1.9
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:33.584 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:31:33.585 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 180 Ringing
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKZTZmOTJjNzEwNGQ5ODIwM2RhOTZkNWNiMDdhYTI2MTg.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536846893140248
+To: <sip:yourname@localhost>;tag=3738121715503927602
+CSeq: 1 INVITE
+Call-ID: 5659583248@192.168.1.9
+
+
+23:31:36.576 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 445
+23:31:36.576 sip.api DEBUG - websocket received
+SIP/2.0 603 Decline
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bKyBdZuNl8Q2C3bPPybH6Xig..;received=127.0.0.1
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;rport=50865;branch=z9hG4bKZTZmOTJjNzEwNGQ5ODIwM2RhOTZkNWNiMDdhYTI2MTg.
+From: "First Last" <sip:myname@localhost>;tag=49427536846893140248
+To: <sip:yourname@localhost>;tag=3738121715503927602
+Call-ID: 5659583248@192.168.1.9
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:36.577 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:36.577 rfc3261 DEBUG - received 1 responses out of 1
+23:31:36.578 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:31:36.578 rfc3261 DEBUG - closing transaction 'z9hG4bKyBdZuNl8Q2C3bPPybH6Xig..'
+23:31:36.578 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+ACK sip:yourname@127.0.0.1:59904;transport=ws SIP/2.0
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bKyBdZuNl8Q2C3bPPybH6Xig..
+From: "First Last" <sip:myname@localhost>;tag=49427536846893140248
+To: <sip:yourname@localhost>;tag=3738121715503927602
+CSeq: 1 ACK
+Call-ID: 5659583248@192.168.1.9
+
+
+23:31:36.578 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 603 Decline
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKZTZmOTJjNzEwNGQ5ODIwM2RhOTZkNWNiMDdhYTI2MTg.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536846893140248
+To: <sip:yourname@localhost>;tag=3738121715503927602
+CSeq: 1 INVITE
+Call-ID: 5659583248@192.168.1.9
+
+
+23:31:36.679 sip.api DEBUG - ('127.0.0.1', 50865)=>('0.0.0.0', 5060) on type='udp'
+ACK sip:yourname@localhost SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport;branch=z9hG4bKZTZmOTJjNzEwNGQ5ODIwM2RhOTZkNWNiMDdhYTI2MTg.
+From: "First Last" <sip:myname@localhost>;tag=49427536846893140248
+To: <sip:yourname@localhost>;tag=3738121715503927602
+Call-ID: 5659583248@192.168.1.9
+CSeq: 1 ACK
+Content-Length: 0
+Route: <sip:yourname@127.0.0.1:5060;lr>
+
+
+23:31:40.464 sip.api DEBUG - ('127.0.0.1', 50865)=>('0.0.0.0', 5060) on type='udp'
+INVITE sip:yourname@localhost SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>
+Call-ID: 7235497312@192.168.1.9
+CSeq: 1 INVITE
+Max-Forwards: 70
+Contact: <sip:myname@localhost>
+Route: <sip:yourname@127.0.0.1:5060;lr>
+Content-Length: 3445
+User-Agent: sip-js/1.0
+Content-Type: application/sdp
+
+v=0
+o=- 95097963579459581 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO
+m=audio 62015 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:59060 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 62015 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 59060 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:8/5E//fFRk6ZXb0L
+a=ice-pwd:940xOuKTp8tpCcOulfcgk0z5
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:2105263376 cname:TrIYWmfLkoZZU0YZ
+a=ssrc:2105263376 msid:ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO 12cdc6d5-5009-4c78-8c0a-1101c52b57c6
+a=ssrc:2105263376 mslabel:ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO
+a=ssrc:2105263376 label:12cdc6d5-5009-4c78-8c0a-1101c52b57c6
+m=video 60553 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:59221 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 60553 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 59221 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:8/5E//fFRk6ZXb0L
+a=ice-pwd:940xOuKTp8tpCcOulfcgk0z5
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 2385408604 2578604629
+a=ssrc:2385408604 cname:TrIYWmfLkoZZU0YZ
+a=ssrc:2385408604 msid:ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO 2c2e6f40-61cd-46df-b84a-e769af3667f7
+a=ssrc:2385408604 mslabel:ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO
+a=ssrc:2385408604 label:2c2e6f40-61cd-46df-b84a-e769af3667f7
+a=ssrc:2578604629 cname:TrIYWmfLkoZZU0YZ
+a=ssrc:2578604629 msid:ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO 2c2e6f40-61cd-46df-b84a-e769af3667f7
+a=ssrc:2578604629 mslabel:ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO
+a=ssrc:2578604629 label:2c2e6f40-61cd-46df-b84a-e769af3667f7
+
+23:31:40.465 sip.api DEBUG - received request from stack 'INVITE'
+23:31:40.465 sip.api DEBUG - locate 'sip:yourname@localhost' in
+{'sip:yourname@localhost': [(Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=140;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)], 'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=152, 1469169237.767506, None)]}
+23:31:40.466 sip.server DEBUG - locate returned [sip:yourname@127.0.0.1:59904;transport=ws]
+23:31:40.466 sip.api DEBUG - proxy 'INVITE' to [sip:yourname@127.0.0.1:59904;transport=ws]
+23:31:40.467 sip.api DEBUG - sending request on stack 'INVITE'
+23:31:40.467 rfc5658 DEBUG - createBranch method='INVITE' target=sip:yourname@127.0.0.1:59904;transport=ws
+23:31:40.469 rfc5658 DEBUG - forStack 'udp' to 'ws'
+23:31:40.469 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:40.470 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+INVITE sip:yourname@127.0.0.1:59904;transport=ws SIP/2.0
+Content-Length: 3445
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bK5YszbgvDnCcpU_VSPL5Ugw..
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;rport=50865;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+User-Agent: sip-js/1.0
+To: <sip:yourname@localhost>
+Contact: <sip:myname@localhost>
+CSeq: 1 INVITE
+Max-Forwards: 69
+Call-ID: 7235497312@192.168.1.9
+Record-Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Record-Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Content-Type: application/sdp
+
+v=0
+o=- 95097963579459581 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO
+m=audio 62015 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:59060 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 62015 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 59060 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:8/5E//fFRk6ZXb0L
+a=ice-pwd:940xOuKTp8tpCcOulfcgk0z5
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:2105263376 cname:TrIYWmfLkoZZU0YZ
+a=ssrc:2105263376 msid:ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO 12cdc6d5-5009-4c78-8c0a-1101c52b57c6
+a=ssrc:2105263376 mslabel:ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO
+a=ssrc:2105263376 label:12cdc6d5-5009-4c78-8c0a-1101c52b57c6
+m=video 60553 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:59221 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 60553 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 59221 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:8/5E//fFRk6ZXb0L
+a=ice-pwd:940xOuKTp8tpCcOulfcgk0z5
+a=fingerprint:sha-256 5E:65:E5:7B:29:C3:E6:97:B8:7C:3F:F8:AB:CF:71:BF:F2:47:7C:3B:1B:71:04:26:BC:78:52:A2:9E:56:7D:8F
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 2385408604 2578604629
+a=ssrc:2385408604 cname:TrIYWmfLkoZZU0YZ
+a=ssrc:2385408604 msid:ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO 2c2e6f40-61cd-46df-b84a-e769af3667f7
+a=ssrc:2385408604 mslabel:ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO
+a=ssrc:2385408604 label:2c2e6f40-61cd-46df-b84a-e769af3667f7
+a=ssrc:2578604629 cname:TrIYWmfLkoZZU0YZ
+a=ssrc:2578604629 msid:ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO 2c2e6f40-61cd-46df-b84a-e769af3667f7
+a=ssrc:2578604629 mslabel:ZA8NHFZIo6sHXJQoFOUOVIC8gwcABFpmamiO
+a=ssrc:2578604629 label:2c2e6f40-61cd-46df-b84a-e769af3667f7
+
+23:31:40.672 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 420
+23:31:40.673 sip.api DEBUG - websocket received
+SIP/2.0 100 Trying
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bK5YszbgvDnCcpU_VSPL5Ugw..;received=127.0.0.1
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;rport=50865;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>
+Call-ID: 7235497312@192.168.1.9
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:40.674 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:31:40.674 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>
+CSeq: 1 INVITE
+Call-ID: 7235497312@192.168.1.9
+
+
+23:31:40.740 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 446
+23:31:40.741 sip.api DEBUG - websocket received
+SIP/2.0 180 Ringing
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bK5YszbgvDnCcpU_VSPL5Ugw..;received=127.0.0.1
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;rport=50865;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>;tag=37381217156554353607
+Call-ID: 7235497312@192.168.1.9
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:40.742 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:31:40.743 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 180 Ringing
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>;tag=37381217156554353607
+CSeq: 1 INVITE
+Call-ID: 7235497312@192.168.1.9
+
+
+23:31:41.684 rfc3261 DEBUG - closing transaction 'z9hG4bKZTZmOTJjNzEwNGQ5ODIwM2RhOTZkNWNiMDdhYTI2MTg.'
+23:31:42.170 sip.api DEBUG - ('127.0.0.1', 50865)=>('0.0.0.0', 5060) on type='udp'
+CANCEL sip:yourname@localhost SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>
+Call-ID: 7235497312@192.168.1.9
+CSeq: 1 CANCEL
+Content-Length: 0
+Route: <sip:yourname@127.0.0.1:5060;lr>
+
+
+23:31:42.171 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:31:42.172 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:31:42.172 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:42.173 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 487 Request terminated
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>;tag=1116163890
+CSeq: 1 INVITE
+Call-ID: 7235497312@192.168.1.9
+
+
+23:31:42.173 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>;tag=1116163890
+CSeq: 1 CANCEL
+Call-ID: 7235497312@192.168.1.9
+
+
+23:31:42.173 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+CANCEL sip:yourname@127.0.0.1:59904;transport=ws SIP/2.0
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bK5YszbgvDnCcpU_VSPL5Ugw..
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>
+CSeq: 1 CANCEL
+Call-ID: 7235497312@192.168.1.9
+
+
+23:31:42.335 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 457
+23:31:42.335 sip.api DEBUG - websocket received
+SIP/2.0 487 Request terminated
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bK5YszbgvDnCcpU_VSPL5Ugw..;received=127.0.0.1
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;rport=50865;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>;tag=37381217156554353607
+Call-ID: 7235497312@192.168.1.9
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:42.336 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:42.336 rfc3261 DEBUG - received 1 responses out of 1
+23:31:42.336 rfc3261 DEBUG - closing transaction 'z9hG4bK5YszbgvDnCcpU_VSPL5Ugw..'
+23:31:42.336 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+ACK sip:yourname@127.0.0.1:59904;transport=ws SIP/2.0
+Content-Length: 0
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bK5YszbgvDnCcpU_VSPL5Ugw..
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>;tag=37381217156554353607
+CSeq: 1 ACK
+Call-ID: 7235497312@192.168.1.9
+
+
+23:31:42.365 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 305
+23:31:42.366 sip.api DEBUG - websocket received
+SIP/2.0 200 OK
+Via: SIP/2.0/WS 192.168.1.9:5060;rport;branch=z9hG4bK5YszbgvDnCcpU_VSPL5Ugw..;received=127.0.0.1
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>;tag=3738121715
+Call-ID: 7235497312@192.168.1.9
+CSeq: 1 CANCEL
+Content-Length: 0
+
+
+23:31:42.366 rfc3261 DEBUG - Invalid transaction received <rtclite.std.ietf.rfc3261.ClientTransaction object at 0x101a254d0>
+23:31:42.366 rfc3261 DEBUG - closing transaction 'z9hG4bK5YszbgvDnCcpU_VSPL5Ugw..|CANCEL'
+23:31:42.675 rfc3261 DEBUG - Retransmitting (#1) INVITE[z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.] response
+23:31:42.675 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:31:42.676 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 487 Request terminated
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>;tag=37381217156554353607
+CSeq: 1 INVITE
+Call-ID: 7235497312@192.168.1.9
+
+
+23:31:42.678 sip.api DEBUG - ('127.0.0.1', 50865)=>('0.0.0.0', 5060) on type='udp'
+CANCEL sip:yourname@localhost SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>
+Call-ID: 7235497312@192.168.1.9
+CSeq: 1 CANCEL
+Content-Length: 0
+Route: <sip:yourname@127.0.0.1:5060;lr>
+
+
+23:31:42.679 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:31:42.679 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>;tag=1116163890
+CSeq: 1 CANCEL
+Call-ID: 7235497312@192.168.1.9
+
+
+23:31:42.775 sip.api DEBUG - ('127.0.0.1', 50865)=>('0.0.0.0', 5060) on type='udp'
+ACK sip:yourname@localhost SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>;tag=1116163890
+Call-ID: 7235497312@192.168.1.9
+CSeq: 1 ACK
+Content-Length: 0
+Route: <sip:yourname@127.0.0.1:5060;lr>
+
+
+23:31:42.974 sip.api DEBUG - ('127.0.0.1', 50865)=>('0.0.0.0', 5060) on type='udp'
+ACK sip:yourname@localhost SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport;branch=z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.
+From: "First Last" <sip:myname@localhost>;tag=49427536841856412821
+To: <sip:yourname@localhost>;tag=37381217156554353607
+Call-ID: 7235497312@192.168.1.9
+CSeq: 1 ACK
+Content-Length: 0
+Route: <sip:yourname@127.0.0.1:5060;lr>
+
+
+23:31:46.929 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 3912
+23:31:46.931 sip.api DEBUG - websocket received
+INVITE sip:myname@localhost SIP/2.0
+Via: SIP/2.0/WS r3755291698.invalid;rport;branch=z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+To: <sip:myname@localhost>
+Call-ID: 4482106933@r3755291698.invalid
+CSeq: 1 INVITE
+Max-Forwards: 70
+Contact: <sip:yourname@localhost>
+Route: <sip:myname@localhost:5080;lr>
+Content-Length: 3443
+User-Agent: sip-js/1.0
+Content-Type: application/sdp
+
+v=0
+o=- 1999798390573137700 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG
+m=audio 53449 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:57699 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 53449 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 57699 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:N0Jb0DIGXD5RWnH+
+a=ice-pwd:NhGHVxLgRj+tU1zbHc1QB+pU
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:376619642 cname:dwXLyPFK3JzGeTEn
+a=ssrc:376619642 msid:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG e1a76776-8ce1-4417-b67d-bc80f7602efe
+a=ssrc:376619642 mslabel:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG
+a=ssrc:376619642 label:e1a76776-8ce1-4417-b67d-bc80f7602efe
+m=video 53405 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:58811 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 53405 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 58811 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:N0Jb0DIGXD5RWnH+
+a=ice-pwd:NhGHVxLgRj+tU1zbHc1QB+pU
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 1428499617 2928202505
+a=ssrc:1428499617 cname:dwXLyPFK3JzGeTEn
+a=ssrc:1428499617 msid:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG edcc6c3e-7997-4e77-af49-a58e32ff564c
+a=ssrc:1428499617 mslabel:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG
+a=ssrc:1428499617 label:edcc6c3e-7997-4e77-af49-a58e32ff564c
+a=ssrc:2928202505 cname:dwXLyPFK3JzGeTEn
+a=ssrc:2928202505 msid:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG edcc6c3e-7997-4e77-af49-a58e32ff564c
+a=ssrc:2928202505 mslabel:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG
+a=ssrc:2928202505 label:edcc6c3e-7997-4e77-af49-a58e32ff564c
+
+23:31:46.932 sip.api DEBUG - received request from stack 'INVITE'
+23:31:46.933 sip.api DEBUG - locate 'sip:myname@localhost' in
+{'sip:yourname@localhost': [(Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=133;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)], 'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=152, 1469169237.767506, None)]}
+23:31:46.933 sip.server DEBUG - locate returned [sip:myname@192.168.1.9:50865;transport=udp]
+23:31:46.933 sip.api DEBUG - proxy 'INVITE' to [sip:myname@192.168.1.9:50865;transport=udp]
+23:31:46.935 sip.api DEBUG - sending request on stack 'INVITE'
+23:31:46.935 rfc5658 DEBUG - createBranch method='INVITE' target=sip:myname@192.168.1.9:50865;transport=udp
+23:31:46.937 rfc5658 DEBUG - forStack 'ws' to 'udp'
+23:31:46.937 rfc5658 DEBUG - send dest=('192.168.1.9', 50865)
+23:31:46.938 sip.api DEBUG - ('0.0.0.0', 5060)=>('192.168.1.9', 50865) on type='udp'
+INVITE sip:myname@192.168.1.9:50865;transport=udp SIP/2.0
+Content-Length: 3443
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport;branch=z9hG4bKXznlPwyD7oYXOne8jFdzWg..
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+User-Agent: sip-js/1.0
+To: <sip:myname@localhost>
+Contact: <sip:yourname@localhost>
+CSeq: 1 INVITE
+Max-Forwards: 69
+Call-ID: 4482106933@r3755291698.invalid
+Record-Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Record-Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Content-Type: application/sdp
+
+v=0
+o=- 1999798390573137700 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG
+m=audio 53449 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:57699 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 53449 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 57699 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:N0Jb0DIGXD5RWnH+
+a=ice-pwd:NhGHVxLgRj+tU1zbHc1QB+pU
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:376619642 cname:dwXLyPFK3JzGeTEn
+a=ssrc:376619642 msid:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG e1a76776-8ce1-4417-b67d-bc80f7602efe
+a=ssrc:376619642 mslabel:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG
+a=ssrc:376619642 label:e1a76776-8ce1-4417-b67d-bc80f7602efe
+m=video 53405 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:58811 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 53405 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 58811 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:N0Jb0DIGXD5RWnH+
+a=ice-pwd:NhGHVxLgRj+tU1zbHc1QB+pU
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 1428499617 2928202505
+a=ssrc:1428499617 cname:dwXLyPFK3JzGeTEn
+a=ssrc:1428499617 msid:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG edcc6c3e-7997-4e77-af49-a58e32ff564c
+a=ssrc:1428499617 mslabel:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG
+a=ssrc:1428499617 label:edcc6c3e-7997-4e77-af49-a58e32ff564c
+a=ssrc:2928202505 cname:dwXLyPFK3JzGeTEn
+a=ssrc:2928202505 msid:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG edcc6c3e-7997-4e77-af49-a58e32ff564c
+a=ssrc:2928202505 mslabel:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG
+a=ssrc:2928202505 label:edcc6c3e-7997-4e77-af49-a58e32ff564c
+
+23:31:47.442 rfc5658 DEBUG - send dest=('192.168.1.9', 50865)
+23:31:47.443 sip.api DEBUG - ('0.0.0.0', 5060)=>('192.168.1.9', 50865) on type='udp'
+INVITE sip:myname@192.168.1.9:50865;transport=udp SIP/2.0
+Content-Length: 3443
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport;branch=z9hG4bKXznlPwyD7oYXOne8jFdzWg..
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+User-Agent: sip-js/1.0
+To: <sip:myname@localhost>
+Contact: <sip:yourname@localhost>
+CSeq: 1 INVITE
+Max-Forwards: 69
+Call-ID: 4482106933@r3755291698.invalid
+Record-Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Record-Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Content-Type: application/sdp
+
+v=0
+o=- 1999798390573137700 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG
+m=audio 53449 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:57699 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 53449 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 57699 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:N0Jb0DIGXD5RWnH+
+a=ice-pwd:NhGHVxLgRj+tU1zbHc1QB+pU
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:376619642 cname:dwXLyPFK3JzGeTEn
+a=ssrc:376619642 msid:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG e1a76776-8ce1-4417-b67d-bc80f7602efe
+a=ssrc:376619642 mslabel:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG
+a=ssrc:376619642 label:e1a76776-8ce1-4417-b67d-bc80f7602efe
+m=video 53405 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:58811 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 53405 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 58811 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:N0Jb0DIGXD5RWnH+
+a=ice-pwd:NhGHVxLgRj+tU1zbHc1QB+pU
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 1428499617 2928202505
+a=ssrc:1428499617 cname:dwXLyPFK3JzGeTEn
+a=ssrc:1428499617 msid:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG edcc6c3e-7997-4e77-af49-a58e32ff564c
+a=ssrc:1428499617 mslabel:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG
+a=ssrc:1428499617 label:edcc6c3e-7997-4e77-af49-a58e32ff564c
+a=ssrc:2928202505 cname:dwXLyPFK3JzGeTEn
+a=ssrc:2928202505 msid:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG edcc6c3e-7997-4e77-af49-a58e32ff564c
+a=ssrc:2928202505 mslabel:XMVgRnb5PExMP8QeXVkYubywERouS3lvOiRG
+a=ssrc:2928202505 label:edcc6c3e-7997-4e77-af49-a58e32ff564c
+
+23:31:47.628 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bKXznlPwyD7oYXOne8jFdzWg..;received=192.168.1.9
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+To: <sip:myname@localhost>
+Call-ID: 4482106933@r3755291698.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:47.630 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:47.631 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+To: <sip:myname@localhost>
+CSeq: 1 INVITE
+Call-ID: 4482106933@r3755291698.invalid
+
+
+23:31:47.633 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 180 Ringing
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bKXznlPwyD7oYXOne8jFdzWg..;received=192.168.1.9
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+To: <sip:myname@localhost>;tag=49427536845415330788
+Call-ID: 4482106933@r3755291698.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:47.634 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:47.635 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 180 Ringing
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+To: <sip:myname@localhost>;tag=49427536845415330788
+CSeq: 1 INVITE
+Call-ID: 4482106933@r3755291698.invalid
+
+
+23:31:47.780 rfc3261 DEBUG - closing transaction 'z9hG4bKZTc3MGMwZGU0MTc4NGRhYjQzYTc0MzlhNjlmNmIwNzQ.'
+23:31:47.849 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 180 Ringing
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bKXznlPwyD7oYXOne8jFdzWg..;received=192.168.1.9
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+To: <sip:myname@localhost>;tag=49427536845415330788
+Call-ID: 4482106933@r3755291698.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:47.850 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:47.851 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 180 Ringing
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+To: <sip:myname@localhost>;tag=49427536845415330788
+CSeq: 1 INVITE
+Call-ID: 4482106933@r3755291698.invalid
+
+
+23:31:48.873 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 603 Decline
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bKXznlPwyD7oYXOne8jFdzWg..;received=192.168.1.9
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+To: <sip:myname@localhost>;tag=49427536845415330788
+Call-ID: 4482106933@r3755291698.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:48.873 rfc5658 DEBUG - send dest=('192.168.1.9', 50865)
+23:31:48.874 rfc3261 DEBUG - received 1 responses out of 1
+23:31:48.874 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:48.874 sip.api DEBUG - ('0.0.0.0', 5060)=>('192.168.1.9', 50865) on type='udp'
+ACK sip:myname@192.168.1.9:50865;transport=udp SIP/2.0
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport;branch=z9hG4bKXznlPwyD7oYXOne8jFdzWg..
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+To: <sip:myname@localhost>;tag=49427536845415330788
+CSeq: 1 ACK
+Call-ID: 4482106933@r3755291698.invalid
+
+
+23:31:48.874 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 603 Decline
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+To: <sip:myname@localhost>;tag=49427536845415330788
+CSeq: 1 INVITE
+Call-ID: 4482106933@r3755291698.invalid
+
+
+23:31:49.4 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 377
+23:31:49.5 sip.api DEBUG - websocket received
+ACK sip:myname@localhost SIP/2.0
+Via: SIP/2.0/WS r3755291698.invalid;rport;branch=z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.
+From: "Second" <sip:yourname@localhost>;tag=37381217153631128736
+To: <sip:myname@localhost>;tag=49427536845415330788
+Call-ID: 4482106933@r3755291698.invalid
+CSeq: 1 ACK
+Content-Length: 0
+Route: <sip:myname@localhost:5080;lr>
+
+
+23:31:49.6 rfc3261 DEBUG - closing transaction 'z9hG4bKOGE4YTdkNDVlMzJiMzIxZmFmYmYxMjZmYmJkOGNjYzc.'
+23:31:53.368 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 3915
+23:31:53.370 sip.api DEBUG - websocket received
+INVITE sip:myname@localhost SIP/2.0
+Via: SIP/2.0/WS r3755291698.invalid;rport;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>
+Call-ID: 2408249150@r3755291698.invalid
+CSeq: 1 INVITE
+Max-Forwards: 70
+Contact: <sip:yourname@localhost>
+Route: <sip:myname@localhost:5080;lr>
+Content-Length: 3446
+User-Agent: sip-js/1.0
+Content-Type: application/sdp
+
+v=0
+o=- 266954764954074519 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7
+m=audio 58544 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:56384 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 58544 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 56384 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:oBlcAti5rzGSpt3o
+a=ice-pwd:a+SeESkpTgTQvURBIO1PFIuc
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:3518369029 cname:PP195FSBNPnJ+KS9
+a=ssrc:3518369029 msid:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7 cb628261-8894-49ef-b50b-3ed473e2addc
+a=ssrc:3518369029 mslabel:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7
+a=ssrc:3518369029 label:cb628261-8894-49ef-b50b-3ed473e2addc
+m=video 53522 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:62026 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 53522 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 62026 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:oBlcAti5rzGSpt3o
+a=ice-pwd:a+SeESkpTgTQvURBIO1PFIuc
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 1306356699 2021818267
+a=ssrc:1306356699 cname:PP195FSBNPnJ+KS9
+a=ssrc:1306356699 msid:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7 f74cafdb-33b7-45ae-8fbf-e00c7c2cfa63
+a=ssrc:1306356699 mslabel:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7
+a=ssrc:1306356699 label:f74cafdb-33b7-45ae-8fbf-e00c7c2cfa63
+a=ssrc:2021818267 cname:PP195FSBNPnJ+KS9
+a=ssrc:2021818267 msid:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7 f74cafdb-33b7-45ae-8fbf-e00c7c2cfa63
+a=ssrc:2021818267 mslabel:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7
+a=ssrc:2021818267 label:f74cafdb-33b7-45ae-8fbf-e00c7c2cfa63
+
+23:31:53.371 sip.api DEBUG - received request from stack 'INVITE'
+23:31:53.371 sip.api DEBUG - locate 'sip:myname@localhost' in
+{'sip:yourname@localhost': [(Contact: <sip:yourname@127.0.0.1:59904;transport=ws>;reg-id=1;pub-gruu="sip:yourname@localhost;gr=urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42";expires=133;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>", 1469169234.307092, sip:yourname@127.0.0.1:59904;transport=ws)], 'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=130, 1469169237.767506, None)]}
+23:31:53.371 sip.server DEBUG - locate returned [sip:myname@192.168.1.9:50865;transport=udp]
+23:31:53.371 sip.api DEBUG - proxy 'INVITE' to [sip:myname@192.168.1.9:50865;transport=udp]
+23:31:53.373 sip.api DEBUG - sending request on stack 'INVITE'
+23:31:53.373 rfc5658 DEBUG - createBranch method='INVITE' target=sip:myname@192.168.1.9:50865;transport=udp
+23:31:53.376 rfc5658 DEBUG - forStack 'ws' to 'udp'
+23:31:53.376 rfc5658 DEBUG - send dest=('192.168.1.9', 50865)
+23:31:53.377 sip.api DEBUG - ('0.0.0.0', 5060)=>('192.168.1.9', 50865) on type='udp'
+INVITE sip:myname@192.168.1.9:50865;transport=udp SIP/2.0
+Content-Length: 3446
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport;branch=z9hG4bKv8Y9jNepy1ErhowRrfdIyw..
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+User-Agent: sip-js/1.0
+To: <sip:myname@localhost>
+Contact: <sip:yourname@localhost>
+CSeq: 1 INVITE
+Max-Forwards: 69
+Call-ID: 2408249150@r3755291698.invalid
+Record-Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Record-Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Content-Type: application/sdp
+
+v=0
+o=- 266954764954074519 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7
+m=audio 58544 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:56384 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 58544 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 56384 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:oBlcAti5rzGSpt3o
+a=ice-pwd:a+SeESkpTgTQvURBIO1PFIuc
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:3518369029 cname:PP195FSBNPnJ+KS9
+a=ssrc:3518369029 msid:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7 cb628261-8894-49ef-b50b-3ed473e2addc
+a=ssrc:3518369029 mslabel:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7
+a=ssrc:3518369029 label:cb628261-8894-49ef-b50b-3ed473e2addc
+m=video 53522 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:62026 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 53522 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 62026 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:oBlcAti5rzGSpt3o
+a=ice-pwd:a+SeESkpTgTQvURBIO1PFIuc
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 1306356699 2021818267
+a=ssrc:1306356699 cname:PP195FSBNPnJ+KS9
+a=ssrc:1306356699 msid:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7 f74cafdb-33b7-45ae-8fbf-e00c7c2cfa63
+a=ssrc:1306356699 mslabel:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7
+a=ssrc:1306356699 label:f74cafdb-33b7-45ae-8fbf-e00c7c2cfa63
+a=ssrc:2021818267 cname:PP195FSBNPnJ+KS9
+a=ssrc:2021818267 msid:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7 f74cafdb-33b7-45ae-8fbf-e00c7c2cfa63
+a=ssrc:2021818267 mslabel:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7
+a=ssrc:2021818267 label:f74cafdb-33b7-45ae-8fbf-e00c7c2cfa63
+
+23:31:53.882 rfc5658 DEBUG - send dest=('192.168.1.9', 50865)
+23:31:53.894 sip.api DEBUG - ('0.0.0.0', 5060)=>('192.168.1.9', 50865) on type='udp'
+INVITE sip:myname@192.168.1.9:50865;transport=udp SIP/2.0
+Content-Length: 3446
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport;branch=z9hG4bKv8Y9jNepy1ErhowRrfdIyw..
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+User-Agent: sip-js/1.0
+To: <sip:myname@localhost>
+Contact: <sip:yourname@localhost>
+CSeq: 1 INVITE
+Max-Forwards: 69
+Call-ID: 2408249150@r3755291698.invalid
+Record-Route: <sip:192.168.1.9:5060;lr;transport=udp>
+Record-Route: <sip:192.168.1.9:5080;lr;transport=ws>
+Content-Type: application/sdp
+
+v=0
+o=- 266954764954074519 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7
+m=audio 58544 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 106 105 13 126
+c=IN IP4 192.168.1.9
+a=rtcp:56384 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 58544 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 56384 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:oBlcAti5rzGSpt3o
+a=ice-pwd:a+SeESkpTgTQvURBIO1PFIuc
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:audio
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:111 opus/48000/2
+a=rtcp-fb:111 transport-cc
+a=fmtp:111 minptime=10
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+a=rtpmap:9 G722/8000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:106 CN/32000
+a=rtpmap:105 CN/16000
+a=rtpmap:13 CN/8000
+a=rtpmap:126 telephone-event/8000
+a=maxptime:60
+a=ssrc:3518369029 cname:PP195FSBNPnJ+KS9
+a=ssrc:3518369029 msid:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7 cb628261-8894-49ef-b50b-3ed473e2addc
+a=ssrc:3518369029 mslabel:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7
+a=ssrc:3518369029 label:cb628261-8894-49ef-b50b-3ed473e2addc
+m=video 53522 UDP/TLS/RTP/SAVPF 100 101 116 117 96 97 98
+c=IN IP4 192.168.1.9
+a=rtcp:62026 IN IP4 192.168.1.9
+a=candidate:1178812653 1 udp 2122260223 192.168.1.9 53522 typ host generation 0
+a=candidate:1178812653 2 udp 2122260222 192.168.1.9 62026 typ host generation 0
+a=candidate:146848797 1 tcp 1518280447 192.168.1.9 9 typ host tcptype active generation 0
+a=candidate:146848797 2 tcp 1518280446 192.168.1.9 9 typ host tcptype active generation 0
+a=ice-ufrag:oBlcAti5rzGSpt3o
+a=ice-pwd:a+SeESkpTgTQvURBIO1PFIuc
+a=fingerprint:sha-256 E3:9E:05:08:A9:4D:5C:1A:82:4D:3E:5C:34:D4:CD:DE:7A:C4:DB:B6:4D:D3:39:23:D0:B0:7F:B8:34:CD:D9:6C
+a=setup:actpass
+a=mid:video
+a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
+a=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time
+a=extmap:4 urn:3gpp:video-orientation
+a=sendrecv
+a=rtcp-mux
+a=rtpmap:100 VP8/90000
+a=rtcp-fb:100 ccm fir
+a=rtcp-fb:100 nack
+a=rtcp-fb:100 nack pli
+a=rtcp-fb:100 goog-remb
+a=rtcp-fb:100 transport-cc
+a=rtpmap:101 VP9/90000
+a=rtcp-fb:101 ccm fir
+a=rtcp-fb:101 nack
+a=rtcp-fb:101 nack pli
+a=rtcp-fb:101 goog-remb
+a=rtcp-fb:101 transport-cc
+a=rtpmap:116 red/90000
+a=rtpmap:117 ulpfec/90000
+a=rtpmap:96 rtx/90000
+a=fmtp:96 apt=100
+a=rtpmap:97 rtx/90000
+a=fmtp:97 apt=101
+a=rtpmap:98 rtx/90000
+a=fmtp:98 apt=116
+a=ssrc-group:FID 1306356699 2021818267
+a=ssrc:1306356699 cname:PP195FSBNPnJ+KS9
+a=ssrc:1306356699 msid:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7 f74cafdb-33b7-45ae-8fbf-e00c7c2cfa63
+a=ssrc:1306356699 mslabel:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7
+a=ssrc:1306356699 label:f74cafdb-33b7-45ae-8fbf-e00c7c2cfa63
+a=ssrc:2021818267 cname:PP195FSBNPnJ+KS9
+a=ssrc:2021818267 msid:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7 f74cafdb-33b7-45ae-8fbf-e00c7c2cfa63
+a=ssrc:2021818267 mslabel:ktbWfmXgNALTl8qGVOQcDfXeHHTjBPIaByn7
+a=ssrc:2021818267 label:f74cafdb-33b7-45ae-8fbf-e00c7c2cfa63
+
+23:31:53.902 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 100 Trying
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bKv8Y9jNepy1ErhowRrfdIyw..;received=192.168.1.9
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>
+Call-ID: 2408249150@r3755291698.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:53.904 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:53.905 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 100 Trying
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>
+CSeq: 1 INVITE
+Call-ID: 2408249150@r3755291698.invalid
+
+
+23:31:53.905 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 180 Ringing
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bKv8Y9jNepy1ErhowRrfdIyw..;received=192.168.1.9
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>;tag=49427536845365406295
+Call-ID: 2408249150@r3755291698.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:53.907 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:53.907 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 180 Ringing
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>;tag=49427536845365406295
+CSeq: 1 INVITE
+Call-ID: 2408249150@r3755291698.invalid
+
+
+23:31:54.172 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 180 Ringing
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bKv8Y9jNepy1ErhowRrfdIyw..;received=192.168.1.9
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>;tag=49427536845365406295
+Call-ID: 2408249150@r3755291698.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:54.172 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:54.173 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 180 Ringing
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>;tag=49427536845365406295
+CSeq: 1 INVITE
+Call-ID: 2408249150@r3755291698.invalid
+
+
+23:31:55.373 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 358
+23:31:55.428 sip.api DEBUG - websocket received
+CANCEL sip:myname@localhost SIP/2.0
+Via: SIP/2.0/WS r3755291698.invalid;rport;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>
+Call-ID: 2408249150@r3755291698.invalid
+CSeq: 1 CANCEL
+Content-Length: 0
+Route: <sip:myname@localhost:5080;lr>
+
+
+23:31:55.428 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:55.429 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:31:55.429 rfc3261 DEBUG - closing transaction 'z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.|CANCEL'
+23:31:55.429 rfc5658 DEBUG - send dest=('192.168.1.9', 50865)
+23:31:55.429 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 487 Request terminated
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>;tag=1202882599
+CSeq: 1 INVITE
+Call-ID: 2408249150@r3755291698.invalid
+
+
+23:31:55.430 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>;tag=1202882599
+CSeq: 1 CANCEL
+Call-ID: 2408249150@r3755291698.invalid
+
+
+23:31:55.430 sip.api DEBUG - ('0.0.0.0', 5060)=>('192.168.1.9', 50865) on type='udp'
+CANCEL sip:myname@192.168.1.9:50865;transport=udp SIP/2.0
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport;branch=z9hG4bKv8Y9jNepy1ErhowRrfdIyw..
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>
+CSeq: 1 CANCEL
+Call-ID: 2408249150@r3755291698.invalid
+
+
+23:31:55.557 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 367
+23:31:55.557 sip.api DEBUG - websocket received
+ACK sip:myname@localhost SIP/2.0
+Via: SIP/2.0/WS r3755291698.invalid;rport;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>;tag=1202882599
+Call-ID: 2408249150@r3755291698.invalid
+CSeq: 1 ACK
+Content-Length: 0
+Route: <sip:myname@localhost:5080;lr>
+
+
+23:31:55.558 rfc3261 DEBUG - closing transaction 'z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.'
+23:31:55.934 rfc5658 DEBUG - send dest=('192.168.1.9', 50865)
+23:31:55.935 sip.api DEBUG - ('0.0.0.0', 5060)=>('192.168.1.9', 50865) on type='udp'
+CANCEL sip:myname@192.168.1.9:50865;transport=udp SIP/2.0
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport;branch=z9hG4bKv8Y9jNepy1ErhowRrfdIyw..
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>
+CSeq: 1 CANCEL
+Call-ID: 2408249150@r3755291698.invalid
+
+
+23:31:56.123 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 487 Request terminated
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bKv8Y9jNepy1ErhowRrfdIyw..;received=192.168.1.9
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;rport=59904;branch=z9hG4bKM2Y5ZDM3MDcwNzc0OTIyZTc2ODlkYmVkMDU3NWZiMzA.
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>;tag=49427536845365406295
+Call-ID: 2408249150@r3755291698.invalid
+CSeq: 1 INVITE
+Content-Length: 0
+
+
+23:31:56.124 rfc5658 DEBUG - send dest=('192.168.1.9', 50865)
+23:31:56.124 rfc3261 DEBUG - received 1 responses out of 1
+23:31:56.124 sip.api DEBUG - ('0.0.0.0', 5060)=>('192.168.1.9', 50865) on type='udp'
+ACK sip:myname@192.168.1.9:50865;transport=udp SIP/2.0
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport;branch=z9hG4bKv8Y9jNepy1ErhowRrfdIyw..
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>;tag=49427536845365406295
+CSeq: 1 ACK
+Call-ID: 2408249150@r3755291698.invalid
+
+
+23:31:56.180 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bKv8Y9jNepy1ErhowRrfdIyw..;received=192.168.1.9
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>;tag=4942753684
+Call-ID: 2408249150@r3755291698.invalid
+CSeq: 1 CANCEL
+Content-Length: 0
+
+
+23:31:56.181 rfc3261 DEBUG - Invalid transaction received <rtclite.std.ietf.rfc3261.ClientTransaction object at 0x101a37650>
+23:31:56.470 sip.api DEBUG - ('192.168.1.9', 50865)=>('0.0.0.0', 5060) on type='udp'
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP 192.168.1.9:5080;rport=5060;branch=z9hG4bKv8Y9jNepy1ErhowRrfdIyw..;received=192.168.1.9
+From: "Second" <sip:yourname@localhost>;tag=37381217151970370715
+To: <sip:myname@localhost>;tag=4942753684
+Call-ID: 2408249150@r3755291698.invalid
+CSeq: 1 CANCEL
+Content-Length: 0
+
+
+23:31:57.697 rfc3261 DEBUG - closing transaction 'z9hG4bKMzJmNjA4MTEwYTg0MmE5YmQ2YzQ3YTg5YWQxMzk3Y2M.'
+23:32:01.183 rfc3261 DEBUG - closing transaction 'z9hG4bKv8Y9jNepy1ErhowRrfdIyw..|CANCEL'
+23:32:08.147 sip.api DEBUG - ('127.0.0.1', 59904)=>('127.0.0.1', 5080) on type='ws' length 553
+23:32:08.148 sip.api DEBUG - websocket received
+REGISTER sip:localhost SIP/2.0
+Via: SIP/2.0/WS r3755291698.invalid;rport;branch=z9hG4bKZGI1YTE5YjYxZjdkMzhjMTcwMzQzMzhmZGMyZjE5MTA.
+From: "Second" <sip:yourname@localhost>;tag=37381217158374972841
+To: "Second" <sip:yourname@localhost>
+Call-ID: 9706428781@r3755291698.invalid
+CSeq: 2 REGISTER
+Max-Forwards: 70
+Contact: <sip:yourname@r3755291698.invalid>;reg-id=1;+sip.instance="<urn:uuid:42ce14dd-aefb-4d1d-b929-a21a33bcca42>"
+Route: <sip:localhost:5080;lr;transport=ws>
+Content-Length: 0
+Supported: path, outbound, gruu
+Expires: 0
+
+
+23:32:08.149 sip.api DEBUG - received request from stack 'REGISTER'
+23:32:08.149 sip.api DEBUG - save {'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=124, 1469169237.767506, None)]}
+23:32:08.149 sip.api DEBUG - locate 'sip:yourname@localhost' in
+{'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=124, 1469169237.767506, None)]}
+23:32:08.149 rfc5658 DEBUG - send dest=('127.0.0.1', 59904)
+23:32:08.150 rfc3261 DEBUG - closing transaction 'z9hG4bKZGI1YTE5YjYxZjdkMzhjMTcwMzQzMzhmZGMyZjE5MTA.'
+23:32:08.150 sip.api DEBUG - ('0.0.0.0', 5080)=>('127.0.0.1', 59904) on type='ws'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/WS r3755291698.invalid;received=127.0.0.1;branch=z9hG4bKZGI1YTE5YjYxZjdkMzhjMTcwMzQzMzhmZGMyZjE5MTA.;rport=59904
+From: "Second" <sip:yourname@localhost>;tag=37381217158374972841
+Expires: 0
+To: "Second" <sip:yourname@localhost>;tag=120288259946
+CSeq: 2 REGISTER
+Call-ID: 9706428781@r3755291698.invalid
+
+
+23:32:10.476 sip.api DEBUG - ('127.0.0.1', 50865)=>('0.0.0.0', 5060) on type='udp'
+REGISTER sip:localhost SIP/2.0
+Via: SIP/2.0/UDP 192.168.1.9:50865;rport;branch=z9hG4bKMTY2OWYzYjFiOTYzNzBkYjkzNzNmODhkZTM3MTY4MzM.
+From: "First Last" <sip:myname@localhost>;tag=49427536846526609388
+To: "First Last" <sip:myname@localhost>
+Call-ID: 3598464371@192.168.1.9
+CSeq: 2 REGISTER
+Max-Forwards: 70
+Contact: <sip:myname@192.168.1.9:50865>
+Route: <sip:127.0.0.1:5060;lr>
+Content-Length: 0
+Expires: 0
+
+
+23:32:10.478 sip.api DEBUG - received request from stack 'REGISTER'
+23:32:10.478 sip.api DEBUG - save {'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=124, 1469169237.767506, None)]}
+23:32:10.478 sip.api DEBUG - locate 'sip:myname@localhost' in
+{'sip:myname@localhost': [(Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=124, 1469169237.767506, None)]}
+23:32:10.479 rfc5658 DEBUG - send dest=('127.0.0.1', 50865)
+23:32:10.479 sip.api DEBUG - ('0.0.0.0', 5060)=>('127.0.0.1', 50865) on type='udp'
+SIP/2.0 200 OK
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.9:50865;received=127.0.0.1;branch=z9hG4bKMTY2OWYzYjFiOTYzNzBkYjkzNzNmODhkZTM3MTY4MzM.;rport=50865
+From: "First Last" <sip:myname@localhost>;tag=49427536846526609388
+Expires: 0
+To: "First Last" <sip:myname@localhost>;tag=111616389074
+Contact: <sip:myname@192.168.1.9:50865;transport=udp>;expires=107
+CSeq: 2 REGISTER
+Call-ID: 3598464371@192.168.1.9
+
+

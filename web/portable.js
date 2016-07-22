@@ -29,9 +29,14 @@ window.onload = function() {
             var w = window.innerWidth >= window.innerHeight ? 510 : 260;
             var h = window.innerWidth >= window.innerHeight ? 260 : 470;
             var scale = Math.min(window.innerWidth / w, window.innerHeight / h);
-            document.body.style.zoom = "" + scale;
+            scale = Math.floor(scale*1000) / 1000;
+            var x = Math.floor(window.innerWidth/2 - w/2);
+            var y = Math.floor(window.innerHeight/2 - h/2);
+            //document.body.style.zoom = "" + scale;
+            document.body.style.transform = "scale(" + scale + ") translateX(" + x + "px) translateY(" + y + "px)";
         } else {
-            document.body.style.zoom = "";
+            //document.body.style.zoom = "";
+            document.body.style.transform = "";
         }
         
     }

@@ -395,6 +395,10 @@ Phone.prototype.register = function() {
 };
 
 Phone.prototype.changeNetworkType = function() {
+    if (is_app) {
+        log("changeNetworkType() cannot change if is_app is true");
+        return false; // cannot change
+    }
     var current = this.network_type;
     var other = (current == 'Flash' ? 'WebRTC' : 'Flash');
     var result = confirm('Using the ' + current + ' network. Would you like to relaunch with the ' + other + ' network');
@@ -1785,9 +1789,10 @@ Phone.prototype.toggleControls = function(name) {
 Phone.prototype.help = function(name, no_transition) {
     var text = null;
     if (name == "default") {
-        text = 'This web-based phone allows you to register with a server, and make or receive VoIP calls from web. This is a demonstration of the <a href="https://github.com/theintencity/sip-js">SIP in Javascript</a> project.<br/><br/>'
-        + 'Please click on help <a href="#" onclick="return help(\'default\');"><img src="assets/help.png"></img></a> anywhere on this page to learn how to use that part of the web phone.<br/><br/>'
+        text = 'This web-based phone allows you to register with a server, and make or receive VoIP calls from web. This is a demonstration of the <a href="https://github.com/theintencity/sip-js" target="_blank">SIP in Javascript</a> project.<br/><br/>'
+        + 'Please click on help <img src="assets/help.png"></img> anywhere on this page to learn how to use that part of the web phone.<br/><br/>'
         + 'Additionally, the edit <img src="assets/edit.png"></img> and save <img src="assets/save.png"></img> buttons allow you to edit and save certain configuration properties in that box.The buttons and controls are enabled only when they make sense in a particular system state.<br/><br/>'
+        + 'There are two modes - Flash and WebRTC. By default the app on desktop or mobile uses the WebRTC mode, whereas the web app uses Flash. This can be changed in the network or help box by clicking on the change link for the web app.<br/><br/>'
         + 'Once you reach this page, the Flash Network application kicks in to launch the separate application that assists this page in network activity. The first time initialization includes installation and launch of the <a href="http://theintencity.kundansingh.com/flash-network" target="_blank">Flash Network</a> application. Once the initialization is complete and the <input href="#" value="Register" type="button" class="button" disabled="disabled"/> and <input href="#" value="Call" type="button" class="button" disabled="disabled"/> buttons are enabled, you can proceed with using this web phone. All the controls except Flash Network are disabled until the initialization is complete.';
     }
     else if (name == "configuration") {
@@ -1821,7 +1826,7 @@ Phone.prototype.help = function(name, no_transition) {
     else if (name == "flash-network") {
         text = 'This area shows the <a href="http://theintencity.kundansingh.com/flash-network" target="_blank">Flash Network</a> activities including the first time initialization prompts, the authentication prompts and any network status. It also displays the selected local IP address that is used for your phone. For most of the prompts, you will follow the standard Flash Network <a href="http://theintencity.kundansingh.com/flash-network/userguide.html" target="_blank">user guide</a>.<br/><br/>'
         + 'For changing the selected local IP address, click on the <img src="assets/edit.png"></img> button and enter the new IP address. This must be done before the SIP listening socket is created. The SIP listening socket is created the first time you click on Register or Call button.<br/><br/>'
-        + 'For trying out the experimental WebRTC technology that uses WebSocket for signaling, click on the change link in the title and confirm the changed launch when prompted. Alternatively, you can use the <tt>?network_type=WebRTC</tt> URL parameter on this page to launch with WebRTC and WebSocket support. In the WebRTC mode it connects using WebSocket for signaling and WebRTC for media path. You can change the WebSocket URL\' path and WebRTC peer connection\' configuration in this box. The configuration is a optional comma separated list of STUN or TURN servers with optional credentials, e.g., "stun://host1,turn://host2|mypass"' ;
+        + 'For trying out the WebRTC technology that uses WebSocket for signaling, click on the change link in the title and confirm the changed launch when prompted. Alternatively, you can use the <tt>?network_type=WebRTC</tt> URL parameter on this page to launch with WebRTC and WebSocket support. In the WebRTC mode it connects using WebSocket for signaling and WebRTC for media path. You can change the WebSocket URL\' path and WebRTC peer connection\' configuration in this box. For the app on desktop or mobile, not the web app, you can also use UDP/TCP transport instead of WebSocket when using WebRTC. The configuration is a optional comma separated list of STUN or TURN servers with optional credentials, e.g., "stun://host1,turn://host2|mypass"' ;
     }
     else if (name == "program-log") {
         text = 'This area displays the debug trace for the software including all the necessary SIP messages that are needed for debugging any problems. To report any issues, please attach your full program log. You can click on the check box <input type="checkbox" checked="checked"/> to toggle the auto-scroll mode of this view. Click on the <img src="assets/print.png"></img> button to print the full program log.';

@@ -28,6 +28,6 @@
     }
   },
   "permissions": [
-    "audioCapture", "videoCapture", "system.network"
+    "audioCapture", "videoCapture", "system.network", "*://*/*"
   ]
 }
