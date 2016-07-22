@@ -80,7 +80,7 @@ Note that Google Chrome allows certain WebRTC APIs such as to capture camera and
 
 ## Building the mobile app ##
 
-We have used Chrome Cordova App tools and framework to convert the web application to desktop and mobile app. Currently, the desktop and mobile app always use WebRTC mode, but can use any transport for SIP. You can find pre-built `apk` files for Android under the [download](/theintencity/sip-js/tree/download) branch. Here, we describe how to build this yourself.
+We have used Chrome Cordova App tools and framework to convert the web application to desktop and mobile app. Currently, the desktop and mobile app always use WebRTC mode, but can use any transport for SIP. You can find pre-built `apk` files for Android under the [download](https://github.com/theintencity/sip-js/blob/master/theintencity/sip-js/tree/download) branch. Here, we describe how to build this yourself.
 
 Follow the steps mentioned in [chrome apps for mobile](https://github.com/MobileChromeApps/mobile-chrome-apps/) page. In particular, install the necessary dependencies - `Nodejs`, Java JDK, Android SDK, command-line `cca`. In Android SDK, you may also need to install SDK Platforms, Android SDK Tools, Android SDK Platform-tools, Android SDK Build-tools, Android Support Repository and Google Repository. We use `cca` version 0.8.1 but others should work too.
 ```
@@ -130,9 +130,7 @@ org.chromium.cca-hooks 0.0.0 "undefined"
 
 We have changed the user interface of the example web video phone application to adapt to the available window size. This is particularly useful for desktop and mobile app. The application shows all the boxes if the window is big enough. If the window is not big or when running on a mobile app, the application shows a compact user interface, which has only two boxes at a time, with tabbed navigation buttons at the bottom. Sample user interfaces for landscape and portrait device orientation are shown below.
 
-<img src="/assets/screen3.png" style="border: solid 1px #808080; width: 75%; " />
-
-<img src="/assets/screen4.png" style="border: solid 1px #808080; width: 75%; " />
+![screen3](/assets/screen3.png) ![screen4](/assets/screen4.png)
 
 The compact user interface enables the buttons in a box when you click on a box, instead of showing the edit or save button. Furthermore, the program log box is not shown in the compact mode. Other than these differences, the compact user interface behaves the same as the full interface.
 
