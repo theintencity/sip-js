@@ -21,7 +21,7 @@ The initial work done in this project was later published in an IEEE paper title
 The project implements SIP and related standards in JavaScript: RFC 3261, RFC 4566, RFC 3264. Any complex telephony or application specific standard that relies on "managed" services mode instead of services in the end-point is outside the scope of this project. If you need web phones with "managed" services in the back end, then there are other better alternatives in our opinion instead of SIP in Javascript in the browser.
 
 ## Challenges ##
-Currently, native browsers do not expose JavaScript API for primitive capabilities such as UDP or TCP socket, microphone and camera access. We keep the network and device part flexible so that the application can use either the WebRTC effort driven by Google and available in the Chrome and other browsers, or the browser plugins such as Flash Player via the separate [flash-network](https://github.com/theintencity/flash-network) project.
+Currently, native browsers do not expose JavaScript API for primitive capabilities such as UDP or TCP socket, microphone and camera access. We keep the network and device part flexible so that the application can use either the WebRTC effort driven by Google and available in the Chrome and other browsers, or the browser plugins such as Flash Player via the separate [flash-network](http://theintencity.kundansingh.com/flash-network/) project.
 
 Consequently, for the web application, the SIP transport can be over UDP or TCP and the media path using RTP/RTCP when using the Flash Player plugin, and the transport can be over WebSocket and the media path over WebRTC when using a WebRTC-capable browser.
 
@@ -80,7 +80,7 @@ Note that Google Chrome allows certain WebRTC APIs such as to capture camera and
 
 ## Building the mobile app ##
 
-We have used Chrome Cordova App tools and framework to convert the web application to desktop and mobile app. Currently, the desktop and mobile app always use WebRTC mode, but can use any transport for SIP. You can find pre-built `apk` files for Android under the [download](/tree/download) directory. Here, we describe how to build this yourself.
+We have used Chrome Cordova App tools and framework to convert the web application to desktop and mobile app. Currently, the desktop and mobile app always use WebRTC mode, but can use any transport for SIP. You can find pre-built `apk` files for Android under the [download](/theintencity/sip-js/tree/download) branch. Here, we describe how to build this yourself.
 
 Follow the steps mentioned in [chrome apps for mobile](https://github.com/MobileChromeApps/mobile-chrome-apps/) page. In particular, install the necessary dependencies - `Nodejs`, Java JDK, Android SDK, command-line `cca`. In Android SDK, you may also need to install SDK Platforms, Android SDK Tools, Android SDK Platform-tools, Android SDK Build-tools, Android Support Repository and Google Repository. We use `cca` version 0.8.1 but others should work too.
 ```
@@ -130,7 +130,9 @@ org.chromium.cca-hooks 0.0.0 "undefined"
 
 We have changed the user interface of the example web video phone application to adapt to the available window size. This is particularly useful for desktop and mobile app. The application shows all the boxes if the window is big enough. If the window is not big or when running on a mobile app, the application shows a compact user interface, which has only two boxes at a time, with tabbed navigation buttons at the bottom. Sample user interfaces for landscape and portrait device orientation are shown below.
 
-![landscape](/assets/screen3.png) ![portrait](/assets/screen4.png)
+<img src="/assets/screen3.png" style="border: solid 1px #808080; width: 75%; " />
+
+<img src="/assets/screen4.png" style="border: solid 1px #808080; width: 75%; " />
 
 The compact user interface enables the buttons in a box when you click on a box, instead of showing the edit or save button. Furthermore, the program log box is not shown in the compact mode. Other than these differences, the compact user interface behaves the same as the full interface.
 
